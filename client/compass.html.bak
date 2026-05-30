@@ -205,6 +205,26 @@
         font-weight: 500;
         font-size: 18px;
       }
+      .submark {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mute);
+        padding-inline-start: 14px;
+        border-inline-start: 1px solid var(--hair);
+        white-space: nowrap;
+      }
+      [dir="rtl"] .submark {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12px;
+      }
+      .steps {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         margin-inline-start: 8px;
       }
       .step {
@@ -239,6 +259,21 @@
         align-items: center;
         gap: 10px;
       }
+      .progress {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--mute);
+        display: inline-flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      [dir="rtl"] .progress {
+        font-family: var(--ar);
+        font-size: 12.5px;
+      }
+      .progress b {
+        font-weight: 500;
+        color: var(--ink);
         font-variant-numeric: tabular-nums;
       }
       .lang {
@@ -843,6 +878,10 @@
             ><span class="en">Catalyst Partners</span
             ><span class="ar">كاتاليست بارتنرز</span></span
           >
+          <span class="submark"
+            ><span class="en">Private · For Mohamed</span
+            ><span class="ar">خاص · لمحمد</span></span
+          >
         </div>
         <nav class="steps" aria-label="Partner review">
           <a href="foundation.html" class="step" aria-label="01 Foundation"
@@ -860,6 +899,14 @@
           <a href="handoff.html" class="step" aria-label="03 Handoff">03</a>
         </nav>
         <div class="controls">
+          <span class="progress"
+            ><span class="en">Open</span><span class="ar">باقي</span>&nbsp;<b
+              id="pcount"
+              >10</b
+            >&nbsp;<span class="en">of 10</span
+            ><span class="ar">من ١٠</span></span
+          >
+          <button
             id="theme-btn"
             class="theme-btn"
             onclick="toggleTheme()"
@@ -1693,6 +1740,8 @@
         ><span class="ar">كاتاليست بارتنرز · مرحلة ٠ · ٢ من ٣</span></span
       >
       <span
+        ><span class="en">Private — for Mohamed only</span
+        ><span class="ar">خاص — لمحمد فقط</span></span
       >
     </footer>
 
@@ -1706,6 +1755,7 @@
       /* ——————————————————————————————————— */
 
       let lang = "en";
+      const total = 10;
       const state = {};
 
       function setLang(l) {
@@ -1734,6 +1784,7 @@
             chipAr: lblAr,
           });
           markDone(c, v);
+          updateProgress();
         });
       });
 
@@ -1743,6 +1794,7 @@
           state[c] = Object.assign({}, state[c], { note: txt.value.trim() });
           if (state[c].chip || state[c].note) markDone(c, state[c].chip);
           else unmarkDone(c);
+          updateProgress();
         });
       });
 
@@ -1772,67 +1824,77 @@
             '<span class="en">Open</span><span class="ar">مفتوح</span>';
       }
 
+      function answeredCount() {
+        return Object.keys(state).filter(
+          (k) => state[k] && (state[k].chip || state[k].note),
+        ).length;
+      }
+      function updateProgress() {
+        const n = answeredCount();
+        document.getElementById("pcount").textContent = total - n;
+        document.getElementById("strand").style.width = (n / total) * 100 + "%";
+      }
 
       const cmeta = [
         {
           id: "c1",
           group: "A",
-          en: "Family business as primary entry market",
-          ar: "عيلات الأعمال كمدخل رئيسي",
+          en: "01. Family business as primary entry market",
+          ar: "٠١. عيلات الأعمال كمدخل رئيسي",
         },
         {
           id: "c2",
           group: "A",
-          en: "Full-picture delivery as the white space",
-          ar: "التسليم الكامل كفراغ في السوق",
+          en: "02. Full-picture delivery as the white space",
+          ar: "٠٢. التسليم الكامل كفراغ في السوق",
         },
         {
           id: "c3",
           group: "A",
-          en: "Excellence frameworks as semi-gov entry",
-          ar: "أُطر التميز كمدخل شبه حكومي",
+          en: "03. Excellence frameworks as semi-gov entry",
+          ar: "٠٣. أُطر التميز كمدخل شبه حكومي",
         },
         {
           id: "c4",
           group: "B",
-          en: "Institutional transformation leads the pitch",
-          ar: "التحول المؤسسي يقود الموقف",
+          en: "04. Institutional transformation leads the pitch",
+          ar: "٠٤. التحول المؤسسي يقود الموقف",
         },
         {
           id: "c5",
           group: "B",
-          en: "Digital delivery layer as the differentiator",
-          ar: "طبقة التسليم الرقمية كمميِّز",
+          en: "05. Digital delivery layer as the differentiator",
+          ar: "٠٥. طبقة التسليم الرقمية كمميِّز",
         },
         {
           id: "c6",
           group: "B",
-          en: "Bilingual fluency as a hard trust signal",
-          ar: "الثنائية الحقيقية كإشارة ثقة",
+          en: "06. Bilingual fluency as a hard trust signal",
+          ar: "٠٦. الثنائية الحقيقية كإشارة ثقة",
         },
         {
           id: "c7",
           group: "C",
-          en: "Brand closer to governance than HR/generic",
-          ar: "البراند أقرب للحوكمة من HR والجنيريك",
+          en: "07. Brand closer to governance than HR/generic",
+          ar: "٠٧. البراند أقرب للحوكمة من HR والجنيريك",
         },
         {
           id: "c8",
           group: "C",
-          en: "The positioning line should be distinctive",
-          ar: "جملة الموقف لازم تكون مميزة",
+          en: "08. The positioning line should be distinctive",
+          ar: "٠٨. جملة الموقف لازم تكون مميزة",
         },
         {
           id: "c9",
           group: "D",
-          en: "LinkedIn as the first go-to-market channel",
-          ar: "LinkedIn كأول قناة للسوق",
+          en: "09. LinkedIn as the first go-to-market channel",
+          ar: "٠٩. LinkedIn كأول قناة للسوق",
         },
         {
           id: "c10",
           group: "D",
-          en: "Outcome-led, milestone-based pricing",
-          ar: "تسعير قائم على النتائج والمراحل",
+          en: "10. Outcome-led, milestone-based pricing",
+          ar: "١٠. تسعير قائم على النتائج والمراحل",
         },
       ];
 
@@ -1959,6 +2021,7 @@
       );
       document.querySelectorAll(".rev").forEach((el) => io.observe(el));
 
+      updateProgress();
     </script>
   </body>
 </html>
