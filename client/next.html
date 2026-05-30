@@ -1,521 +1,1415 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="robots" content="noindex, nofollow" />
-<title>Catalyst Partners — What moves next</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" />
-<style>
-  :root{
-    --paper:#F4EFE5;--paper-2:#EBE5D6;--card:#FBF7ED;
-    --ink:#161311;--ink-2:#3B3733;--mute:#6E665C;--hair:#D7CFBE;
-    --bronze:#8C6E3D;--bronze-2:#6E5630;--green:#3D6B52;
-    --sx:clamp(18px,4vw,32px);
-    --col:min(640px,92vw);--col-wide:min(880px,94vw);
-    --serif:'Instrument Serif',ui-serif,Georgia,serif;
-    --sans:'Inter Tight',ui-sans-serif,system-ui,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-    --ar:'IBM Plex Sans Arabic',ui-sans-serif,system-ui,sans-serif;
-  }
-  [data-theme="dark"]{
-    --paper:#141210;--paper-2:#1C1916;--card:#1E1B17;
-    --ink:#EDE8DF;--ink-2:#B8B0A4;--mute:#6B6259;--hair:#2E2A25;
-    --bronze:#A8854D;--bronze-2:#C49A58;--green:#5A9E78;
-  }
-  @media(prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --paper:#141210;--paper-2:#1C1916;--card:#1E1B17;
-      --ink:#EDE8DF;--ink-2:#B8B0A4;--mute:#6B6259;--hair:#2E2A25;
-      --bronze:#A8854D;--bronze-2:#C49A58;--green:#5A9E78;
-    }
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-  body{
-    font-size:17px;line-height:1.62;letter-spacing:-0.005em;
-    background:radial-gradient(1200px 600px at 80% -10%,var(--paper-2) 0%,transparent 60%),
-               radial-gradient(900px 500px at -10% 110%,var(--paper-2) 0%,transparent 60%),
-               var(--paper);
-    min-height:100vh;overflow-x:hidden;
-  }
-  [dir="rtl"] body{font-family:var(--ar);font-size:17px;line-height:1.85;letter-spacing:0}
-  ::selection{background:#8C6E3D33;color:var(--ink)}
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Catalyst Partners — What moves next</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap"
+    />
+    <style>
+      :root {
+        --paper: #f4efe5;
+        --paper-2: #ebe5d6;
+        --card: #fbf7ed;
+        --ink: #161311;
+        --ink-2: #3b3733;
+        --mute: #6e665c;
+        --hair: #d7cfbe;
+        --bronze: #8c6e3d;
+        --bronze-2: #6e5630;
+        --green: #3d6b52;
+        --sx: clamp(18px, 4vw, 32px);
+        --col: min(640px, 92vw);
+        --col-wide: min(880px, 94vw);
+        --serif: "Instrument Serif", ui-serif, Georgia, serif;
+        --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+      }
+      [data-theme="dark"] {
+        --paper: #141210;
+        --paper-2: #1c1916;
+        --card: #1e1b17;
+        --ink: #ede8df;
+        --ink-2: #b8b0a4;
+        --mute: #6b6259;
+        --hair: #2e2a25;
+        --bronze: #a8854d;
+        --bronze-2: #c49a58;
+        --green: #5a9e78;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --paper: #141210;
+          --paper-2: #1c1916;
+          --card: #1e1b17;
+          --ink: #ede8df;
+          --ink-2: #b8b0a4;
+          --mute: #6b6259;
+          --hair: #2e2a25;
+          --bronze: #a8854d;
+          --bronze-2: #c49a58;
+          --green: #5a9e78;
+        }
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      body {
+        font-size: 17px;
+        line-height: 1.62;
+        letter-spacing: -0.005em;
+        background:
+          radial-gradient(
+            1200px 600px at 80% -10%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at -10% 110%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          var(--paper);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      [dir="rtl"] body {
+        font-family: var(--ar);
+        font-size: 17px;
+        line-height: 1.85;
+        letter-spacing: 0;
+      }
+      ::selection {
+        background: #8c6e3d33;
+        color: var(--ink);
+      }
 
-  .en{display:initial}.ar{display:none}
-  [dir="rtl"] .en{display:none}[dir="rtl"] .ar{display:initial}
+      .en {
+        display: initial;
+      }
+      .ar {
+        display: none;
+      }
+      [dir="rtl"] .en {
+        display: none;
+      }
+      [dir="rtl"] .ar {
+        display: initial;
+      }
 
-  /* masthead */
-  .masthead{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in oklab,var(--paper) 86%,transparent);
-    backdrop-filter:saturate(1.2) blur(10px);
-    -webkit-backdrop-filter:saturate(1.2) blur(10px);
-    border-bottom:1px solid var(--hair);
-  }
-  .masthead-row{
-    max-width:var(--col-wide);margin:0 auto;padding:14px var(--sx);
-    display:flex;align-items:center;justify-content:space-between;gap:16px;
-  }
-  .markline{display:flex;align-items:center;gap:14px;min-width:0}
-  .glyph{width:22px;height:22px;display:grid;place-items:center;color:var(--bronze)}
-  .wordmark{font-family:var(--serif);font-size:20px;line-height:1;letter-spacing:.005em;color:var(--ink);white-space:nowrap}
-  [dir="rtl"] .wordmark{font-family:var(--ar);font-weight:500;font-size:18px}
-  .submark{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--mute);padding-inline-start:14px;border-inline-start:1px solid var(--hair);white-space:nowrap;
-  }
-  [dir="rtl"] .submark{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:12px}
-  .steps{display:flex;align-items:center;gap:6px;margin-inline-start:8px}
-  .step{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute);text-decoration:none;padding:4px 6px;border-radius:4px;transition:color .18s}
-  .step.on{color:var(--bronze);font-weight:500}
-  .step:hover:not(.on){color:var(--ink)}
-  .step-sep{width:12px;height:1px;background:var(--hair)}
-  @media(max-width:480px){.steps{display:none}}
-  .controls{display:flex;align-items:center;gap:10px}
-  .lang{display:inline-flex;border:1px solid var(--hair);border-radius:999px;overflow:hidden;background:var(--card)}
-  .lang button{appearance:none;border:0;background:transparent;cursor:pointer;padding:6px 12px;font:500 12px var(--sans);color:var(--mute);letter-spacing:.04em}
-  .lang button.on{background:var(--ink);color:var(--paper)}
-  .lang button:last-child{font-family:var(--ar);font-size:13.5px;letter-spacing:0}
-  .theme-btn{
-    appearance:none;border:1px solid var(--hair);background:var(--card);color:var(--mute);
-    cursor:pointer;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;
-    transition:color .18s,border-color .18s,background .18s;
-  }
-  .theme-btn:hover{color:var(--bronze);border-color:var(--bronze)}
-  .strand{height:2px;background:var(--hair);position:relative;overflow:hidden}
-  .strand i{
-    position:absolute;inset-inline-start:0;top:0;bottom:0;width:100%;
-    background:linear-gradient(90deg,var(--bronze) 0%,var(--bronze-2) 100%);
-  }
+      /* masthead */
+      .masthead {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in oklab, var(--paper) 86%, transparent);
+        backdrop-filter: saturate(1.2) blur(10px);
+        -webkit-backdrop-filter: saturate(1.2) blur(10px);
+        border-bottom: 1px solid var(--hair);
+      }
+      .masthead-row {
+        max-width: var(--col-wide);
+        margin: 0 auto;
+        padding: 14px var(--sx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .markline {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+      .glyph {
+        width: 22px;
+        height: 22px;
+        display: grid;
+        place-items: center;
+        color: var(--bronze);
+      }
+      .wordmark {
+        font-family: var(--serif);
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: 0.005em;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      [dir="rtl"] .wordmark {
+        font-family: var(--ar);
+        font-weight: 500;
+        font-size: 18px;
+      }
+      .submark {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mute);
+        padding-inline-start: 14px;
+        border-inline-start: 1px solid var(--hair);
+        white-space: nowrap;
+      }
+      [dir="rtl"] .submark {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12px;
+      }
+      .steps {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-inline-start: 8px;
+      }
+      .step {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        color: var(--mute);
+        text-decoration: none;
+        padding: 4px 6px;
+        border-radius: 4px;
+        transition: color 0.18s;
+      }
+      .step.on {
+        color: var(--bronze);
+        font-weight: 500;
+      }
+      .step:hover:not(.on) {
+        color: var(--ink);
+      }
+      .step-sep {
+        width: 12px;
+        height: 1px;
+        background: var(--hair);
+      }
+      @media (max-width: 480px) {
+        .steps {
+          display: none;
+        }
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .lang {
+        display: inline-flex;
+        border: 1px solid var(--hair);
+        border-radius: 999px;
+        overflow: hidden;
+        background: var(--card);
+      }
+      .lang button {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        padding: 6px 12px;
+        font: 500 12px var(--sans);
+        color: var(--mute);
+        letter-spacing: 0.04em;
+      }
+      .lang button.on {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .lang button:last-child {
+        font-family: var(--ar);
+        font-size: 13.5px;
+        letter-spacing: 0;
+      }
+      .theme-btn {
+        appearance: none;
+        border: 1px solid var(--hair);
+        background: var(--card);
+        color: var(--mute);
+        cursor: pointer;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        transition:
+          color 0.18s,
+          border-color 0.18s,
+          background 0.18s;
+      }
+      .theme-btn:hover {
+        color: var(--bronze);
+        border-color: var(--bronze);
+      }
+      .strand {
+        height: 2px;
+        background: var(--hair);
+        position: relative;
+        overflow: hidden;
+      }
+      .strand i {
+        position: absolute;
+        inset-inline-start: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--bronze) 0%,
+          var(--bronze-2) 100%
+        );
+      }
 
-  /* layout */
-  main{padding:48px var(--sx) 96px}
-  .col{max-width:var(--col);margin-inline:auto}
+      /* layout */
+      main {
+        padding: 48px var(--sx) 96px;
+      }
+      .col {
+        max-width: var(--col);
+        margin-inline: auto;
+      }
 
-  /* hero */
-  .hero{padding:56px 0 60px;border-bottom:1px solid var(--hair)}
-  .salutation{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bronze);margin-bottom:24px}
-  [dir="rtl"] .salutation{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:13px}
-  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.4vw,58px);line-height:1.06;letter-spacing:-0.02em;color:var(--ink);margin-bottom:20px}
-  [dir="rtl"] .hero h1{font-family:var(--ar);font-weight:500;line-height:1.25;letter-spacing:0;font-size:clamp(28px,4.8vw,46px)}
-  .hero h1 em{font-style:italic;color:var(--bronze-2)}
-  [dir="rtl"] .hero h1 em{font-style:normal;color:var(--bronze-2);font-weight:600}
-  .hero .deck{font-size:17px;color:var(--ink-2);max-width:520px;line-height:1.65}
-  [dir="rtl"] .hero .deck{font-size:17.5px;line-height:1.9}
+      /* hero */
+      .hero {
+        padding: 56px 0 60px;
+        border-bottom: 1px solid var(--hair);
+      }
+      .salutation {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--bronze);
+        margin-bottom: 24px;
+      }
+      [dir="rtl"] .salutation {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 13px;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(34px, 5.4vw, 58px);
+        line-height: 1.06;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        margin-bottom: 20px;
+      }
+      [dir="rtl"] .hero h1 {
+        font-family: var(--ar);
+        font-weight: 500;
+        line-height: 1.25;
+        letter-spacing: 0;
+        font-size: clamp(28px, 4.8vw, 46px);
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--bronze-2);
+      }
+      [dir="rtl"] .hero h1 em {
+        font-style: normal;
+        color: var(--bronze-2);
+        font-weight: 600;
+      }
+      .hero .deck {
+        font-size: 17px;
+        color: var(--ink-2);
+        max-width: 520px;
+        line-height: 1.65;
+      }
+      [dir="rtl"] .hero .deck {
+        font-size: 17.5px;
+        line-height: 1.9;
+      }
 
-  /* section marker */
-  .marker{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;margin-top:48px}
-  .marker .num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--bronze)}
-  [dir="rtl"] .marker .num{font-family:var(--ar);letter-spacing:0;font-size:13px}
-  .marker .label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
-  [dir="rtl"] .marker .label{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:13px}
-  .marker .rule{flex:1;height:1px;background:var(--hair)}
+      /* section marker */
+      .marker {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        margin-bottom: 20px;
+        margin-top: 48px;
+      }
+      .marker .num {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--bronze);
+      }
+      [dir="rtl"] .marker .num {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        font-size: 13px;
+      }
+      .marker .label {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--mute);
+      }
+      [dir="rtl"] .marker .label {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 13px;
+      }
+      .marker .rule {
+        flex: 1;
+        height: 1px;
+        background: var(--hair);
+      }
 
-  /* what you did — completion chips */
-  .completed-note{
-    padding:18px 20px;background:color-mix(in oklab,var(--green) 8%,transparent);
-    border:1px solid color-mix(in oklab,var(--green) 30%,transparent);
-    border-radius:6px;margin-bottom:24px;
-    font-size:15px;color:var(--ink-2);line-height:1.55;
-  }
-  [dir="rtl"] .completed-note{font-size:15.5px;line-height:1.8}
-  .completed-note .tick{color:var(--green);font-weight:600;margin-inline-end:6px}
-  .completed-items{margin-top:10px;display:flex;flex-direction:column;gap:6px}
-  .completed-item{
-    display:flex;align-items:flex-start;gap:10px;
-    font-size:14px;color:var(--mute);
-  }
-  [dir="rtl"] .completed-item{font-size:15px}
-  .completed-item .ci-dot{
-    flex-shrink:0;width:6px;height:6px;border-radius:50%;
-    background:var(--green);margin-top:5px;
-  }
+      /* what you did — completion chips */
+      .completed-note {
+        padding: 18px 20px;
+        background: color-mix(in oklab, var(--green) 8%, transparent);
+        border: 1px solid color-mix(in oklab, var(--green) 30%, transparent);
+        border-radius: 6px;
+        margin-bottom: 24px;
+        font-size: 15px;
+        color: var(--ink-2);
+        line-height: 1.55;
+      }
+      [dir="rtl"] .completed-note {
+        font-size: 15.5px;
+        line-height: 1.8;
+      }
+      .completed-note .tick {
+        color: var(--green);
+        font-weight: 600;
+        margin-inline-end: 6px;
+      }
+      .completed-items {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .completed-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--mute);
+      }
+      [dir="rtl"] .completed-item {
+        font-size: 15px;
+      }
+      .completed-item .ci-dot {
+        flex-shrink: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        margin-top: 5px;
+      }
 
-  /* timeline */
-  .timeline{display:flex;flex-direction:column;gap:0}
-  .week{
-    display:grid;grid-template-columns:90px 1fr;gap:18px;
-    padding:18px 0;border-top:1px solid var(--hair);
-    align-items:start;
-  }
-  .week:last-child{border-bottom:1px solid var(--hair)}
-  .week-label{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--bronze);padding-top:3px;
-  }
-  [dir="rtl"] .week-label{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:12.5px}
-  .week-items{display:flex;flex-direction:column;gap:10px}
-  .week-item{display:flex;align-items:flex-start;gap:10px}
-  .week-item .wi-dot{
-    flex-shrink:0;width:6px;height:6px;border-radius:50%;
-    background:var(--hair);margin-top:6px;
-  }
-  .week-item .wi-title{font-size:15px;color:var(--ink);font-weight:500;margin-bottom:1px}
-  [dir="rtl"] .week-item .wi-title{font-size:16px}
-  .week-item .wi-detail{font-size:13px;color:var(--mute);line-height:1.5}
-  [dir="rtl"] .week-item .wi-detail{font-size:14px;line-height:1.7}
+      /* timeline */
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .week {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 18px;
+        padding: 18px 0;
+        border-top: 1px solid var(--hair);
+        align-items: start;
+      }
+      .week:last-child {
+        border-bottom: 1px solid var(--hair);
+      }
+      .week-label {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bronze);
+        padding-top: 3px;
+      }
+      [dir="rtl"] .week-label {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12.5px;
+      }
+      .week-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .week-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .week-item .wi-dot {
+        flex-shrink: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--hair);
+        margin-top: 6px;
+      }
+      .week-item .wi-title {
+        font-size: 15px;
+        color: var(--ink);
+        font-weight: 500;
+        margin-bottom: 1px;
+      }
+      [dir="rtl"] .week-item .wi-title {
+        font-size: 16px;
+      }
+      .week-item .wi-detail {
+        font-size: 13px;
+        color: var(--mute);
+        line-height: 1.5;
+      }
+      [dir="rtl"] .week-item .wi-detail {
+        font-size: 14px;
+        line-height: 1.7;
+      }
 
-  /* owner map */
-  .owner-map{
-    display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:4px;
-    background:var(--hair);border:1px solid var(--hair);
-  }
-  @media(max-width:480px){.owner-map{grid-template-columns:1fr}}
-  .owner-col{background:var(--card);padding:20px}
-  .owner-col-head{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--bronze);margin-bottom:14px;
-  }
-  [dir="rtl"] .owner-col-head{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:12.5px}
-  .owner-list{display:flex;flex-direction:column;gap:8px}
-  .owner-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-2);line-height:1.45}
-  [dir="rtl"] .owner-item{font-size:15px;line-height:1.65}
-  .owner-item .oi-dot{flex-shrink:0;width:5px;height:5px;border-radius:50%;background:var(--bronze);margin-top:5px}
+      /* owner map */
+      .owner-map {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        margin-top: 4px;
+        background: var(--hair);
+        border: 1px solid var(--hair);
+      }
+      @media (max-width: 480px) {
+        .owner-map {
+          grid-template-columns: 1fr;
+        }
+      }
+      .owner-col {
+        background: var(--card);
+        padding: 20px;
+      }
+      .owner-col-head {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bronze);
+        margin-bottom: 14px;
+      }
+      [dir="rtl"] .owner-col-head {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12.5px;
+      }
+      .owner-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .owner-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.45;
+      }
+      [dir="rtl"] .owner-item {
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      .owner-item .oi-dot {
+        flex-shrink: 0;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--bronze);
+        margin-top: 5px;
+      }
 
-  /* the ask / CTA */
-  .the-ask{
-    margin-top:48px;padding:36px;
-    background:var(--ink);border-radius:8px;
-    color:var(--paper);
-  }
-  .the-ask h2{
-    font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.4vw,36px);
-    line-height:1.12;letter-spacing:-0.01em;margin-bottom:12px;
-  }
-  [dir="rtl"] .the-ask h2{font-family:var(--ar);font-weight:500;line-height:1.35;letter-spacing:0;font-size:clamp(22px,3vw,30px)}
-  .the-ask h2 em{font-style:italic;color:var(--bronze-2)}
-  [dir="rtl"] .the-ask h2 em{font-style:normal;color:var(--bronze-2);font-weight:600}
-  .the-ask p{font-size:15.5px;color:color-mix(in oklab,var(--paper) 65%,transparent);line-height:1.6;margin-bottom:24px;max-width:480px}
-  [dir="rtl"] .the-ask p{font-size:16px;line-height:1.85}
-  .cta-btn{
-    display:inline-flex;align-items:center;gap:10px;
-    appearance:none;border:0;cursor:pointer;
-    background:var(--bronze);color:var(--paper);
-    padding:16px 26px;border-radius:999px;
-    font:600 15px var(--sans);letter-spacing:-0.005em;
-    transition:background .18s,transform .12s;
-    text-decoration:none;
-  }
-  [dir="rtl"] .cta-btn{font-family:var(--ar);font-size:16px;font-weight:600}
-  .cta-btn:hover{background:var(--bronze-2);transform:translateY(-1px)}
-  .cta-btn svg{width:16px;height:16px}
+      /* the ask / CTA */
+      .the-ask {
+        margin-top: 48px;
+        padding: 36px;
+        background: var(--ink);
+        border-radius: 8px;
+        color: var(--paper);
+      }
+      .the-ask h2 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(26px, 3.4vw, 36px);
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        margin-bottom: 12px;
+      }
+      [dir="rtl"] .the-ask h2 {
+        font-family: var(--ar);
+        font-weight: 500;
+        line-height: 1.35;
+        letter-spacing: 0;
+        font-size: clamp(22px, 3vw, 30px);
+      }
+      .the-ask h2 em {
+        font-style: italic;
+        color: var(--bronze-2);
+      }
+      [dir="rtl"] .the-ask h2 em {
+        font-style: normal;
+        color: var(--bronze-2);
+        font-weight: 600;
+      }
+      .the-ask p {
+        font-size: 15.5px;
+        color: color-mix(in oklab, var(--paper) 65%, transparent);
+        line-height: 1.6;
+        margin-bottom: 24px;
+        max-width: 480px;
+      }
+      [dir="rtl"] .the-ask p {
+        font-size: 16px;
+        line-height: 1.85;
+      }
+      .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        background: var(--bronze);
+        color: var(--paper);
+        padding: 16px 26px;
+        border-radius: 999px;
+        font: 600 15px var(--sans);
+        letter-spacing: -0.005em;
+        transition:
+          background 0.18s,
+          transform 0.12s;
+        text-decoration: none;
+      }
+      [dir="rtl"] .cta-btn {
+        font-family: var(--ar);
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .cta-btn:hover {
+        background: var(--bronze-2);
+        transform: translateY(-1px);
+      }
+      .cta-btn svg {
+        width: 16px;
+        height: 16px;
+      }
 
-  /* page nav */
-  .page-nav{max-width:var(--col);margin-inline:auto;padding:32px var(--sx) 0;display:flex;justify-content:flex-start;align-items:center}
-  .page-back{
-    display:inline-flex;align-items:center;gap:10px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--mute);text-decoration:none;
-    padding:13px 18px;border:1px solid var(--hair);border-radius:999px;
-    transition:border-color .18s,color .18s,background .18s;
-  }
-  [dir="rtl"] .page-back{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:13px}
-  .page-back:hover{border-color:var(--bronze);background:color-mix(in oklab,var(--bronze) 6%,transparent)}
+      /* page nav */
+      .page-nav {
+        max-width: var(--col);
+        margin-inline: auto;
+        padding: 32px var(--sx) 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .page-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mute);
+        text-decoration: none;
+        padding: 13px 18px;
+        border: 1px solid var(--hair);
+        border-radius: 999px;
+        transition:
+          border-color 0.18s,
+          color 0.18s,
+          background 0.18s;
+      }
+      [dir="rtl"] .page-back {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 13px;
+      }
+      .page-back:hover {
+        border-color: var(--bronze);
+        background: color-mix(in oklab, var(--bronze) 6%, transparent);
+      }
 
-  footer{
-    border-top:1px solid var(--hair);margin-top:64px;padding:28px var(--sx);
-    color:var(--mute);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
-    max-width:var(--col-wide);margin-inline:auto;
-  }
-  [dir="rtl"] footer{font-family:var(--ar);letter-spacing:0;text-transform:none;font-size:12.5px}
+      footer {
+        border-top: 1px solid var(--hair);
+        margin-top: 64px;
+        padding: 28px var(--sx);
+        color: var(--mute);
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+        max-width: var(--col-wide);
+        margin-inline: auto;
+      }
+      [dir="rtl"] footer {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12.5px;
+      }
 
-  .rev{opacity:0;transform:translateY(12px);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
-  .rev.in{opacity:1;transform:none}
+      .rev {
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.65s cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .rev.in {
+        opacity: 1;
+        transform: none;
+      }
 
-  @media(max-width:560px){
-    .hero{padding:40px 0 44px}
-    .week{grid-template-columns:72px 1fr;gap:12px}
-    .the-ask{padding:26px}
-  }
-  @media(prefers-reduced-motion:reduce){*{transition:none !important}.rev{opacity:1;transform:none}}
-</style>
-</head>
-<body>
-
-<header class="masthead">
-  <div class="masthead-row">
-    <div class="markline">
-      <span class="glyph" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <rect x="2.5" y="2.5" width="17" height="17" stroke="currentColor" stroke-width="1"/>
-          <line x1="2.5" y1="11" x2="19.5" y2="11" stroke="currentColor" stroke-width="1"/>
-          <line x1="11" y1="2.5" x2="11" y2="19.5" stroke="currentColor" stroke-width="1"/>
-        </svg>
-      </span>
-      <span class="wordmark"><span class="en">Catalyst Partners</span><span class="ar">كاتاليست بارتنرز</span></span>
-      <span class="submark"><span class="en">Private · For Mohamed</span><span class="ar">خاص · لمحمد</span></span>
-    </div>
-    <nav class="steps" aria-label="Pages">
-      <a href="intake.html" class="step">01</a>
-      <span class="step-sep"></span>
-      <a href="validate.html" class="step">02</a>
-      <span class="step-sep"></span>
-      <a href="next.html" class="step on">03</a>
-    </nav>
-    <div class="controls">
-      <button id="theme-btn" class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
-        <svg id="theme-icon-moon" viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M13.5 9A6 6 0 0 1 6.5 2a.5.5 0 0 0-.62.64A6 6 0 1 0 13.36 9.62.5.5 0 0 0 13.5 9z" fill="currentColor"/></svg>
-        <svg id="theme-icon-sun" viewBox="0 0 16 16" fill="none" width="14" height="14" style="display:none"><circle cx="8" cy="8" r="3.2" stroke="currentColor" stroke-width="1.2"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.9 11.9l1.05 1.05M12.95 3.05l-1.06 1.06M4.1 11.9l-1.05 1.05" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      </button>
-      <div class="lang" role="group" aria-label="Language">
-        <button id="lng-en" class="on" onclick="setLang('en')">EN</button>
-        <button id="lng-ar" onclick="setLang('ar')">عربي</button>
-      </div>
-    </div>
-  </div>
-  <div class="strand"><i></i></div>
-</header>
-
-<main>
-
-  <section class="hero col">
-    <div class="salutation rev"><span class="en">Page 03 · What moves</span><span class="ar">صفحة ٠٣ · اللي بيتحرك</span></div>
-
-    <h1 class="rev">
-      <span class="en">You've read the strategy. You've validated the compass. <em>Here is what happens in the next 30 days.</em></span>
-      <span class="ar">قرأت الاستراتيجية. قيّمت الموقف. <em>ده اللي بيحصل في الثلاثين يوم الجاية.</em></span>
-    </h1>
-
-    <p class="deck rev">
-      <span class="en">No ambiguity. What we ship, when, who owns what — laid out flat so the first call we have is about the work, not about the plan.</span>
-      <span class="ar">من غير أي غموض. إيه بنسلّمه، إمتى، مين بياخد إيه — مرسومة بوضوح عشان أول كالّ يكون عن الشغل، مش عن الخطة.</span>
-    </p>
-  </section>
-
-  <section class="col">
-
-    <div class="marker rev">
-      <span class="num">01</span>
-      <span class="label"><span class="en">What you did</span><span class="ar">اللي عملته</span></span>
-      <span class="rule"></span>
-    </div>
-
-    <div class="completed-note rev">
-      <span class="en"><span class="tick">✓</span>By sending back pages 1 and 2, you have given us what we need to move. Here is what you closed:</span>
-      <span class="ar"><span class="tick">✓</span>بإرسالك الصفحتين الأولى والتانية، إديتنا اللي محتاجينه للتحرك. ده اللي أقفلته:</span>
-      <div class="completed-items">
-        <div class="completed-item">
-          <div class="ci-dot"></div>
-          <span class="en">12 foundation decisions — Arabic name, default language, segment ownership, data residency, CRM, lead alerts, booking model, Arabic guardian, CMS hosting, numerals, notification path.</span>
-          <span class="ar">١٢ قرار تأسيسي — اسم الشركة بالعربي، اللغة الافتراضية، ملكية السيجمنتس، إقامة البيانات، الـ CRM، تنبيهات الـ leads، نموذج الحجز، مراجع العربي، استضافة الـ CMS، الأرقام، طريق التنبيه.</span>
+      @media (max-width: 560px) {
+        .hero {
+          padding: 40px 0 44px;
+        }
+        .week {
+          grid-template-columns: 72px 1fr;
+          gap: 12px;
+        }
+        .the-ask {
+          padding: 26px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+        .rev {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead-row">
+        <div class="markline">
+          <span class="glyph" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect
+                x="2.5"
+                y="2.5"
+                width="17"
+                height="17"
+                stroke="currentColor"
+                stroke-width="1"
+              />
+              <line
+                x1="2.5"
+                y1="11"
+                x2="19.5"
+                y2="11"
+                stroke="currentColor"
+                stroke-width="1"
+              />
+              <line
+                x1="11"
+                y1="2.5"
+                x2="11"
+                y2="19.5"
+                stroke="currentColor"
+                stroke-width="1"
+              />
+            </svg>
+          </span>
+          <span class="wordmark"
+            ><span class="en">Catalyst Partners</span
+            ><span class="ar">كاتاليست بارتنرز</span></span
+          >
+          <span class="submark"
+            ><span class="en">Private · For Mohamed</span
+            ><span class="ar">خاص · لمحمد</span></span
+          >
         </div>
-        <div class="completed-item">
-          <div class="ci-dot"></div>
-          <span class="en">10 market and positioning claims validated — where you agreed, where you adjusted, where you challenged. These shape the brand brief, the site copy, and the first client conversation.</span>
-          <span class="ar">١٠ رهانات سوقية وتموضع تم التحقق منها — فين اتفقت، فين عدّلت، فين اختلفت. دي بتشكّل بريف البراند ونص الموقع وأول محادثة مع عميل.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="marker rev">
-      <span class="num">02</span>
-      <span class="label"><span class="en">The first 30 days</span><span class="ar">الثلاثين يوم الأولى</span></span>
-      <span class="rule"></span>
-    </div>
-
-    <div class="timeline rev">
-      <div class="week">
-        <span class="week-label"><span class="en">Days 1–7</span><span class="ar">يوم ١–٧</span></span>
-        <div class="week-items">
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">30-minute alignment call</span><span class="ar">كالّ تنسيق ٣٠ دقيقة</span></div>
-              <div class="wi-detail"><span class="en">Review decisions + validations together. Close anything still open. One conversation, no slides.</span><span class="ar">نراجع القرارات والتحققات مع بعض. نقفل أي حاجة لسه مفتوحة. محادثة واحدة، من غير سلايدات.</span></div>
-            </div>
-          </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Domains registered</span><span class="ar">النطاقات متسجَّلة</span></div>
-              <div class="wi-detail"><span class="en">catalystpartners.ae and supporting domains locked. No brand work ships before the addresses are owned.</span><span class="ar">catalystpartners.ae والنطاقات المساندة متأمَّنة. مفيش شغل براند ينزل قبل ما العناوين ملكنا.</span></div>
-            </div>
-          </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Brand brief finalized and issued to designer</span><span class="ar">بريف البراند نهائي وبيتسلّم للمصمم</span></div>
-              <div class="wi-detail"><span class="en">Your decisions embedded. Arabic name direction confirmed. Designer-ready document — no revision loops for missing information.</span><span class="ar">قراراتك مدمجة فيه. اتجاه الاسم العربي مؤكَّد. الوثيقة جاهزة للمصمم — من غير دورات مراجعة لمعلومات ناقصة.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="week">
-        <span class="week-label"><span class="en">Days 8–14</span><span class="ar">يوم ٨–١٤</span></span>
-        <div class="week-items">
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Brand identity — round 1</span><span class="ar">الهوية البصرية — الجولة الأولى</span></div>
-              <div class="wi-detail"><span class="en">Logo concepts, bilingual wordmark, colour application, typography in use. Three directions presented, one selected.</span><span class="ar">مفاهيم الشعار، الاسم التجاري بالعربي والإنجليزي، تطبيق الألوان، الخطوط في الاستخدام. ثلاثة اتجاهات مقدَّمة، واحد منهم بيتاخد.</span></div>
-            </div>
-          </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Hosting environment provisioned</span><span class="ar">بيئة الاستضافة جاهزة</span></div>
-              <div class="wi-detail"><span class="en">UAE-region server stood up. CMS instance deployed. Backups configured. Development environment live.</span><span class="ar">سيرفر منطقة الإمارات شغّال. نسخة الـ CMS متنشَّرة. نسخ احتياطية مجهَّزة. بيئة التطوير شغّالة.</span></div>
-            </div>
-          </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">CRM configured</span><span class="ar">الـ CRM متجهَّز</span></div>
-              <div class="wi-detail"><span class="en">HubSpot or Zoho set up per your decision. Segment routing map implemented. Raw lead log in place — CRM stays swappable.</span><span class="ar">HubSpot أو Zoho متجهَّز حسب قرارك. خريطة توجيه السيجمنتس متنفَّذة. سجل الـ leads الخام جاهز — الـ CRM يفضل قابل للتبديل.</span></div>
-            </div>
+        <nav class="steps" aria-label="Pages">
+          <a href="intake.html" class="step">01</a>
+          <span class="step-sep"></span>
+          <a href="validate.html" class="step">02</a>
+          <span class="step-sep"></span>
+          <a href="next.html" class="step on">03</a>
+        </nav>
+        <div class="controls">
+          <button
+            id="theme-btn"
+            class="theme-btn"
+            onclick="toggleTheme()"
+            aria-label="Toggle dark mode"
+          >
+            <svg
+              id="theme-icon-moon"
+              viewBox="0 0 16 16"
+              fill="none"
+              width="14"
+              height="14"
+            >
+              <path
+                d="M13.5 9A6 6 0 0 1 6.5 2a.5.5 0 0 0-.62.64A6 6 0 1 0 13.36 9.62.5.5 0 0 0 13.5 9z"
+                fill="currentColor"
+              />
+            </svg>
+            <svg
+              id="theme-icon-sun"
+              viewBox="0 0 16 16"
+              fill="none"
+              width="14"
+              height="14"
+              style="display: none"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="3.2"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+              <path
+                d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.9 11.9l1.05 1.05M12.95 3.05l-1.06 1.06M4.1 11.9l-1.05 1.05"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <div class="lang" role="group" aria-label="Language">
+            <button id="lng-en" class="on" onclick="setLang('en')">EN</button>
+            <button id="lng-ar" onclick="setLang('ar')">عربي</button>
           </div>
         </div>
       </div>
+      <div class="strand"><i></i></div>
+    </header>
 
-      <div class="week">
-        <span class="week-label"><span class="en">Days 15–21</span><span class="ar">يوم ١٥–٢١</span></span>
-        <div class="week-items">
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Brand identity — final</span><span class="ar">الهوية البصرية — نهائية</span></div>
-              <div class="wi-detail"><span class="en">Refined direction approved. Bilingual wordmark complete. Full identity system: logo files, colour palette, type specimen, usage rules.</span><span class="ar">الاتجاه المُختار معتمد. الاسم التجاري ثنائي اللغة كامل. نظام الهوية كامل: ملفات الشعار، لوحة الألوان، عينة الخطوط، قواعد الاستخدام.</span></div>
+    <main>
+      <section class="hero col">
+        <div class="salutation rev">
+          <span class="en">Page 03 · What moves</span
+          ><span class="ar">صفحة ٠٣ · اللي بيتحرك</span>
+        </div>
+
+        <h1 class="rev">
+          <span class="en"
+            >You've read the strategy. You've validated the compass.
+            <em>Here is what happens in the next 30 days.</em></span
+          >
+          <span class="ar"
+            >قرأت الاستراتيجية. قيّمت الموقف.
+            <em>ده اللي بيحصل في الثلاثين يوم الجاية.</em></span
+          >
+        </h1>
+
+        <p class="deck rev">
+          <span class="en"
+            >No ambiguity. What we ship, when, who owns what — laid out flat so
+            the first call we have is about the work, not about the plan.</span
+          >
+          <span class="ar"
+            >من غير أي غموض. إيه بنسلّمه، إمتى، مين بياخد إيه — مرسومة بوضوح
+            عشان أول كالّ يكون عن الشغل، مش عن الخطة.</span
+          >
+        </p>
+      </section>
+
+      <section class="col">
+        <div class="marker rev">
+          <span class="num">01</span>
+          <span class="label"
+            ><span class="en">What you did</span
+            ><span class="ar">اللي عملته</span></span
+          >
+          <span class="rule"></span>
+        </div>
+
+        <div class="completed-note rev">
+          <span class="en"
+            ><span class="tick">✓</span>By sending back pages 1 and 2, you have
+            given us what we need to move. Here is what you closed:</span
+          >
+          <span class="ar"
+            ><span class="tick">✓</span>بإرسالك الصفحتين الأولى والتانية، إديتنا
+            اللي محتاجينه للتحرك. ده اللي أقفلته:</span
+          >
+          <div class="completed-items">
+            <div class="completed-item">
+              <div class="ci-dot"></div>
+              <span class="en"
+                >12 foundation decisions — Arabic name, default language,
+                segment ownership, data residency, CRM, lead alerts, booking
+                model, Arabic guardian, CMS hosting, numerals, notification
+                path.</span
+              >
+              <span class="ar"
+                >١٢ قرار تأسيسي — اسم الشركة بالعربي، اللغة الافتراضية، ملكية
+                السيجمنتس، إقامة البيانات، الـ CRM، تنبيهات الـ leads، نموذج
+                الحجز، مراجع العربي، استضافة الـ CMS، الأرقام، طريق
+                التنبيه.</span
+              >
             </div>
-          </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Core website pages in development</span><span class="ar">صفحات الموقع الأساسية في التطوير</span></div>
-              <div class="wi-detail"><span class="en">Homepage, positioning, services, and partners pages. Arabic and English built together — never one before the other.</span><span class="ar">الصفحة الرئيسية، التموضع، الخدمات، وصفحة الشركاء. العربي والإنجليزي بيتبنوا مع بعض — مش واحد قبل التاني.</span></div>
-            </div>
-          </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Lead notification stack live</span><span class="ar">نظام تنبيه الـ leads شغّال</span></div>
-              <div class="wi-detail"><span class="en">Your preferred path — Slack, email, or both — configured and tested. Fast-track threshold working. Scoring model calibrated.</span><span class="ar">الطريق المفضل عندك — Slack أو إيميل أو الاتنين — متجهَّز ومتاختبَر. حد الـ fast-track شغّال. نموذج السكورنج معاير.</span></div>
+            <div class="completed-item">
+              <div class="ci-dot"></div>
+              <span class="en"
+                >10 market and positioning claims validated — where you agreed,
+                where you adjusted, where you challenged. These shape the brand
+                brief, the site copy, and the first client conversation.</span
+              >
+              <span class="ar"
+                >١٠ رهانات سوقية وتموضع تم التحقق منها — فين اتفقت، فين عدّلت،
+                فين اختلفت. دي بتشكّل بريف البراند ونص الموقع وأول محادثة مع
+                عميل.</span
+              >
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="week">
-        <span class="week-label"><span class="en">Days 22–30</span><span class="ar">يوم ٢٢–٣٠</span></span>
-        <div class="week-items">
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Bilingual core site — review round</span><span class="ar">الموقع الثنائي الأساسي — جولة مراجعة</span></div>
-              <div class="wi-detail"><span class="en">Core pages reviewed in both locales and directions. Arabic editorial review gate applied. Copy refinements based on validation feedback.</span><span class="ar">الصفحات الأساسية متراجَعة في اللغتين والاتجاهين. بوابة مراجعة المحتوى العربي متطبَّقة. تحسينات النص بناءً على تغذية راجعة من التحقق.</span></div>
+        <div class="marker rev">
+          <span class="num">02</span>
+          <span class="label"
+            ><span class="en">The first 30 days</span
+            ><span class="ar">الثلاثين يوم الأولى</span></span
+          >
+          <span class="rule"></span>
+        </div>
+
+        <div class="timeline rev">
+          <div class="week">
+            <span class="week-label"
+              ><span class="en">Days 1–7</span
+              ><span class="ar">يوم ١–٧</span></span
+            >
+            <div class="week-items">
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">30-minute alignment call</span
+                    ><span class="ar">كالّ تنسيق ٣٠ دقيقة</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Review decisions + validations together. Close anything
+                      still open. One conversation, no slides.</span
+                    ><span class="ar"
+                      >نراجع القرارات والتحققات مع بعض. نقفل أي حاجة لسه مفتوحة.
+                      محادثة واحدة، من غير سلايدات.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Domains registered</span
+                    ><span class="ar">النطاقات متسجَّلة</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >catalystpartners.ae and supporting domains locked. No
+                      brand work ships before the addresses are owned.</span
+                    ><span class="ar"
+                      >catalystpartners.ae والنطاقات المساندة متأمَّنة. مفيش شغل
+                      براند ينزل قبل ما العناوين ملكنا.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en"
+                      >Brand brief finalized and issued to designer</span
+                    ><span class="ar">بريف البراند نهائي وبيتسلّم للمصمم</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Your decisions embedded. Arabic name direction confirmed.
+                      Designer-ready document — no revision loops for missing
+                      information.</span
+                    ><span class="ar"
+                      >قراراتك مدمجة فيه. اتجاه الاسم العربي مؤكَّد. الوثيقة
+                      جاهزة للمصمم — من غير دورات مراجعة لمعلومات ناقصة.</span
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">LinkedIn content strategy delivered</span><span class="ar">استراتيجية محتوى LinkedIn مسلَّمة</span></div>
-              <div class="wi-detail"><span class="en">Editorial calendar for the first 90 days. First three pieces drafted — Arabic and English. Audience repositioning roadmap.</span><span class="ar">تقويم تحريري للتسعين يوم الأولى. أول ثلاث قطع محتوى مسوَّدة — عربي وإنجليزي. خريطة طريق إعادة تموضع الجمهور.</span></div>
+
+          <div class="week">
+            <span class="week-label"
+              ><span class="en">Days 8–14</span
+              ><span class="ar">يوم ٨–١٤</span></span
+            >
+            <div class="week-items">
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Brand identity — round 1</span
+                    ><span class="ar">الهوية البصرية — الجولة الأولى</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Logo concepts, bilingual wordmark, colour application,
+                      typography in use. Three directions presented, one
+                      selected.</span
+                    ><span class="ar"
+                      >مفاهيم الشعار، الاسم التجاري بالعربي والإنجليزي، تطبيق
+                      الألوان، الخطوط في الاستخدام. ثلاثة اتجاهات مقدَّمة، واحد
+                      منهم بيتاخد.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Hosting environment provisioned</span
+                    ><span class="ar">بيئة الاستضافة جاهزة</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >UAE-region server stood up. CMS instance deployed.
+                      Backups configured. Development environment live.</span
+                    ><span class="ar"
+                      >سيرفر منطقة الإمارات شغّال. نسخة الـ CMS متنشَّرة. نسخ
+                      احتياطية مجهَّزة. بيئة التطوير شغّالة.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">CRM configured</span
+                    ><span class="ar">الـ CRM متجهَّز</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >HubSpot or Zoho set up per your decision. Segment routing
+                      map implemented. Raw lead log in place — CRM stays
+                      swappable.</span
+                    ><span class="ar"
+                      >HubSpot أو Zoho متجهَّز حسب قرارك. خريطة توجيه السيجمنتس
+                      متنفَّذة. سجل الـ leads الخام جاهز — الـ CRM يفضل قابل
+                      للتبديل.</span
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="week-item">
-            <div class="wi-dot"></div>
-            <div>
-              <div class="wi-title"><span class="en">Phase 0 closed. Phase 1 begins.</span><span class="ar">مرحلة ٠ منتهية. مرحلة ١ تبدأ.</span></div>
-              <div class="wi-detail"><span class="en">All foundation decisions implemented. The site moves into full Phase 1 build — lead system, gated reports, and the full content engine.</span><span class="ar">كل قرارات التأسيس متنفَّذة. الموقع بيدخل البناء الكامل للمرحلة ١ — نظام الـ leads والتقارير المقفولة ومحرك المحتوى الكامل.</span></div>
+
+          <div class="week">
+            <span class="week-label"
+              ><span class="en">Days 15–21</span
+              ><span class="ar">يوم ١٥–٢١</span></span
+            >
+            <div class="week-items">
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Brand identity — final</span
+                    ><span class="ar">الهوية البصرية — نهائية</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Refined direction approved. Bilingual wordmark complete.
+                      Full identity system: logo files, colour palette, type
+                      specimen, usage rules.</span
+                    ><span class="ar"
+                      >الاتجاه المُختار معتمد. الاسم التجاري ثنائي اللغة كامل.
+                      نظام الهوية كامل: ملفات الشعار، لوحة الألوان، عينة الخطوط،
+                      قواعد الاستخدام.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Core website pages in development</span
+                    ><span class="ar">صفحات الموقع الأساسية في التطوير</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Homepage, positioning, services, and partners pages.
+                      Arabic and English built together — never one before the
+                      other.</span
+                    ><span class="ar"
+                      >الصفحة الرئيسية، التموضع، الخدمات، وصفحة الشركاء. العربي
+                      والإنجليزي بيتبنوا مع بعض — مش واحد قبل التاني.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Lead notification stack live</span
+                    ><span class="ar">نظام تنبيه الـ leads شغّال</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Your preferred path — Slack, email, or both — configured
+                      and tested. Fast-track threshold working. Scoring model
+                      calibrated.</span
+                    ><span class="ar"
+                      >الطريق المفضل عندك — Slack أو إيميل أو الاتنين — متجهَّز
+                      ومتاختبَر. حد الـ fast-track شغّال. نموذج السكورنج
+                      معاير.</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="week">
+            <span class="week-label"
+              ><span class="en">Days 22–30</span
+              ><span class="ar">يوم ٢٢–٣٠</span></span
+            >
+            <div class="week-items">
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Bilingual core site — review round</span
+                    ><span class="ar"
+                      >الموقع الثنائي الأساسي — جولة مراجعة</span
+                    >
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Core pages reviewed in both locales and directions.
+                      Arabic editorial review gate applied. Copy refinements
+                      based on validation feedback.</span
+                    ><span class="ar"
+                      >الصفحات الأساسية متراجَعة في اللغتين والاتجاهين. بوابة
+                      مراجعة المحتوى العربي متطبَّقة. تحسينات النص بناءً على
+                      تغذية راجعة من التحقق.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">LinkedIn content strategy delivered</span
+                    ><span class="ar">استراتيجية محتوى LinkedIn مسلَّمة</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >Editorial calendar for the first 90 days. First three
+                      pieces drafted — Arabic and English. Audience
+                      repositioning roadmap.</span
+                    ><span class="ar"
+                      >تقويم تحريري للتسعين يوم الأولى. أول ثلاث قطع محتوى
+                      مسوَّدة — عربي وإنجليزي. خريطة طريق إعادة تموضع
+                      الجمهور.</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="week-item">
+                <div class="wi-dot"></div>
+                <div>
+                  <div class="wi-title">
+                    <span class="en">Phase 0 closed. Phase 1 begins.</span
+                    ><span class="ar">مرحلة ٠ منتهية. مرحلة ١ تبدأ.</span>
+                  </div>
+                  <div class="wi-detail">
+                    <span class="en"
+                      >All foundation decisions implemented. The site moves into
+                      full Phase 1 build — lead system, gated reports, and the
+                      full content engine.</span
+                    ><span class="ar"
+                      >كل قرارات التأسيس متنفَّذة. الموقع بيدخل البناء الكامل
+                      للمرحلة ١ — نظام الـ leads والتقارير المقفولة ومحرك
+                      المحتوى الكامل.</span
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="marker rev">
-      <span class="num">03</span>
-      <span class="label"><span class="en">Who owns what</span><span class="ar">مين مسؤول عن إيه</span></span>
-      <span class="rule"></span>
-    </div>
-
-    <div class="owner-map rev">
-      <div class="owner-col">
-        <div class="owner-col-head"><span class="en">Our side</span><span class="ar">من جهتنا</span></div>
-        <div class="owner-list">
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Everything technical: hosting, CMS, website build, lead system, CRM setup</span><span class="ar">كل حاجة تقنية: الاستضافة، الـ CMS، بناء الموقع، نظام الـ leads، إعداد الـ CRM</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Brand execution: brief → designer → bilingual identity system</span><span class="ar">تنفيذ البراند: البريف ← المصمم ← نظام الهوية ثنائي اللغة</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Bilingual content: Arabic and English written at the same level, reviewed before it ships</span><span class="ar">المحتوى ثنائي اللغة: عربي وإنجليزي بنفس المستوى، متراجَع قبل ما ينزل</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Lead scoring, segment routing, notification stack</span><span class="ar">سكورنج الـ leads وتوجيه السيجمنتس ونظام التنبيه</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">LinkedIn editorial calendar and first 90 days of content</span><span class="ar">تقويم محتوى LinkedIn وأول تسعين يوم</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Any specialist gap — if a role is missing, we place it and hold the quality bar</span><span class="ar">أي فراغ في الفريق — لو في دور ناقص، إحنا بنحطه ومش بنخفض المستوى</span></div>
+        <div class="marker rev">
+          <span class="num">03</span>
+          <span class="label"
+            ><span class="en">Who owns what</span
+            ><span class="ar">مين مسؤول عن إيه</span></span
+          >
+          <span class="rule"></span>
         </div>
-      </div>
-      <div class="owner-col">
-        <div class="owner-col-head"><span class="en">Your side</span><span class="ar">من جهتك</span></div>
-        <div class="owner-list">
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Send back pages 1 and 2 — decisions and validations</span><span class="ar">إرسال الصفحتين الأولى والتانية — القرارات والتحققات</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Name the Arabic editorial reviewer — one person, before CMS setup</span><span class="ar">تسمية مراجع المحتوى العربي — شخص واحد قبل إعداد الـ CMS</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Confirm who handles mid-market / manufacturing segment leads</span><span class="ar">تأكيد مين بياخد leads السوق المتوسط والصناعة</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Join the 30-minute alignment call — one hour of your time closes Phase 0</span><span class="ar">الانضمام لكالّ التنسيق ثلاثين دقيقة — ساعة من وقتك بتقفل مرحلة ٠</span></div>
-          <div class="owner-item"><div class="oi-dot"></div><span class="en">Final approval on brand identity direction — your call, our execution</span><span class="ar">الموافقة النهائية على اتجاه الهوية البصرية — قرارك، تنفيذنا</span></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="the-ask rev">
-      <h2>
-        <span class="en">One thing left. <em>Say the word.</em></span>
-        <span class="ar">حاجة واحدة فاضلة. <em>قول الكلمة.</em></span>
-      </h2>
-      <p>
-        <span class="en">You've read the strategy, validated the compass, and seen the plan. Send this back to us — three pages, your answers — and the 30-minute call gets scheduled within the hour.</span>
-        <span class="ar">قرأت الاستراتيجية، وقيّمت الموقف، وشفت الخطة. ابعت لينا الثلاث صفحات بإجاباتك — والكالّ بيتحدد في خلال ساعة.</span>
-      </p>
-      <a class="cta-btn" href="https://wa.me/?text=Mohamed%20Abdelwahab%20%E2%80%94%20I%20have%20reviewed%20the%20Catalyst%20Partners%20foundation%20documents%20(all%20three%20pages).%20Ready%20to%20align." target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M2 14l1.2-3.4a6 6 0 1 1 2.2 2.2L2 14z" stroke="currentColor" stroke-width="1.5"/></svg>
-        <span class="en">I've reviewed all three. Let's start.</span>
-        <span class="ar">راجعت الثلاثة. يلا نبدأ.</span>
+        <div class="owner-map rev">
+          <div class="owner-col">
+            <div class="owner-col-head">
+              <span class="en">Our side</span><span class="ar">من جهتنا</span>
+            </div>
+            <div class="owner-list">
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Everything technical: hosting, CMS, website build, lead
+                  system, CRM setup</span
+                ><span class="ar"
+                  >كل حاجة تقنية: الاستضافة، الـ CMS، بناء الموقع، نظام الـ
+                  leads، إعداد الـ CRM</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Brand execution: brief → designer → bilingual identity
+                  system</span
+                ><span class="ar"
+                  >تنفيذ البراند: البريف ← المصمم ← نظام الهوية ثنائي
+                  اللغة</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Bilingual content: Arabic and English written at the same
+                  level, reviewed before it ships</span
+                ><span class="ar"
+                  >المحتوى ثنائي اللغة: عربي وإنجليزي بنفس المستوى، متراجَع قبل
+                  ما ينزل</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Lead scoring, segment routing, notification stack</span
+                ><span class="ar"
+                  >سكورنج الـ leads وتوجيه السيجمنتس ونظام التنبيه</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >LinkedIn editorial calendar and first 90 days of
+                  content</span
+                ><span class="ar">تقويم محتوى LinkedIn وأول تسعين يوم</span>
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Any specialist gap — if a role is missing, we place it and
+                  hold the quality bar</span
+                ><span class="ar"
+                  >أي فراغ في الفريق — لو في دور ناقص، إحنا بنحطه ومش بنخفض
+                  المستوى</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="owner-col">
+            <div class="owner-col-head">
+              <span class="en">Your side</span><span class="ar">من جهتك</span>
+            </div>
+            <div class="owner-list">
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Send back pages 1 and 2 — decisions and validations</span
+                ><span class="ar"
+                  >إرسال الصفحتين الأولى والتانية — القرارات والتحققات</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Name the Arabic editorial reviewer — one person, before CMS
+                  setup</span
+                ><span class="ar"
+                  >تسمية مراجع المحتوى العربي — شخص واحد قبل إعداد الـ CMS</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Confirm who handles mid-market / manufacturing segment
+                  leads</span
+                ><span class="ar"
+                  >تأكيد مين بياخد leads السوق المتوسط والصناعة</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Join the 30-minute alignment call — one hour of your time
+                  closes Phase 0</span
+                ><span class="ar"
+                  >الانضمام لكالّ التنسيق ثلاثين دقيقة — ساعة من وقتك بتقفل
+                  مرحلة ٠</span
+                >
+              </div>
+              <div class="owner-item">
+                <div class="oi-dot"></div>
+                <span class="en"
+                  >Final approval on brand identity direction — your call, our
+                  execution</span
+                ><span class="ar"
+                  >الموافقة النهائية على اتجاه الهوية البصرية — قرارك،
+                  تنفيذنا</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="the-ask rev">
+          <h2>
+            <span class="en">One thing left. <em>Say the word.</em></span>
+            <span class="ar">حاجة واحدة فاضلة. <em>قول الكلمة.</em></span>
+          </h2>
+          <p>
+            <span class="en"
+              >You've read the strategy, validated the compass, and seen the
+              plan. Send this back to us — three pages, your answers — and the
+              30-minute call gets scheduled within the hour.</span
+            >
+            <span class="ar"
+              >قرأت الاستراتيجية، وقيّمت الموقف، وشفت الخطة. ابعت لينا الثلاث
+              صفحات بإجاباتك — والكالّ بيتحدد في خلال ساعة.</span
+            >
+          </p>
+          <a
+            class="cta-btn"
+            href="https://wa.me/201033939828?text=Mohamed%20Abdelwahab%20%E2%80%94%20I%20have%20reviewed%20the%20Catalyst%20Partners%20foundation%20documents%20(all%20three%20pages).%20Ready%20to%20align."
+            target="_blank"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 16 16" fill="none">
+              <path
+                d="M2 14l1.2-3.4a6 6 0 1 1 2.2 2.2L2 14z"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+            </svg>
+            <span class="en">I've reviewed all three. Let's start.</span>
+            <span class="ar">راجعت الثلاثة. يلا نبدأ.</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <div class="page-nav col">
+      <a href="validate.html" class="page-back">
+        <span class="en">← Back to validation</span
+        ><span class="ar">رجوع للتحقق ←</span>
       </a>
     </div>
 
-  </section>
-</main>
+    <footer>
+      <span
+        ><span class="en">Catalyst Partners · Phase 0 · 3 of 3</span
+        ><span class="ar">كاتاليست بارتنرز · مرحلة ٠ · ٣ من ٣</span></span
+      >
+      <span
+        ><span class="en">Private — for Mohamed only</span
+        ><span class="ar">خاص — لمحمد فقط</span></span
+      >
+    </footer>
 
-<div class="page-nav col">
-  <a href="validate.html" class="page-back">
-    <span class="en">← Back to validation</span><span class="ar">رجوع للتحقق ←</span>
-  </a>
-</div>
+    <script>
+      /* ⚙️ CONFIG: Set the WhatsApp recipient number (international format, no +) */
+      const WA_NUMBER = "201033939828"; // e.g. '971501234567'
+      /* ——————————————————————————————————— */
 
-<footer>
-  <span><span class="en">Catalyst Partners · Phase 0 · 3 of 3</span><span class="ar">كاتاليست بارتنرز · مرحلة ٠ · ٣ من ٣</span></span>
-  <span><span class="en">Private — for Mohamed only</span><span class="ar">خاص — لمحمد فقط</span></span>
-</footer>
+      let lang = "en";
 
-<script>
-  /* ⚙️ CONFIG: Set the WhatsApp recipient number (international format, no +) */
-  const WA_NUMBER = '[SET_WA_NUMBER]'; // e.g. '971501234567'
-  /* ——————————————————————————————————— */
+      function setLang(l) {
+        lang = l;
+        document.documentElement.lang = l === "ar" ? "ar" : "en";
+        document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+        document.getElementById("lng-en").classList.toggle("on", l === "en");
+        document.getElementById("lng-ar").classList.toggle("on", l === "ar");
+      }
 
-  let lang = 'en';
+      let darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      function applyTheme() {
+        document.documentElement.setAttribute(
+          "data-theme",
+          darkMode ? "dark" : "light",
+        );
+        document.getElementById("theme-icon-moon").style.display = darkMode
+          ? "none"
+          : "block";
+        document.getElementById("theme-icon-sun").style.display = darkMode
+          ? "block"
+          : "none";
+      }
+      function toggleTheme() {
+        darkMode = !darkMode;
+        applyTheme();
+      }
+      applyTheme();
 
-  function setLang(l){
-    lang = l;
-    document.documentElement.lang = l === 'ar' ? 'ar' : 'en';
-    document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
-    document.getElementById('lng-en').classList.toggle('on', l === 'en');
-    document.getElementById('lng-ar').classList.toggle('on', l === 'ar');
-  }
-
-  let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  function applyTheme(){
-    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
-    document.getElementById('theme-icon-moon').style.display = darkMode ? 'none' : 'block';
-    document.getElementById('theme-icon-sun').style.display  = darkMode ? 'block' : 'none';
-  }
-  function toggleTheme(){ darkMode = !darkMode; applyTheme(); }
-  applyTheme();
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-  document.querySelectorAll('.rev').forEach(el => io.observe(el));
-</script>
-
-</body>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) en.target.classList.add("in");
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -6% 0px" },
+      );
+      document.querySelectorAll(".rev").forEach((el) => io.observe(el));
+    </script>
+  </body>
 </html>
