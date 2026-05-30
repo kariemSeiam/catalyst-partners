@@ -190,25 +190,6 @@
         font-weight: 500;
         font-size: 18px;
       }
-      .submark {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--mute);
-        padding-inline-start: 14px;
-        border-inline-start: 1px solid var(--hair);
-        white-space: nowrap;
-      }
-      [dir="rtl"] .submark {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12px;
-      }
-      .controls {
-        display: flex;
-        align-items: center;
         gap: 10px;
       }
       .lang {
@@ -1059,9 +1040,6 @@
         .chapter {
           padding: 44px 0;
         }
-        .submark {
-          display: none;
-        }
         .phase {
           grid-template-columns: 64px 1fr;
           gap: 12px;
@@ -1124,10 +1102,6 @@
           <span class="wordmark"
             ><span class="en">Catalyst Partners</span
             ><span class="ar">كاتاليست بارتنرز</span></span
-          >
-          <span class="submark"
-            ><span class="en">Private · For Mohamed</span
-            ><span class="ar">خاص · لمحمد</span></span
           >
         </div>
         <nav class="steps" aria-label="Partner review">
@@ -1203,8 +1177,8 @@
 
         <h1 class="rev">
           <span class="en"
-            >Mohamed — read this once. <em>A few answers</em> from you,
-            and we move.</span
+            >Mohamed — read this once. <em>A few answers</em> from you, and we
+            move.</span
           >
           <span class="ar"
             >محمد — اقراها مرة. <em>إجابات صغيرة</em> منك، وبنتحرك.</span
@@ -2193,9 +2167,6 @@
         ><span class="en">Catalyst Partners · Phase 0 · 1 of 3</span
         ><span class="ar">كاتاليست بارتنرز · مرحلة ٠ · ١ من ٣</span></span
       >
-      <span
-        ><span class="en">Private — for Mohamed only</span
-        ><span class="ar">خاص — لمحمد فقط</span></span
       >
     </footer>
 
@@ -2454,7 +2425,6 @@
         { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
       );
       document.querySelectorAll(".rev").forEach((el) => io.observe(el));
-
     </script>
   </body>
 </html>
