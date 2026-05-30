@@ -205,26 +205,28 @@
         font-weight: 500;
         font-size: 18px;
       }
+      .steps {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         margin-inline-start: 8px;
       }
       .step {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.14em;
-        color: var(--mute);
         text-decoration: none;
-        padding: 4px 6px;
-        border-radius: 4px;
+        color: var(--mute);
         transition: color 0.18s;
+        white-space: nowrap;
       }
       .step.on {
         color: var(--bronze);
         font-weight: 500;
       }
-      .step:hover:not(.on) {
-        color: var(--ink);
-      }
       .step-sep {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--hair);
+      }
         width: 12px;
         height: 1px;
         background: var(--hair);
@@ -845,22 +847,22 @@
           >
         </div>
         <nav class="steps" aria-label="Partner review">
-          <a href="foundation.html" class="step" aria-label="01 Foundation"
-            >01</a
+          <a href="foundation.html" class="step" aria-label="Foundation"
+            ><span class="en">Foundation</span><span class="ar">التأسيس</span></a
           >
           <span class="step-sep"></span>
           <a
             href="compass.html"
             class="step on"
             aria-current="page"
-            aria-label="02 Compass"
-            >02</a
+            aria-label="Compass"
+            ><span class="en">Compass</span><span class="ar">البوصلة</span></a
           >
           <span class="step-sep"></span>
-          <a href="handoff.html" class="step" aria-label="03 Handoff">03</a>
+          <a href="handoff.html" class="step" aria-label="Handoff"
+            ><span class="en">Handoff</span><span class="ar">التسليم</span></a
+          >
         </nav>
-        <div class="controls">
-            id="theme-btn"
             class="theme-btn"
             onclick="toggleTheme()"
             aria-label="Toggle dark mode"

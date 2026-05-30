@@ -198,23 +198,21 @@
         margin-inline-start: 8px;
       }
       .step {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.14em;
-        color: var(--mute);
         text-decoration: none;
-        padding: 4px 6px;
-        border-radius: 4px;
+        color: var(--mute);
         transition: color 0.18s;
+        white-space: nowrap;
       }
       .step.on {
         color: var(--bronze);
         font-weight: 500;
       }
-      .step:hover:not(.on) {
-        color: var(--ink);
-      }
       .step-sep {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--hair);
+      }
         width: 12px;
         height: 1px;
         background: var(--hair);
@@ -774,15 +772,18 @@
             ><span class="en">Catalyst Partners</span
             ><span class="ar">كاتاليست بارتنرز</span></span
           >
-          <span class="step-sep"></span>
-          <a href="compass.html" class="step" aria-label="02 Compass">02</a>
+        </div>
+        <nav class="steps" aria-label="Partner review">
+          <a href="compass.html" class="step" aria-label="Compass"
+            ><span class="en">Compass</span><span class="ar">البوصلة</span></a
+          >
           <span class="step-sep"></span>
           <a
             href="handoff.html"
             class="step on"
             aria-current="page"
-            aria-label="03 Handoff"
-            >03</a
+            aria-label="Handoff"
+            ><span class="en">Handoff</span><span class="ar">التسليم</span></a
           >
         </nav>
         <div class="controls">
