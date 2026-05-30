@@ -33,9 +33,10 @@ See `.venom/CONTEXT.md` for the full validated positioning.
 │   └── Catalyst-Partners-Website-Technical-Spec.md  # v1.0 developer-ready build doc (the spine)
 │
 ├── client/                        # 3-page bilingual client flow for partner sign-off
-│   ├── intake.html                # Page 01 — 12 foundation decisions (EN/AR)
-│   ├── validate.html              # Page 02 — 10 market/positioning claims to validate (EN/AR)
-│   └── next.html                  # Page 03 — 30-day PMO handoff plan (EN/AR)
+│   ├── foundation.html            # 01 — Foundation: briefing + 12 decisions (EN/AR)
+│   ├── compass.html               # 02 — Compass: 10 market/positioning claims (EN/AR)
+│   ├── handoff.html               # 03 — Handoff: 30-day PMO plan (EN/AR)
+│   ├── intake.html / validate.html / next.html  # redirects → above (legacy URLs)
 │
 ├── content/                       # [NEXT] Content engine spec, editorial calendar, flagship report brief
 │   └── .gitkeep
@@ -98,9 +99,9 @@ The `client/` folder contains three private, noindex pages for Mohamed:
 
 | Page | File | Purpose |
 |---|---|---|
-| **01 — Foundation** | `intake.html` | 12 decisions in 4 groups (voice / firm / rails / rhythm) |
-| **02 — Validate** | `validate.html` | 10 market & positioning claims to confirm/adjust/challenge |
-| **03 — Next** | `next.html` | 30-day execution timeline, ownership map, final CTA |
+| **01 — Foundation** | `foundation.html` | Briefing + 12 decisions in 4 groups (voice / firm / rails / rhythm) |
+| **02 — Compass** | `compass.html` | 10 market & positioning claims to confirm/adjust/challenge |
+| **03 — Handoff** | `handoff.html` | 30-day execution timeline, ownership map, final CTA |
 
 All three are bilingual (EN/AR) with RTL support, dark mode, copy-to-clipboard, and WhatsApp export. No external dependencies beyond Google Fonts.
 
