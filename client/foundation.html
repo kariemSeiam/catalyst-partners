@@ -211,23 +211,6 @@
         align-items: center;
         gap: 10px;
       }
-      .progress {
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--mute);
-        display: inline-flex;
-        align-items: baseline;
-        gap: 6px;
-      }
-      [dir="rtl"] .progress {
-        font-family: var(--ar);
-        font-size: 12.5px;
-      }
-      .progress b {
-        font-weight: 500;
-        color: var(--ink);
-        font-variant-numeric: tabular-nums;
-      }
       .lang {
         display: inline-flex;
         border: 1px solid var(--hair);
@@ -1161,13 +1144,6 @@
           <a href="handoff.html" class="step" aria-label="03 Handoff">03</a>
         </nav>
         <div class="controls">
-          <span class="progress"
-            ><span class="en">Open</span><span class="ar">باقي</span>&nbsp;<b
-              id="pcount"
-              >12</b
-            >&nbsp;<span class="en">of 12</span
-            ><span class="ar">من ١٢</span></span
-          >
           <button
             id="theme-btn"
             class="theme-btn"
@@ -1227,11 +1203,11 @@
 
         <h1 class="rev">
           <span class="en"
-            >Mohamed — read this once. <em>Twelve small answers</em> from you,
+            >Mohamed — read this once. <em>A few answers</em> from you,
             and we move.</span
           >
           <span class="ar"
-            >محمد — اقراها مرة. <em>اتناشر إجابة صغيرة</em> منك، وبنتحرك.</span
+            >محمد — اقراها مرة. <em>إجابات صغيرة</em> منك، وبنتحرك.</span
           >
         </h1>
 
@@ -1653,11 +1629,11 @@
 
         <p class="hand rev">
           <span class="en"
-            >Twelve answers, four short groups. Pick a chip or write a line —
+            >A few answers in four groups. Pick a chip or write a line —
             <em>both work</em>.</span
           >
           <span class="ar"
-            >اتناشر إجابة في أربع مجموعات. اختار اختيار جاهز أو اكتب سطر —
+            >بعض الإجابات في أربع مجموعات. اختار اختيار جاهز أو اكتب سطر —
             <em>الاتنين شغالين</em>.</span
           >
         </p>
@@ -1683,7 +1659,7 @@
           </div>
 
           <div class="q" id="q1">
-            <span class="qmark">01</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">The Arabic name of the firm.</span>
@@ -1722,7 +1698,7 @@
           </div>
 
           <div class="q" id="q3">
-            <span class="qmark">02</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">The named guardian of the Arabic voice.</span>
@@ -1772,7 +1748,7 @@
           </div>
 
           <div class="q" id="q4">
-            <span class="qmark">03</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">Family-business leads — who owns them?</span>
@@ -1808,7 +1784,7 @@
           </div>
 
           <div class="q" id="q5">
-            <span class="qmark">04</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en"
@@ -1849,7 +1825,7 @@
           </div>
 
           <div class="q" id="q6">
-            <span class="qmark">05</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en"
@@ -1889,7 +1865,7 @@
           </div>
 
           <div class="q" id="q7">
-            <span class="qmark">06</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">A booking link, or a request form?</span>
@@ -1938,7 +1914,7 @@
           </div>
 
           <div class="q" id="q8">
-            <span class="qmark">07</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en"
@@ -1982,7 +1958,7 @@
           </div>
 
           <div class="q" id="q9">
-            <span class="qmark">08</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">Which CRM is the system of record?</span>
@@ -2033,7 +2009,7 @@
           </div>
 
           <div class="q" id="q10">
-            <span class="qmark">09</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">How do you want a hot lead to reach you?</span>
@@ -2071,7 +2047,7 @@
           </div>
 
           <div class="q" id="q11">
-            <span class="qmark">10</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en"
@@ -2117,7 +2093,7 @@
           </div>
 
           <div class="q" id="q12">
-            <span class="qmark">11</span>
+            <span class="qmark"></span>
             <div>
               <div class="qtext">
                 <span class="en">CMS hosting model.</span>
@@ -2233,7 +2209,6 @@
       document.body.appendChild(out);
 
       let lang = "en";
-      const total = 12;
       const state = {};
 
       function setLang(l) {
@@ -2262,7 +2237,6 @@
             chipAr: lblAr,
           });
           markDone(q);
-          updateProgress();
         });
       });
 
@@ -2272,7 +2246,6 @@
           state[q] = Object.assign({}, state[q], { text: txt.value.trim() });
           if (state[q].chip || state[q].text) markDone(q);
           else unmarkDone(q);
-          updateProgress();
         });
       });
 
@@ -2289,18 +2262,6 @@
         if (stat)
           stat.innerHTML =
             '<span class="en">Open</span><span class="ar">مفتوح</span>';
-      }
-
-      function answeredCount() {
-        return Object.keys(state).filter(
-          (k) => state[k] && (state[k].chip || state[k].text),
-        ).length;
-      }
-      function updateProgress() {
-        const n = answeredCount();
-        const open = total - n;
-        document.getElementById("pcount").textContent = open;
-        document.getElementById("strand").style.width = (n / total) * 100 + "%";
       }
 
       const labels = {
@@ -2334,63 +2295,63 @@
         {
           id: "q1",
           g: "A",
-          en: "01. Arabic name of the firm",
-          ar: "٠١. اسم الشركة بالعربي",
+          en: "Arabic name of the firm",
+          ar: "اسم الشركة بالعربي",
         },
         {
           id: "q3",
           g: "A",
-          en: "02. Guardian of the Arabic voice",
-          ar: "٠٢. المسؤول عن مراجعة العربي",
+          en: "Guardian of the Arabic voice",
+          ar: "المسؤول عن مراجعة العربي",
         },
         {
           id: "q4",
           g: "B",
-          en: "03. Family-business lead owner",
-          ar: "٠٣. المسؤول عن عملاء عيلات الأعمال",
+          en: "Family-business lead owner",
+          ar: "المسؤول عن عملاء عيلات الأعمال",
         },
         {
           id: "q5",
           g: "B",
-          en: "04. Mid-market / manufacturing owner",
-          ar: "٠٤. المسؤول عن السوق المتوسط والصناعة",
+          en: "Mid-market / manufacturing owner",
+          ar: "المسؤول عن السوق المتوسط والصناعة",
         },
         {
           id: "q6",
           g: "B",
-          en: "05. Fast-track lead threshold",
-          ar: "٠٥. حد الـ lead المهم",
+          en: "Fast-track lead threshold",
+          ar: "حد الـ lead المهم",
         },
         {
           id: "q7",
           g: "B",
-          en: "06. Booking link vs request form",
-          ar: "٠٦. لينك حجز ولا فورم طلب",
+          en: "Booking link vs request form",
+          ar: "لينك حجز ولا فورم طلب",
         },
         {
           id: "q8",
           g: "C",
-          en: "07. UAE data residency requirement",
-          ar: "٠٧. شرط إقامة البيانات في الإمارات",
+          en: "UAE data residency requirement",
+          ar: "شرط إقامة البيانات في الإمارات",
         },
-        { id: "q9", g: "C", en: "08. CRM choice", ar: "٠٨. اختيار الـ CRM" },
+        { id: "q9", g: "C", en: "CRM choice", ar: "اختيار الـ CRM" },
         {
           id: "q10",
           g: "D",
-          en: "09. Hot-lead notification path",
-          ar: "٠٩. طريق تنبيه الـ lead المهم",
+          en: "Hot-lead notification path",
+          ar: "طريق تنبيه الـ lead المهم",
         },
         {
           id: "q11",
           g: "D",
-          en: "10. Arabic numerals style",
-          ar: "١٠. شكل الأرقام في النصوص العربي",
+          en: "Arabic numerals style",
+          ar: "شكل الأرقام في النصوص العربي",
         },
         {
           id: "q12",
           g: "D",
-          en: "11. CMS hosting model",
-          ar: "١١. طريقة استضافة الـ CMS",
+          en: "CMS hosting model",
+          ar: "طريقة استضافة الـ CMS",
         },
       ];
 
@@ -2494,7 +2455,6 @@
       );
       document.querySelectorAll(".rev").forEach((el) => io.observe(el));
 
-      updateProgress();
     </script>
   </body>
 </html>
