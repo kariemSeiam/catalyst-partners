@@ -1,58 +1,55 @@
 # Catalyst Partners — Agency Workspace
 
-> **Status:** Phase 0 — Pre-code. Strategy validated, site specified, brand briefed.
-> **Client:** Catalyst Partners — UAE premium strategic advisory (institutional transformation, governance, PMO, performance excellence + digital delivery)
-> **Agency lead:** Kariem | **Partner:** Mohamed Abdelwahab
+> **Status:** Phase 0 — Strategy validated. Technical specification complete. Brand brief ready. Partner decisions pending.
+> **Client:** Catalyst Partners — UAE institutional advisory: transformation, governance, PMO, performance excellence, and digital delivery.
+> **Agency:** Kariem · **Partner:** Mohamed Abdelwahab
 
 ---
 
-## The One Thing That Must Not Drift
+## Positioning (Load-Bearing)
 
 **Lead with institutional transformation, governance, PMO, performance excellence + digital delivery layer.**
-Do not restore financial restructuring / debt advisory to the foreground until a credentialed finance partner with a referenceable track record joins the roster. Every brand asset, every site copy block, every pitch deck must hold this line.
 
-See `.venom/CONTEXT.md` for the full validated positioning.
+Financial restructuring / debt advisory must not return to the foreground until a credentialed finance partner with a referenceable track record joins the roster. Every brand asset, every site copy block, every pitch deck holds this line.
+
+The wedge segment is **UAE family business** (~60% GDP, ~US$1tn wealth transfer, 33% with robust succession plans). The packaged offer is the **Legacy & Institution** suite.
 
 ---
 
 ## Project Structure
 
 ```
-├── .venom/                        # AI session context & decisions
-│   ├── CONTEXT.md                 # Full project anatomy for AI sessions
+├── .venom/                        # AI session memory and cross-session decisions
+│   ├── CONTEXT.md                 # Full project anatomy for agent continuity
 │   └── MEMORY.md                  # Load-bearing decisions with reversal conditions
 │
 ├── brand/
-│   └── design-brief.md            # Designer-ready brief (palette, typography, logo concept)
-│                                  # [WAITING: Arabic name decision before logo design begins]
+│   └── design-brief.md            # Designer-ready identity brief (palette, typography, logo)
+│                                  # Blocks: Arabic name decision
 │
 ├── decisions/
-│   └── phase0-decisions.md        # 9 decisions with recommendations; needs partner sign-off
+│   └── phase0-decisions.md        # 9 decisions gating the build; D1 (residency) + D2 (CRM) unlock all
 │
 ├── site/
-│   └── Catalyst-Partners-Website-Technical-Spec.md  # v1.0 developer-ready build doc (the spine)
+│   └── Catalyst-Partners-Website-Technical-Spec.md  # v1.0 developer-ready build specification
 │
-├── client/                        # 3-page bilingual client flow for partner sign-off
-│   ├── foundation.html            # 01 — Foundation: briefing + 12 decisions (EN/AR)
-│   ├── compass.html               # 02 — Compass: 10 market/positioning claims (EN/AR)
-│   ├── handoff.html               # 03 — Handoff: 30-day PMO plan (EN/AR)
-│   ├── intake.html / validate.html / next.html  # redirects → above (legacy URLs)
-│
-├── content/                       # [NEXT] Content engine spec, editorial calendar, flagship report brief
-│   └── .gitkeep
+├── client/                        # 3-page bilingual partner-review sequence (EN/AR)
+│   ├── foundation.html            # Strategic briefing + decisions (4 groups: voice, firm, rails, rhythm)
+│   ├── compass.html               # Market and positioning validation (10 claims to confirm or challenge)
+│   └── handoff.html               # Delivery sequence — Phase A through Phase D (not calendar-bound)
 │
 ├── internal/
-│   └── team-hub-ar.html           # Agency team conscience — Arabic only, no EN toggle
+│   └── team-hub-ar.html           # Agency team conscience — Arabic only, Gulf institutional register
 │
-├── draft/                         # Conversation history, early strategy drafts, research
-│   ├── compass_artifact_*.md      # GTM & Brand Strategy research report
-│   ├── catalyst_partners_brand_identity_strategy.md  # Strategy pivot transcript
-│   └── ملف_الذكاء_الاستراتيجي_محمد_عبدالوهاب_...md   # Partner intelligence (Arabic)
+├── drafts/                        # Research, strategy transcripts, partner intelligence
+│   └── *.md
 │
-├── src/                           # [FUTURE] Website source code (Next.js App Router)
-│   └── .gitkeep
+├── fonts/                         # Self-hosted IBM Plex Sans Arabic woff2 (300–700)
 │
-├── README.md                      # This file
+├── content/                       # [NEXT] Editorial calendar, flagship report brief
+├── src/                           # [FUTURE] Next.js App Router site source
+│
+├── README.md
 ├── LICENSE                        # All Rights Reserved — proprietary
 └── .gitignore
 ```
@@ -63,81 +60,86 @@ See `.venom/CONTEXT.md` for the full validated positioning.
 
 | Area | Status | Owner |
 |---|---|---|
-| **Strategy** | ✅ Validated (GTM report complete) | Agency |
-| **Technical spec** | ✅ Written (developer-ready) | Agency |
-| **Brand brief** | ✅ Written (designer-ready) | Agency |
-| **Phase 0 decisions (D1–D9)** | ✅ Drafted with recommendations | Agency |
-| **Client pages (3)** | ✅ Built (bilingual, interactive) | Agency |
-| **Team hub** | ✅ Built (Arabic-only) | Agency |
+| Strategy & positioning | ✅ Validated (GTM research complete) | Agency |
+| Website technical spec | ✅ Written, developer-ready | Agency |
+| Brand brief | ✅ Written, designer-ready | Agency |
+| Phase 0 decisions (D1–D9) | ✅ Drafted with recommendations | Agency |
+| Client review pages (3) | ✅ Built, bilingual, interactive, self-hosted fonts | Agency |
+| Team hub | ✅ Built, Arabic only | Agency |
 | — | — | — |
-| **Decisions closed with partners** | ⏳ Pending Mohamed | Partner |
-| **Domains registered** | ⏳ Pending | Partner |
-| **Repos initialized** | ✅ Done | Agency |
-| **CMS + environments stood up** | ⏳ Pending decision D1, D7 | Agency |
-| **CRM + ESP chosen + configured** | ⏳ Pending decision D2, D9 | Agency |
-| **Content engine spec** | ❌ Not yet drafted | Agency |
-| **Logo / brand identity** | ⏳ Blocked on Arabic name decision | Partner |
+| Partner decisions signed | ⏳ Pending | Mohamed |
+| Domains registered | ⏳ Pending | Partner |
+| Logo / brand identity | ⏳ Blocked on Arabic name decision | Partner |
+| CMS + environment | ⏳ Gates on D1 (residency) + D7 (hosting) | Agency |
+| CRM + notification stack | ⏳ Gates on D2 (CRM choice) + D8 (routing) | Agency |
+| Content engine | ❌ Not yet drafted | Agency |
+
+**Critical path:** Close **D1 (data residency)** and **D2 (CRM choice + segment routing)** — everything else cascades from these two.
 
 ---
 
-## Critical Open Items
+## Client Pages — Design Principles
 
-1. **Arabic name decision** — transliteration (`كاتاليست بارتنرز`) vs translated Arabic name. Blocks logo design.
-2. **Data residency (D1)** — UAE-hosted required? Drives hosting and CRM choice. (Recommendation: yes.)
-3. **CRM (D2)** — HubSpot Starter (recommended) or Zoho CRM if UAE residency required.
-4. **Arabic reviewer name (D5)** — person who holds the mandatory review gate in the CMS.
-5. **Segment ownership map (D2)** — who handles mid-market / manufacturing referrals.
-6. **Content engine spec** — editorial calendar + flagship report brief not yet drafted.
+The three `client/` pages form a private partner-review sequence. Each is a standalone HTML document — zero framework, zero build step, zero external dependencies except Latin Google Fonts.
 
----
+### What was built
 
-## Client Pages (for Partner Review)
-
-The `client/` folder contains three private, noindex pages for Mohamed:
-
-| Page | File | Purpose |
+| Page | Purpose | Sections |
 |---|---|---|
-| **01 — Foundation** | `foundation.html` | Briefing + 12 decisions in 4 groups (voice / firm / rails / rhythm) |
-| **02 — Compass** | `compass.html` | 10 market & positioning claims to confirm/adjust/challenge |
-| **03 — Handoff** | `handoff.html` | 30-day execution timeline, ownership map, final CTA |
+| **Foundation** | Strategic briefing + decisions | Where we are · The gap · The decisions (4 groups) · Who owns what |
+| **Compass** | Market and positioning validation | 10 claims across 4 groups — confirm, adjust, or challenge |
+| **Handoff** | Delivery sequence | Phase A–D delivery · Ownership map · Closing call to action |
 
-All three are bilingual (EN/AR) with RTL support, dark mode, copy-to-clipboard, and WhatsApp export (routed to Mohamed's number). No external dependencies beyond Google Fonts.
+### Technical decisions
 
-> **✅ Configured:** WhatsApp number set to `201067553846` — Send buttons route to Mohamed directly.
+- **Bilingual first-class:** English and Arabic rendered simultaneously via `lang` toggle. RTL via CSS logical properties (`inset-inline-start`, `margin-inline`). Language preference preserved in `localStorage`.
+- **Self-hosted Arabic font:** IBM Plex Sans Arabic (300–700) stored as woff2 in `/fonts/`. No Google CDN dependency — works in networks that block Google Fonts (UAE, Egypt, corporate firewalls).
+- **No numbered counters:** Header shows named pages (Foundation · Compass · Handoff), not numbered steps. Decision cards show status dots (○ / ●), not item numbers.
+- **Dark mode:** Respects `prefers-color-scheme` with manual toggle override. Persisted in `localStorage`.
+- **WhatsApp export:** Answers formatted and sent via WhatsApp Web to the partner's number. Routing configured in a single constant per file.
+- **Phase-based timeline:** Handoff uses Phase A–D instead of calendar days. No commitment to a delivery window until scope is known.
+
+### Visual identity
+
+The pages follow the design brief's constraints: premium bronze accent, midnight navy, off-white paper, instrumental serif headings, mono labels, restrained visual language. All CSS is inline — no external stylesheets, no icon libraries, no JavaScript runtime.
 
 ---
 
 ## Build Phases
 
-| Phase | Scope | When |
+| Phase | Scope | Gates On |
 |---|---|---|
-| **0 — Foundation** | Decisions closed, domains/repos/CRM/env set up | Now |
-| **1 — Core bilingual site** | Next.js + CMS + i18n + RTL + core pages | After Phase 0 closes |
-| **2 — Lead system** | Gated reports, forms, scoring, CRM, owned lead log | Phase 1 + 1 |
-| **3 — Content engine** | Editorial workflow, AR review gate, Arabic search | Phase 2 + 1 |
+| **0 — Foundation** | Decisions closed, domains registered, repos, brand identity | Partner review sign-off |
+| **1 — Core bilingual site** | Next.js + Payload CMS + i18n + RTL + core pages | Phase 0 close |
+| **2 — Lead system** | Gated reports, scoring, CRM, owned lead log, notification | Phase 1 |
+| **3 — Content engine** | Editorial workflow, Arabic review gate, content search | Phase 2 |
 | **4 — Launch** | QA (both locales), security audit, go-live | Phase 3 |
 | **5+ — Delivery layer** | Client portal, PMO dashboard (separate product) | Post-launch |
 
 ---
 
-## Conventions
+## Quick Reference
 
-- **Bilingual:** Arabic is first-class — per-locale slugs, metadata, fonts, RTL via CSS logical properties. Hide AR nav until translated. Mandatory AR review gate. Western numerals in AR (UAE norm).
-- **Ownership:** Self-hostable CMS, Git codebase, CRM-swappable via adapter + raw lead log.
-- **Egypt hub:** Delivery only; never in brand/site/marketing.
-- **Copy scrub:** No inflated Zegato stats on Catalyst entity. No unverified finance claims. Cite compass report for market stats.
-
----
-
-## Quick Start (for future dev)
-
-```bash
-# Website source will live in src/
-cd src
-git init
-# ... Next.js + Payload CMS setup follows in Phase 1
-```
+- **Planned stack:** Next.js App Router · Payload CMS · Postgres (UAE region) · Serverless lead handler · HubSpot/Zoho CRM · Privacy-first analytics · Cloudflare Turnstile
+- **Arabic fonts:** IBM Plex Sans Arabic — self-hosted (300, 400, 500, 600, 700)
+- **Latin fonts:** Instrument Serif (headings) · Inter Tight (body) · JetBrains Mono (code/labels) — Google Fonts
+- **WhatsApp number:** `201067553846` — Mohamed Abdelwahab
+- **Conventions:** Arabic first-class. Egypt hub backstage. Vendor-swappable architecture. No unverified finance claims.
 
 ---
 
-*This workspace is proprietary. See LICENSE for terms.*
+## Context for AI Sessions
+
+This workspace is consumed by agentic coding tools. The `.venom/` directory contains cross-session memory (`CONTEXT.md` for project anatomy, `MEMORY.md` for load-bearing decisions). Read both before starting any significant work.
+
+Key decisions that must not be contradicted:
+
+1. **Institutional transformation leads** — not financial restructuring. Reversal condition: credentialed finance partner joins roster.
+2. **Family business is the primary wedge** — site IA, content engine, and lead weighting reflect this.
+3. **Egypt is backstage** — never surfaced in brand, site, or marketing.
+4. **Ownership-by-architecture** — every vendor replaceable, raw lead log, adapters for third parties.
+5. **Arabic is first-class** — per-locale slugs, metadata, RTL via logical properties. Arabic review gate is mandatory.
+
+---
+
+*This workspace is proprietary. All Rights Reserved. See LICENSE for terms.*
