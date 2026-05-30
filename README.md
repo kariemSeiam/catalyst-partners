@@ -87,9 +87,7 @@ See `.venom/CONTEXT.md` for the full validated positioning.
 3. **CRM (D2)** — HubSpot Starter (recommended) or Zoho CRM if UAE residency required.
 4. **Arabic reviewer name (D5)** — person who holds the mandatory review gate in the CMS.
 5. **Segment ownership map (D2)** — who handles mid-market / manufacturing referrals.
-6. **WhatsApp number** — client pages need a recipient number configured before deployment.
-
-Full decision sheet: `decisions/phase0-decisions.md`
+6. **Content engine spec** — editorial calendar + flagship report brief not yet drafted.
 
 ---
 
@@ -103,9 +101,9 @@ The `client/` folder contains three private, noindex pages for Mohamed:
 | **02 — Compass** | `compass.html` | 10 market & positioning claims to confirm/adjust/challenge |
 | **03 — Handoff** | `handoff.html` | 30-day execution timeline, ownership map, final CTA |
 
-All three are bilingual (EN/AR) with RTL support, dark mode, copy-to-clipboard, and WhatsApp export. No external dependencies beyond Google Fonts.
+All three are bilingual (EN/AR) with RTL support, dark mode, copy-to-clipboard, and WhatsApp export (routed to Mohamed's number). No external dependencies beyond Google Fonts.
 
-> **⚠️ Pre-deployment:** Update `WA_NUMBER` in each client HTML file to the team WhatsApp number before sending links to Mohamed.
+> **✅ Configured:** WhatsApp number set to `201067553846` — Send buttons route to Mohamed directly.
 
 ---
 
