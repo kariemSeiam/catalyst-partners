@@ -227,10 +227,6 @@
         border-radius: 50%;
         background: var(--hair);
       }
-        width: 12px;
-        height: 1px;
-        background: var(--hair);
-      }
       @media (max-width: 480px) {
         .steps {
           display: none;
@@ -240,8 +236,6 @@
         display: flex;
         align-items: center;
         gap: 10px;
-      }
-        font-variant-numeric: tabular-nums;
       }
       .lang {
         display: inline-flex;
@@ -863,6 +857,9 @@
             ><span class="en">Handoff</span><span class="ar">التسليم</span></a
           >
         </nav>
+        <div class="controls">
+          <button
+            id="theme-btn"
             class="theme-btn"
             onclick="toggleTheme()"
             aria-label="Toggle dark mode"
