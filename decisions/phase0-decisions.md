@@ -16,7 +16,7 @@
 
 The cost difference is negligible. The advantage is not. Government and semi-government procurement in the UAE includes data residency as a scoring factor, and for a firm selling governance and trust to government-adjacent clients, a residency objection raised during procurement is avoidable. Design for it now; removing the constraint later is impossible.
 
-**Practical implication:** The CMS database and lead store run on **AWS Middle East (UAE)** region (ap-southeast-3, launched in the UAE in 2022, used by major UAE government and banking clients). The front-end static layer (Next.js, CDN) runs on Vercel or Cloudflare — no PII touches it, no residency concern. Gated PDFs are served via signed S3-compatible URLs from UAE-region storage.
+**Practical implication:** The CMS database and lead store run on **AWS Middle East (UAE)** region (me-central-1, launched January 2023, used by major UAE government and banking clients). The front-end static layer (Next.js, CDN) runs on Vercel or Cloudflare — no PII touches it, no residency concern. Gated PDFs are served via signed S3-compatible URLs from UAE-region storage.
 
 **What to confirm:** Does any founding partner have a conflicting constraint (cost, existing infrastructure, or a specific client requirement that changes this)?
 
