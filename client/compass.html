@@ -61,6 +61,34 @@ body {
   unicode-bidi: isolate;
 }
 
+/* ── Bilingual pair layout ── */
+/* Inline pairs: centered dot between EN and AR */
+.eyebrow [data-show="en"] + [data-show="ar"]::before,
+.meta [data-show="en"] + [data-show="ar"]::before {
+  content: " · ";
+  color: var(--mute-3);
+  margin-inline: 0.3em;
+}
+
+/* Block pairs: tighten margin so they read as a unit */
+h1[data-show="en"] + h1[data-show="ar"] {
+  margin-top: -0.3em;
+}
+p[data-show="en"] + p[data-show="ar"],
+h2[data-show="en"] + h2[data-show="ar"] {
+  margin-top: -0.2em;
+}
+
+/* h1 bilingual pair: EN secondary, AR primary */
+[dir="rtl"] h1[data-show="en"] {
+  font-size: var(--t-1);
+  opacity: 0.85;
+  margin-bottom: 0;
+}
+[dir="rtl"] h1[data-show="ar"] {
+  font-size: var(--t-display);
+}
+
 /* ── Bilingual: both languages always visible, each in its correct font ── */
 /* When AR mode active, EN spans inherit AR font from parent — override */
 html[data-lang="ar"] .en { font-family: var(--sans); }
