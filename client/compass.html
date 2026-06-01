@@ -185,11 +185,14 @@
         min-width: 0;
       }
       .glyph {
-        width: 22px;
-        height: 22px;
+        width: 28px;
+        height: 28px;
         color: var(--bronze);
         flex-shrink: 0;
         transition: transform 0.6s var(--ease);
+      }
+      @media (max-width: 480px) {
+        .glyph { width: 24px; height: 24px; }
       }
       .markline:hover .glyph {
         transform: rotate(45deg);
@@ -905,11 +908,14 @@
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.5"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            shape-rendering="geometricPrecision"
             aria-hidden="true"
           >
             <path d="M4 12 L12 4 L20 12 L12 20 Z" />
-            <circle cx="12" cy="12" r="3" />
+            <circle cx="12" cy="12" r="3.5" />
           </svg>
           <span class="wordmark" data-show="en">Catalyst Partners</span>
           <span class="wordmark" data-show="ar">كاتاليست بارتنرز</span>
