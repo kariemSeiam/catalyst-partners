@@ -17,7 +17,7 @@
     var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
     var h = document.documentElement;
     h.lang = l === "en" ? "en" : "ar";
-    h.dir = l === "en" ? "ltr" : "rtl";
+    h.dir = "rtl"; // bilingual: always RTL
     h.setAttribute("data-theme", t === "light" ? "light" : "dark");
     h.setAttribute("data-lang", l);
   } catch(e){}
@@ -1435,7 +1435,7 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
         function applyLang(l) {
           l = l === "en" ? "en" : "ar";
           root.lang = l === "en" ? "en" : "ar";
-          root.dir = l === "en" ? "ltr" : "rtl";
+          root.dir = "rtl"; // bilingual: always RTL
           root.setAttribute("data-lang", l);
           btnAr.classList.toggle("on", l === "ar");
       btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
