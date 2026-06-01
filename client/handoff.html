@@ -136,9 +136,11 @@ body {
         padding: 7px 12px;
         cursor: pointer;
         letter-spacing: 0.06em;
+        transition: background 0.18s var(--ease), color 0.18s var(--ease);
       }
-      .lang-tog button.on {
-        background: var(--ink);
+      .lang-tog button.on,
+      .lang-tog button[aria-pressed="true"] {
+        background: var(--bronze);
         color: var(--paper);
       }
       .theme-btn {
@@ -1414,7 +1416,9 @@ body {
           root.dir = l === "en" ? "ltr" : "rtl";
           root.setAttribute("data-lang", l);
           btnAr.classList.toggle("on", l === "ar");
+      btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
           btnEn.classList.toggle("on", l === "en");
+      btnEn.setAttribute("aria-pressed", l === "en" ? "true" : "false");
           try {
             localStorage.setItem("cp_lang", l);
           } catch (e) {}

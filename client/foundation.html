@@ -168,6 +168,7 @@ body {
   font: 500 11px var(--sans);
   color: var(--mute);
   letter-spacing: 0.04em;
+  transition: background 0.18s var(--ease), color 0.18s var(--ease);
 }
 
 .lang button:last-child {
@@ -176,8 +177,9 @@ body {
   letter-spacing: 0;
 }
 
-.lang button.on {
-  background: var(--ink);
+.lang button.on,
+.lang button[aria-pressed="true"] {
+  background: var(--bronze);
   color: var(--paper);
 }
 
@@ -1405,7 +1407,9 @@ footer {
     root.lang = l;
     root.dir = l === "en" ? "ltr" : "rtl";
     btnEn.classList.toggle("on", l === "en");
+      btnEn.setAttribute("aria-pressed", l === "en" ? "true" : "false");
     btnAr.classList.toggle("on", l === "ar");
+      btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
     try { localStorage.setItem("cp_lang", l); } catch(e){}
   }
   btnEn.addEventListener("click", function(){ applyLang("en"); });
