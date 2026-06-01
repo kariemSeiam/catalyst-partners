@@ -46,8 +46,11 @@ body {
   min-height: 100vh;
 }
 
-.en, .ar {
-  display: inline;
+.en, .ar, [data-show] {
+  display: revert;
+}
+[data-show="en"], [data-show="ar"] {
+  display: revert;
 }
 .en {
   direction: ltr;
