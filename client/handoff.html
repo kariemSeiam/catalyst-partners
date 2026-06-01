@@ -818,6 +818,59 @@
         font-size: var(--t-6);
       }
 
+      /* Request note — free-form input before send */
+      .req-note {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 28px;
+      }
+      .req-note-label {
+        font-family: var(--mono);
+        font-size: var(--t-7);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--paper);
+        opacity: 0.65;
+        cursor: default;
+      }
+      html[data-lang="ar"] .req-note-label {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: var(--t-6);
+      }
+      .req-note-ta {
+        width: 100%;
+        min-height: 80px;
+        resize: vertical;
+        background: color-mix(in oklab, var(--paper) 10%, transparent);
+        border: 1px solid color-mix(in oklab, var(--paper) 22%, transparent);
+        border-radius: 10px;
+        padding: 12px 16px;
+        color: var(--paper);
+        font: inherit;
+        font-size: var(--t-5);
+        line-height: 1.7;
+        transition: border-color 0.2s var(--ease);
+      }
+      html[data-lang="ar"] .req-note-ta {
+        font-family: var(--ar);
+        font-size: var(--t-5);
+        line-height: 1.85;
+        direction: rtl;
+      }
+      html[data-lang="en"] .req-note-ta {
+        direction: ltr;
+      }
+      .req-note-ta:focus {
+        outline: 0;
+        border-color: color-mix(in oklab, var(--paper) 45%, transparent);
+      }
+      .req-note-ta::placeholder {
+        color: color-mix(in oklab, var(--paper) 38%, transparent);
+      }
+
       /* Toast */
       .toast {
         position: fixed;
@@ -1466,6 +1519,18 @@
             فيها التموضع المُغلَق، أولوية القطاع المُتَّفَق عليها، قرار الاسم
             العربي، والخطوات العملية الأولى. لا أكثر، ولا أقل.
           </p>
+          <div class="req-note">
+            <label class="req-note-label" for="req-note">
+              <span data-show="en">Anything you'd like us to know (optional)</span>
+              <span data-show="ar">أضف ما تودّ إعلامنا به (اختياري)</span>
+            </label>
+            <textarea
+              id="req-note"
+              class="req-note-ta"
+              rows="3"
+              placeholder="..."
+            ></textarea>
+          </div>
           <div class="final-actions">
             <button class="final-btn btn-wa" id="btn-wa" type="button">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1691,6 +1756,11 @@
                 lines.push(n);
               });
             }
+            var reqNoteAr = (document.getElementById("req-note") || {}).value || "";
+            if (reqNoteAr.trim()) {
+              lines.push("");
+              lines.push("ملاحظة: " + reqNoteAr.trim());
+            }
             lines.push("");
             lines.push("جاهز لفتح المرحلة (أ).");
           } else {
@@ -1744,6 +1814,11 @@
               notesEn.forEach(function (n) {
                 lines.push(n);
               });
+            }
+            var reqNoteEn = (document.getElementById("req-note") || {}).value || "";
+            if (reqNoteEn.trim()) {
+              lines.push("");
+              lines.push("Note: " + reqNoteEn.trim());
             }
             lines.push("");
             lines.push("Ready to open Phase A.");

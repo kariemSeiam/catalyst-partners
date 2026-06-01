@@ -124,11 +124,11 @@
 [data-theme="light"] {
 	--paper: #f4efe5;
 	--paper-2: #ebe5d6;
-	--card: #fbf7ed;
+	--card: #fffdf7; /* brighter — cards read clearly on warm cream paper */
 	--ink: #161311;
 	--ink-2: #3b3733;
 	--mute: #6e665c;
-	--hair: #d7cfbe;
+	--hair: #d1c9b8;
 	--rule: #1614120f;
 	--bronze: #8c6e3d;
 	--bronze-2: #6e5630;
@@ -274,4 +274,30 @@ samp,
 .mono {
 	font-family: var(--mono);
 	font-variant-numeric: tabular-nums;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * Light theme AR — heading warmth.
+ * Plain #161311 on cream is readable but flat. A bronze-tinted ink adds the
+ * character the dark theme gets for free from its warm surface hierarchy.
+ * ──────────────────────────────────────────────────────────────────── */
+html[data-theme="light"][lang="ar"] h1,
+html[data-theme="light"][lang="ar"] h2:not([data-show="en"]),
+html[data-theme="light"][lang="ar"] h3 {
+	color: color-mix(in oklab, var(--ink) 76%, var(--bronze));
+}
+html[data-theme="light"][lang="ar"] .hero h1 {
+	color: color-mix(in oklab, var(--ink) 70%, var(--bronze));
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * Focus-visible — keyboard accessibility.
+ * ──────────────────────────────────────────────────────────────────── */
+:focus-visible {
+	outline: 2px solid var(--bronze);
+	outline-offset: 3px;
+	border-radius: 3px;
+}
+:focus:not(:focus-visible) {
+	outline: none;
 }
