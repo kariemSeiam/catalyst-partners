@@ -10,100 +10,155 @@
     <title>كاتاليست بارتنرز — البوصلة</title>
 
     <script>
-// Pre-paint: apply stored lang + theme so first frame is never wrong.
-(function(){
-  try {
-    var l = localStorage.getItem("cp_lang") || "ar";
-    var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
-    var h = document.documentElement;
-    h.lang = l === "en" ? "en" : "ar";
-    h.dir = "rtl"; // bilingual: always RTL
-    h.setAttribute("data-theme", t === "light" ? "light" : "dark");
-    h.setAttribute("data-lang", l);
-  } catch(e){}
-})();
-</script>
+      // Pre-paint: apply stored lang + theme so first frame is never wrong.
+      (function () {
+        try {
+          var l = localStorage.getItem("cp_lang") || "ar";
+          var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
+          var h = document.documentElement;
+          h.lang = l === "en" ? "en" : "ar";
+          h.dir = "rtl"; // bilingual: always RTL
+          h.setAttribute("data-theme", t === "light" ? "light" : "dark");
+          h.setAttribute("data-lang", l);
+        } catch (e) {}
+      })();
+    </script>
 
-<link rel="preload" href="../fonts/400.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="../fonts/700.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../fonts/400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-<link rel="stylesheet" href="../site/system.css" />
+    <link rel="stylesheet" href="../site/system.css" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+    /></noscript>
 
-<style>
-/* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
-html { scroll-behavior: smooth; }
+    <style>
+      /* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
+      html {
+        scroll-behavior: smooth;
+      }
 
-body {
-  background:
-    radial-gradient(1200px 600px at 80% -10%, var(--paper-2) 0%, transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, var(--paper-2) 0%, transparent 60%),
-    var(--paper);
-  min-height: 100vh;
-}
+      body {
+        background:
+          radial-gradient(
+            1200px 600px at 80% -10%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at -10% 110%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          var(--paper);
+        min-height: 100vh;
+      }
 
-.en, .ar, [data-show] {
-  display: revert;
-}
-[data-show="en"], [data-show="ar"] {
-  display: revert;
-}
-.en {
-  direction: ltr;
-  unicode-bidi: isolate;
-}
-.ar {
-  direction: rtl;
-  unicode-bidi: isolate;
-}
+      .en,
+      .ar,
+      [data-show] {
+        display: revert;
+      }
+      [data-show="en"],
+      [data-show="ar"] {
+        display: revert;
+      }
+      html[data-lang="ar"] [data-show="en"] {
+        display: none;
+      }
+      html[data-lang="en"] [data-show="ar"] {
+        display: none;
+      }
+      .en {
+        direction: ltr;
+        unicode-bidi: isolate;
+      }
+      .ar {
+        direction: rtl;
+        unicode-bidi: isolate;
+      }
 
-/* ── Bilingual pair layout ── */
-/* Inline pairs: centered dot between EN and AR */
-.eyebrow [data-show="en"] + [data-show="ar"]::before,
-.meta [data-show="en"] + [data-show="ar"]::before {
-  content: " · ";
-  color: var(--mute-3);
-  margin-inline: 0.3em;
-}
+      /* ── Bilingual pair layout ── */
+      /* Inline pairs: centered dot between EN and AR */
+      .eyebrow [data-show="en"] + [data-show="ar"]::before,
+      .meta [data-show="en"] + [data-show="ar"]::before {
+        content: " · ";
+        color: var(--mute-3);
+        margin-inline: 0.3em;
+      }
 
-/* Block pairs: tighten margin so they read as a unit */
-h1[data-show="en"] + h1[data-show="ar"] {
-  margin-top: -0.3em;
-}
-p[data-show="en"] + p[data-show="ar"],
-h2[data-show="en"] + h2[data-show="ar"] {
-  margin-top: -0.2em;
-}
+      /* Block pairs: tighten margin so they read as a unit */
+      h1[data-show="en"] + h1[data-show="ar"] {
+        margin-top: -0.3em;
+      }
+      p[data-show="en"] + p[data-show="ar"],
+      h2[data-show="en"] + h2[data-show="ar"] {
+        margin-top: -0.2em;
+      }
 
-/* h1 bilingual pair: EN secondary, AR primary */
-[dir="rtl"] h1[data-show="en"] {
-  font-size: var(--t-1);
-  opacity: 0.85;
-  margin-bottom: 0;
-}
-[dir="rtl"] h1[data-show="ar"] {
-  font-size: var(--t-display);
-}
+      /* h1 bilingual pair: EN secondary, AR primary — only in AR mode */
+      html[data-lang="ar"] h1[data-show="en"] {
+        font-size: var(--t-1);
+        opacity: 0.85;
+        margin-bottom: 0;
+      }
+      html[data-lang="ar"] h1[data-show="ar"] {
+        font-size: var(--t-display);
+      }
 
-/* ── Bilingual: both languages always visible, each in its correct font ── */
-/* When AR mode active, EN spans inherit AR font from parent — override */
-html[data-lang="ar"] .en { font-family: var(--sans); }
-html[data-lang="ar"] h1 .en,
-html[data-lang="ar"] h2 .en,
-html[data-lang="ar"] h3 .en { font-family: var(--serif); }
-html[data-lang="ar"] h3 .en { font-style: italic; }
-/* When EN mode active, AR spans inherit sans/serif — override to AR */
-html[data-lang="en"] .ar { font-family: var(--ar); }
+      /* ── Bilingual: both languages always visible, each in its correct font ── */
+      /* When AR mode active, EN spans inherit AR font from parent — override */
+      html[data-lang="ar"] .en {
+        font-family: var(--sans);
+      }
+      html[data-lang="ar"] h1 .en,
+      html[data-lang="ar"] h2 .en,
+      html[data-lang="ar"] h3 .en {
+        font-family: var(--serif);
+      }
+      html[data-lang="ar"] h3 .en {
+        font-style: italic;
+      }
+      /* When EN mode active, AR spans inherit sans/serif — override to AR */
+      html[data-lang="en"] .ar {
+        font-family: var(--ar);
+      }
 
-/* EN spans inside RTL parent — keep correct EN fonts */
-[dir="rtl"] .en { font-family: var(--sans); }
-[dir="rtl"] h1 .en, [dir="rtl"] h2 .en { font-family: var(--serif); }
-[dir="rtl"] .pillar h3 .en { font-family: var(--serif); font-style: italic; }
-
+      /* EN spans inside RTL parent — keep correct EN fonts */
+      [dir="rtl"] .en {
+        font-family: var(--sans);
+      }
+      [dir="rtl"] h1 .en,
+      [dir="rtl"] h2 .en {
+        font-family: var(--serif);
+      }
+      [dir="rtl"] .pillar h3 .en {
+        font-family: var(--serif);
+        font-style: italic;
+      }
 
       .masthead {
         position: sticky;
@@ -189,7 +244,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
         padding: 7px 12px;
         cursor: pointer;
         letter-spacing: 0.06em;
-        transition: background 0.18s var(--ease), color 0.18s var(--ease);
+        transition:
+          background 0.18s var(--ease),
+          color 0.18s var(--ease);
       }
       .lang-tog button.on,
       .lang-tog button[aria-pressed="true"] {
@@ -456,8 +513,7 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
         border: 1px solid var(--hair);
         background: var(--paper);
         color: var(--ink-2);
-        font-family: var(--mono);
-        font-size: var(--t-7);
+        font: inherit;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         padding: 10px 18px;
@@ -467,7 +523,6 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
           background 0.2s,
           border-color 0.2s,
           color 0.2s;
-        font: inherit;
       }
       html[data-lang="ar"] .act {
         font-family: var(--ar);
@@ -887,7 +942,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
           each, or write back where we should sharpen it.
         </p>
         <p class="lede" data-show="ar">
-          أربع قراءات: التموضع، القطاع الأول، الاسم العربي، لحظة البدء. كل قراءة تؤثّر في ما يليها. نطلب تأكيد كل قراءة، أو تدوين ما يلزم تعديله.
+          أربع قراءات: التموضع، القطاع الأول، الاسم العربي، لحظة البدء. كل قراءة
+          تؤثّر في ما يليها. نطلب تأكيد كل قراءة، أو تدوين ما يلزم تعديله.
         </p>
         <div class="hero .meta meta">
           <span data-show="en">Foundation → Compass → Handoff</span>
@@ -921,7 +977,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               restructuring grow around the right partner.
             </h2>
             <h2 data-show="ar">
-              نوصي بالبدء بالتحوّل المؤسسي. إعادة الهيكلة المالية تنضمّ لاحقًا، عند انضمام الشريك المناسب.
+              نوصي بالبدء بالتحوّل المؤسسي. إعادة الهيكلة المالية تنضمّ لاحقًا،
+              عند انضمام الشريك المناسب.
             </h2>
             <p class="body" data-show="en">
               Your brief lists both halves of the work. The market evidence —
@@ -933,8 +990,11 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               referenceable track record sits at the table.
             </p>
             <p class="body" data-show="ar">
-              يذكر الموجز الشقّين معًا. تشير قراءة السوق، والكفاءات الموثّقة في فريق الشركاء، إلى التركيز على الشق المؤسسي: الحوكمة، الإشراف على البرامج، الأداء، التحوّل، مع طبقة تسليم رقمية تُحدث الفارق. تبقى إعادة الهيكلة المالية ضمن العرض، إنّما لا تتصدّر المحادثة حتى يجلس على الطاولة شريكٌ ماليٌ
-              بسجلٍّ معتمد.
+              يذكر الموجز الشقّين معًا. تشير قراءة السوق، والكفاءات الموثّقة في
+              فريق الشركاء، إلى التركيز على الشق المؤسسي: الحوكمة، الإشراف على
+              البرامج، الأداء، التحوّل، مع طبقة تسليم رقمية تُحدث الفارق. تبقى
+              إعادة الهيكلة المالية ضمن العرض، إنّما لا تتصدّر المحادثة حتى يجلس
+              على الطاولة شريكٌ ماليٌ بسجلٍّ معتمد.
             </p>
             <small class="cite" data-show="en"
               >Evidence: A&amp;M Q2 2023 Middle East Turnaround Survey — 73%
@@ -942,7 +1002,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               practice.</small
             >
             <small class="cite" data-show="ar"
-              >المرجع: مسح A&amp;M للتحوّل في الشرق الأوسط، الربع الثاني 2023 — 73% يطلبون الشقّين معًا، أقل من 25% يرونه يتحقّق فعليًا.</small
+              >المرجع: مسح A&amp;M للتحوّل في الشرق الأوسط، الربع الثاني 2023 —
+              73% يطلبون الشقّين معًا، أقل من 25% يرونه يتحقّق فعليًا.</small
             >
             <div class="claim-actions">
               <button class="act" data-type="agree" type="button">
@@ -982,7 +1043,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               front. Banks and investors are reached through both.
             </h2>
             <h2 data-show="ar">
-              الشركات العائلية: المدخل. الجهات شبه الحكومية: الجبهة الثانية. البنوك والمستثمرون: نصل إليهم عبر الاثنتين.
+              الشركات العائلية: المدخل. الجهات شبه الحكومية: الجبهة الثانية.
+              البنوك والمستثمرون: نصل إليهم عبر الاثنتين.
             </h2>
             <p class="body" data-show="en">
               Roughly 60% of UAE GDP sits inside family enterprises.
@@ -1011,7 +1073,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               Julius Baer (Jan 2025).</small
             >
             <small class="cite" data-show="ar"
-              >المراجع: وزارة الاقتصاد والسياحة الإماراتية (نوفمبر 2025)؛ مسح PwC للشركات العائلية في الشرق الأوسط 2021؛ مركز ابتكار DIFC مع جوليوس باير (يناير 2025).</small
+              >المراجع: وزارة الاقتصاد والسياحة الإماراتية (نوفمبر 2025)؛ مسح
+              PwC للشركات العائلية في الشرق الأوسط 2021؛ مركز ابتكار DIFC مع
+              جوليوس باير (يناير 2025).</small
             >
             <div class="claim-actions">
               <button class="act" data-type="agree" type="button">
@@ -1031,7 +1095,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                   differently.</span
                 >
                 <span data-show="ar"
-                  >نرجو تحديد القطاع الأول، أو إعادة ترتيب القطاعات إن لزم.</span
+                  >نرجو تحديد القطاع الأول، أو إعادة ترتيب القطاعات إن
+                  لزم.</span
                 >
               </div>
             </div>
@@ -1054,7 +1119,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               Arabic. We recommend the transliteration; the choice is yours.
             </h2>
             <h2 data-show="ar">
-              النقل الصوتي أسرع. الاسم المُترجَم أعمق في العربية. نوصي بالنقل الصوتي. القرار قراركم.
+              النقل الصوتي أسرع. الاسم المُترجَم أعمق في العربية. نوصي بالنقل
+              الصوتي. القرار قراركم.
             </h2>
             <p class="body" data-show="en">
               The logo cannot be designed in earnest until this is decided. A
@@ -1066,8 +1132,11 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               equal weight in every layout.
             </p>
             <p class="body" data-show="ar">
-              لا يمكن تصميم الشعار قبل حسم هذا. النقل الصوتي ("كاتاليست بارتنرز") يُبقي العلامة موحَّدة بين اللغتين — أسلم وأكثر دوليّة. الاسم المُترجَم ("شركاء التحوّل" أو ما يماثله) أقرب للعملاء الحكوميين الناطقين بالعربية، لكنّه يُغيِّر معمارية العلامة؛ إذ على الاسمين عندئذٍ أن يحملا
-              الثقل ذاته في كل تصميم.
+              لا يمكن تصميم الشعار قبل حسم هذا. النقل الصوتي ("كاتاليست
+              بارتنرز") يُبقي العلامة موحَّدة بين اللغتين — أسلم وأكثر دوليّة.
+              الاسم المُترجَم ("شركاء التحوّل" أو ما يماثله) أقرب للعملاء
+              الحكوميين الناطقين بالعربية، لكنّه يُغيِّر معمارية العلامة؛ إذ على
+              الاسمين عندئذٍ أن يحملا الثقل ذاته في كل تصميم.
             </p>
 
             <div class="name-options" id="name-options">
@@ -1094,7 +1163,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                   parallel wordmark and a dedicated naming round.</span
                 >
                 <span class="name-opt-note" data-show="ar"
-                  >اسم عربي مُترجَم: صدى أقوى، يستلزم شعارًا عربيًا موازيًا وجولة تسمية مخصّصة.</span
+                  >اسم عربي مُترجَم: صدى أقوى، يستلزم شعارًا عربيًا موازيًا
+                  وجولة تسمية مخصّصة.</span
                 >
               </button>
             </div>
@@ -1150,7 +1220,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               have seen the full reading.
             </p>
             <p class="body" data-show="ar">
-              المسار المختار في الصفحة السابقة يُحدّد شكل ما يليه: المُخرَجات التي تدخل المرحلة الأولى، ترتيب إيقاع العمل، وما يلزم منكم قبل البدء. نرجو تأكيد بقاء الاختيار صحيحًا، بعد قراءة الصورة كاملة.
+              المسار المختار في الصفحة السابقة يُحدّد شكل ما يليه: المُخرَجات
+              التي تدخل المرحلة الأولى، ترتيب إيقاع العمل، وما يلزم منكم قبل
+              البدء. نرجو تأكيد بقاء الاختيار صحيحًا، بعد قراءة الصورة كاملة.
             </p>
             <div class="scope-mirror">
               <span class="scope-mirror-dot"></span>
@@ -1265,9 +1337,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
           root.dir = "rtl"; // bilingual: always RTL
           root.setAttribute("data-lang", l);
           btnAr.classList.toggle("on", l === "ar");
-      btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
+          btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
           btnEn.classList.toggle("on", l === "en");
-      btnEn.setAttribute("aria-pressed", l === "en" ? "true" : "false");
+          btnEn.setAttribute("aria-pressed", l === "en" ? "true" : "false");
           try {
             localStorage.setItem("cp_lang", l);
           } catch (e) {}

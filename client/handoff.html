@@ -10,101 +10,151 @@
     <title>كاتاليست بارتنرز — التسليم</title>
 
     <script>
-// Pre-paint: apply stored lang + theme so first frame is never wrong.
-(function(){
-  try {
-    var l = localStorage.getItem("cp_lang") || "ar";
-    var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
-    var h = document.documentElement;
-    h.lang = l === "en" ? "en" : "ar";
-    h.dir = "rtl"; // bilingual: always RTL
-    h.setAttribute("data-theme", t === "light" ? "light" : "dark");
-    h.setAttribute("data-lang", l);
-  } catch(e){}
-})();
-</script>
+      // Pre-paint: apply stored lang + theme so first frame is never wrong.
+      (function () {
+        try {
+          var l = localStorage.getItem("cp_lang") || "ar";
+          var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
+          var h = document.documentElement;
+          h.lang = l === "en" ? "en" : "ar";
+          h.dir = "rtl"; // bilingual: always RTL
+          h.setAttribute("data-theme", t === "light" ? "light" : "dark");
+          h.setAttribute("data-lang", l);
+        } catch (e) {}
+      })();
+    </script>
 
-<link rel="preload" href="../fonts/400.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="../fonts/700.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="../fonts/400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-<link rel="stylesheet" href="../site/system.css" />
+    <link rel="stylesheet" href="../site/system.css" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+    /></noscript>
 
-<style>
-/* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
-html { scroll-behavior: smooth; }
+    <style>
+      /* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
+      html {
+        scroll-behavior: smooth;
+      }
 
-body {
-  background:
-    radial-gradient(1200px 600px at 80% -10%, var(--paper-2) 0%, transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, var(--paper-2) 0%, transparent 60%),
-    var(--paper);
-  min-height: 100vh;
-}
+      body {
+        background:
+          radial-gradient(
+            1200px 600px at 80% -10%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at -10% 110%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          var(--paper);
+        min-height: 100vh;
+      }
 
-.en, .ar, [data-show] {
-  display: revert;
-}
-[data-show="en"], [data-show="ar"] {
-  display: revert;
-}
-.en {
-  direction: ltr;
-  unicode-bidi: isolate;
-}
-.ar {
-  direction: rtl;
-  unicode-bidi: isolate;
-}
+      .en,
+      .ar,
+      [data-show] {
+        display: revert;
+      }
+      [data-show="en"],
+      [data-show="ar"] {
+        display: revert;
+      }
+      html[data-lang="ar"] [data-show="en"] {
+        display: none;
+      }
+      html[data-lang="en"] [data-show="ar"] {
+        display: none;
+      }
+      .en {
+        direction: ltr;
+        unicode-bidi: isolate;
+      }
+      .ar {
+        direction: rtl;
+        unicode-bidi: isolate;
+      }
 
-/* ── Bilingual pair layout ── */
-/* Inline pairs: centered dot between EN and AR */
-.eyebrow [data-show="en"] + [data-show="ar"]::before,
-.meta [data-show="en"] + [data-show="ar"]::before {
-  content: " · ";
-  color: var(--mute-3);
-  margin-inline: 0.3em;
-}
+      /* ── Bilingual pair layout ── */
+      /* Inline pairs: centered dot between EN and AR */
+      .eyebrow [data-show="en"] + [data-show="ar"]::before,
+      .meta [data-show="en"] + [data-show="ar"]::before {
+        content: " · ";
+        color: var(--mute-3);
+        margin-inline: 0.3em;
+      }
 
-/* Block pairs: tighten margin so they read as a unit */
-h1[data-show="en"] + h1[data-show="ar"] {
-  margin-top: -0.3em;
-}
-p[data-show="en"] + p[data-show="ar"],
-h2[data-show="en"] + h2[data-show="ar"] {
-  margin-top: -0.2em;
-}
+      /* Block pairs: tighten margin so they read as a unit */
+      h1[data-show="en"] + h1[data-show="ar"] {
+        margin-top: -0.3em;
+      }
+      p[data-show="en"] + p[data-show="ar"],
+      h2[data-show="en"] + h2[data-show="ar"] {
+        margin-top: -0.2em;
+      }
 
-/* h1 bilingual pair: EN secondary, AR primary */
-[dir="rtl"] h1[data-show="en"] {
-  font-size: var(--t-1);
-  opacity: 0.85;
-  margin-bottom: 0;
-}
-[dir="rtl"] h1[data-show="ar"] {
-  font-size: var(--t-display);
-}
+      /* h1 bilingual pair: EN secondary, AR primary — only in AR mode */
+      html[data-lang="ar"] h1[data-show="en"] {
+        font-size: var(--t-1);
+        opacity: 0.85;
+        margin-bottom: 0;
+      }
+      html[data-lang="ar"] h1[data-show="ar"] {
+        font-size: var(--t-display);
+      }
 
-/* ── Bilingual: both languages always visible, each in its correct font ── */
-/* When AR mode active, EN spans inherit AR font from parent — override */
-html[data-lang="ar"] .en { font-family: var(--sans); }
-html[data-lang="ar"] h1 .en,
-html[data-lang="ar"] h2 .en,
-html[data-lang="ar"] h3 .en { font-family: var(--serif); }
-html[data-lang="ar"] h3 .en { font-style: italic; }
-/* When EN mode active, AR spans inherit sans/serif — override to AR */
-html[data-lang="en"] .ar { font-family: var(--ar); }
+      /* ── Bilingual: both languages always visible, each in its correct font ── */
+      /* When AR mode active, EN spans inherit AR font from parent — override */
+      html[data-lang="ar"] .en {
+        font-family: var(--sans);
+      }
+      html[data-lang="ar"] h1 .en,
+      html[data-lang="ar"] h2 .en,
+      html[data-lang="ar"] h3 .en {
+        font-family: var(--serif);
+      }
+      html[data-lang="ar"] h3 .en {
+        font-style: italic;
+      }
+      /* When EN mode active, AR spans inherit sans/serif — override to AR */
+      html[data-lang="en"] .ar {
+        font-family: var(--ar);
+      }
 
-/* EN spans inside RTL parent — keep correct EN fonts */
-[dir="rtl"] .en { font-family: var(--sans); }
-[dir="rtl"] h1 .en, [dir="rtl"] h2 .en { font-family: var(--serif); }
-[dir="rtl"] .pillar h3 .en { font-family: var(--serif); font-style: italic; }
-
-
+      /* EN spans inside RTL parent — keep correct EN fonts */
+      [dir="rtl"] .en {
+        font-family: var(--sans);
+      }
+      [dir="rtl"] h1 .en,
+      [dir="rtl"] h2 .en {
+        font-family: var(--serif);
+      }
       .masthead {
         position: sticky;
         top: 0;
@@ -189,7 +239,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
         padding: 7px 12px;
         cursor: pointer;
         letter-spacing: 0.06em;
-        transition: background 0.18s var(--ease), color 0.18s var(--ease);
+        transition:
+          background 0.18s var(--ease),
+          color 0.18s var(--ease);
       }
       .lang-tog button.on,
       .lang-tog button[aria-pressed="true"] {
@@ -463,8 +515,6 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
         .deliver {
           grid-template-columns: 1fr;
         }
-      }
-      .deliver-col {
       }
       .deliver-label {
         font-family: var(--mono);
@@ -907,7 +957,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
           the line between us at each step.
         </p>
         <p class="lede" data-show="ar">
-          نبني كاتاليست بارتنرز على مراحل، لا على تواريخ. كل مرحلة تكتمل ببلوغ معيار إتمامها، لا بانتهاء جدول. الشكل أدناه يتبع المسار المختار في "الأساس": ما تتسلّمونه، ما نطلبه منكم، وما يَعبُر بيننا في كل خطوة.
+          نبني كاتاليست بارتنرز على مراحل، لا على تواريخ. كل مرحلة تكتمل ببلوغ
+          معيار إتمامها، لا بانتهاء جدول. الشكل أدناه يتبع المسار المختار في
+          "الأساس": ما تتسلّمونه، ما نطلبه منكم، وما يَعبُر بيننا في كل خطوة.
         </p>
 
         <div class="track-banner" id="track-banner">
@@ -948,7 +1000,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
           one before is finished to the standard.
         </p>
         <p class="section-sub" data-show="ar">
-          كل مرحلة تنتهي بمعيار واضح. لا ندخل التالية قبل اكتمال سابقتها وفق المعيار.
+          كل مرحلة تنتهي بمعيار واضح. لا ندخل التالية قبل اكتمال سابقتها وفق
+          المعيار.
         </p>
 
         <div class="phases">
@@ -971,7 +1024,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                 a moving one.
               </p>
               <p data-show="ar">
-                تأكيدات البوصلة مُوقَّعة. الاسم العربي محسوم. النطاقات مُسجَّلة. مساحتا العلامة والمحتوى جاهزتان. ينطلق العمل من نقطة بداية ثابتة.
+                تأكيدات البوصلة مُوقَّعة. الاسم العربي محسوم. النطاقات مُسجَّلة.
+                مساحتا العلامة والمحتوى جاهزتان. ينطلق العمل من نقطة بداية
+                ثابتة.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1034,7 +1089,10 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                 it does not ship.
               </p>
               <p data-show="ar">
-                هوية ثنائية اللغة كاملة: شعار نصّي، رمز، منظومة، تطبيقات. يُختبَر الشعار في السياقات التي عليه اجتيازها: أغلفة العروض الحكومية، عروض المديرين، LinkedIn بعرض 56 بكسل، اللافتات بمترين. إما أن ينجح في كل ذلك، أو لا يُسلَّم.
+                هوية ثنائية اللغة كاملة: شعار نصّي، رمز، منظومة، تطبيقات.
+                يُختبَر الشعار في السياقات التي عليه اجتيازها: أغلفة العروض
+                الحكومية، عروض المديرين، LinkedIn بعرض 56 بكسل، اللافتات بمترين.
+                إما أن ينجح في كل ذلك، أو لا يُسلَّم.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1052,7 +1110,8 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                       card, email signature, LinkedIn set
                     </li>
                     <li data-show="ar">
-                      قوالب: غلاف العروض، العرض التقديمي، بطاقة العمل، توقيع البريد، حزمة LinkedIn
+                      قوالب: غلاف العروض، العرض التقديمي، بطاقة العمل، توقيع
+                      البريد، حزمة LinkedIn
                     </li>
                   </ul>
                 </div>
@@ -1099,7 +1158,10 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                 rhythm.
               </p>
               <p data-show="ar">
-                منظومة تحريرية يقدر الشركاء على الالتزام بها: إيقاع شهري على LinkedIn بالعربية والإنجليزية، سلسلة رؤى فصلية، وهيكل التقرير المرجعي حول الحوكمة. ليس جدول محتوى يتوقّف في الأسبوع الثالث، بل إيقاع مستدام.
+                منظومة تحريرية يقدر الشركاء على الالتزام بها: إيقاع شهري على
+                LinkedIn بالعربية والإنجليزية، سلسلة رؤى فصلية، وهيكل التقرير
+                المرجعي حول الحوكمة. ليس جدول محتوى يتوقّف في الأسبوع الثالث، بل
+                إيقاع مستدام.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1159,9 +1221,7 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
               <h3 data-show="en">
                 The site that earns trust before the first sentence is read.
               </h3>
-              <h3 data-show="ar">
-                موقع يستحق الثقة قبل قراءة أول جملة.
-              </h3>
+              <h3 data-show="ar">موقع يستحق الثقة قبل قراءة أول جملة.</h3>
               <p data-show="en">
                 A bilingual website that treats Arabic and English as equals,
                 hosts the flagship report behind a quiet lead form, and routes
@@ -1170,7 +1230,10 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
                 you, always. The architecture is the asset.
               </p>
               <p data-show="ar">
-                موقع ثنائي اللغة يعامل العربية والإنجليزية بمنزلة واحدة. يحتضن التقرير المرجعي خلف استمارة استقطاب هادئة، ويوجّه كل تواصل إلى الشريك المعنيّ. كل مكوّن — المحتوى، البيانات، التحليلات — يبقى ملكًا لكم. المعمار هو الأصل الحقيقي.
+                موقع ثنائي اللغة يعامل العربية والإنجليزية بمنزلة واحدة. يحتضن
+                التقرير المرجعي خلف استمارة استقطاب هادئة، ويوجّه كل تواصل إلى
+                الشريك المعنيّ. كل مكوّن — المحتوى، البيانات، التحليلات — يبقى
+                ملكًا لكم. المعمار هو الأصل الحقيقي.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1469,9 +1532,9 @@ html[data-lang="en"] .ar { font-family: var(--ar); }
           root.dir = "rtl"; // bilingual: always RTL
           root.setAttribute("data-lang", l);
           btnAr.classList.toggle("on", l === "ar");
-      btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
+          btnAr.setAttribute("aria-pressed", l === "ar" ? "true" : "false");
           btnEn.classList.toggle("on", l === "en");
-      btnEn.setAttribute("aria-pressed", l === "en" ? "true" : "false");
+          btnEn.setAttribute("aria-pressed", l === "en" ? "true" : "false");
           try {
             localStorage.setItem("cp_lang", l);
           } catch (e) {}

@@ -40,8 +40,13 @@
 	--ink: #ede8df;
 	--ink-2: #b8b0a4;
 	--mute: #7a7166;
+	--mute-3: color-mix(in oklab, var(--mute) 50%, transparent);
 	--hair: #2e2a25;
 	--rule: #ffffff0a;
+
+	/* WhatsApp */
+	--wa: #25d366;
+	--wa-2: #1ebe57;
 
 	/* Bronze — the brand axis. */
 	--bronze: #a8854d;
