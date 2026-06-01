@@ -10,110 +10,65 @@
     <title>كاتاليست بارتنرز — موجز خاص</title>
 
     <script>
+      // Pre-paint: apply stored lang + theme so first frame is never wrong.
       (function () {
         try {
           var l = localStorage.getItem("cp_lang") || "ar";
-          var t = localStorage.getItem("cp_theme");
-          if (!t)
-            t = window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
+          var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
           var h = document.documentElement;
           h.lang = l === "en" ? "en" : "ar";
           h.dir = l === "en" ? "ltr" : "rtl";
-          h.setAttribute("data-theme", t);
+          h.setAttribute("data-theme", t === "light" ? "light" : "dark");
           h.setAttribute("data-lang", l);
         } catch (e) {}
       })();
     </script>
 
+    <!-- AR — preload critical weights so first-paint text is real, not fallback. -->
+    <link
+      rel="preload"
+      href="fonts/400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Design system: tokens, type scale, AR @font-face. -->
+    <link rel="stylesheet" href="site/system.css" />
+
+    <!-- EN fonts — async load, never blocks first paint. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+    /></noscript>
 
     <style>
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 300;
-        font-display: swap;
-        src: url("fonts/300.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 400;
-        font-display: swap;
-        src: url("fonts/400.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 500;
-        font-display: swap;
-        src: url("fonts/500.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 600;
-        font-display: swap;
-        src: url("fonts/600.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 700;
-        font-display: swap;
-        src: url("fonts/700.woff2") format("woff2");
-      }
+      /* Page-only — system.css carries every shared token. */
 
-      :root {
-        --paper: #f4efe5;
-        --paper-2: #ebe5d6;
-        --card: #fbf7ed;
-        --ink: #161311;
-        --ink-2: #3b3733;
-        --mute: #6e665c;
-        --hair: #d7cfbe;
-        --bronze: #8c6e3d;
-        --bronze-2: #6e5630;
-        --serif: "Instrument Serif", ui-serif, Georgia, serif;
-        --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-        --mono: "JetBrains Mono", ui-monospace, monospace;
-        --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-        --sx: clamp(24px, 4vw, 48px);
-      }
-      [data-theme="dark"] {
-        --paper: #141210;
-        --paper-2: #1c1916;
-        --card: #1e1b17;
-        --ink: #ede8df;
-        --ink-2: #b8b0a4;
-        --mute: #7a7166;
-        --hair: #2e2a25;
-        --bronze: #a8854d;
-        --bronze-2: #c49a58;
-      }
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
       html[data-lang="en"] [data-show="ar"] {
         display: none;
       }
       html[data-lang="ar"] [data-show="en"] {
         display: none;
       }
-      html[data-lang="en"] body {
-        font-family: var(--sans);
-      }
-      html[data-lang="ar"] body {
-        font-family: var(--ar);
-      }
 
       body {
-        color: var(--ink);
         min-height: 100vh;
         background:
           radial-gradient(
@@ -127,20 +82,9 @@
             transparent 60%
           ),
           var(--paper);
-        -webkit-font-smoothing: antialiased;
         display: grid;
         place-items: center;
         padding: 48px var(--sx);
-        line-height: 1.7;
-        font-size: 16px;
-      }
-      html[data-lang="ar"] body {
-        line-height: 1.85;
-        font-size: 17px;
-      }
-      ::selection {
-        background: #8c6e3d33;
-        color: var(--ink);
       }
 
       .wrap {
@@ -179,62 +123,63 @@
         }
       }
 
+      /* Eyebrow — EN is mono-uppercase tracked; AR is sentence-cased AR sans. */
       .eyebrow {
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
         color: var(--mute);
-        letter-spacing: 0.22em;
+        letter-spacing: var(--track-micro);
         text-transform: uppercase;
       }
       html[data-lang="ar"] .eyebrow {
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 13px;
+        font-size: var(--t-6);
         color: var(--bronze-2);
       }
 
+      /* Display — EN serif italic, AR sans light. */
       h1 {
         font-family: var(--serif);
         font-style: italic;
         font-weight: 400;
-        font-size: clamp(40px, 7vw, 64px);
-        line-height: 1.05;
-        letter-spacing: -0.01em;
+        font-size: var(--t-display);
+        line-height: var(--lh-tight);
+        letter-spacing: var(--track-display);
         color: var(--ink);
       }
       html[data-lang="ar"] h1 {
         font-family: var(--ar);
         font-style: normal;
-        font-weight: 300;
-        font-size: clamp(36px, 6.5vw, 56px);
-        line-height: 1.2;
+        font-weight: 500;
+        font-size: var(--t-display);
+        line-height: var(--lh-tight);
         letter-spacing: 0;
       }
 
       .for {
         font-family: var(--mono);
-        font-size: 11.5px;
+        font-size: var(--t-7);
         color: var(--mute);
-        letter-spacing: 0.15em;
+        letter-spacing: var(--track-micro);
         text-transform: uppercase;
       }
       html[data-lang="ar"] .for {
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 13.5px;
+        font-size: var(--t-6);
       }
 
       .lede {
-        font-size: 17px;
+        font-size: var(--t-4);
         color: var(--ink-2);
         max-width: 42ch;
-        line-height: 1.65;
+        line-height: var(--lh-prose);
       }
       html[data-lang="ar"] .lede {
-        font-size: 17.5px;
-        line-height: 1.85;
+        line-height: var(--lh-loose);
       }
 
       .enter {
@@ -248,7 +193,7 @@
         padding: 18px 32px;
         border-radius: 999px;
         font: inherit;
-        font-size: 15px;
+        font-size: var(--t-5);
         font-weight: 500;
         display: inline-flex;
         align-items: center;
@@ -257,24 +202,20 @@
           background 0.25s,
           transform 0.15s var(--ease);
       }
-      html[data-lang="ar"] .enter {
-        font-size: 16px;
-        font-weight: 600;
-      }
       .enter:hover {
         background: var(--bronze-2);
         transform: translateY(-1px);
       }
       .enter-arr {
         font-family: var(--serif);
-        font-size: 22px;
+        font-size: var(--t-3);
         line-height: 1;
         opacity: 0.9;
       }
       html[data-lang="ar"] .enter-arr {
         transform: scaleX(-1);
         font-family: var(--ar);
-        font-weight: 300;
+        font-weight: 400;
       }
 
       .controls {
@@ -294,7 +235,7 @@
         background: var(--card);
         overflow: hidden;
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
       }
       .lang-tog button {
         appearance: none;
@@ -340,16 +281,16 @@
         inset-inline-end: 0;
         text-align: center;
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: var(--t-7);
         color: var(--mute);
-        letter-spacing: 0.22em;
+        letter-spacing: var(--track-micro);
         text-transform: uppercase;
       }
       html[data-lang="ar"] .seal {
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12px;
+        font-size: var(--t-6);
       }
     </style>
   </head>
@@ -417,25 +358,25 @@
       </div>
 
       <p class="lede" data-show="en">
-        Three pages of careful reading. Foundation, Compass, Handoff. Together,
-        they hold what we understand about the firm — and what we propose to
-        build before we touch a single deliverable.
+        Three pages. Foundation, Compass, Handoff. They set out what we
+        understand about the firm, and what we propose to build before any
+        deliverable is touched.
       </p>
       <p class="lede" data-show="ar">
-        ثلاث صفحات من قراءةٍ متأنّية. الأساس، البوصلة، التسليم. تَحمل، مجتمعةً،
-        ما فهمناه عن الشركة — وما نقترح بناءه قبل أن نبدأ بأوّل مُخرَج.
+        ثلاث صفحات: الأساس، البوصلة، التسليم. تعرض ما فهمناه عن الشركة، وما
+        نقترح بناءه قبل البدء بأي مُخرَجات.
       </p>
 
       <a class="enter" href="client/foundation.html">
         <span data-show="en">Begin with Foundation</span>
-        <span data-show="ar">ابدأ بالأساس</span>
+        <span data-show="ar">نبدأ بالأساس</span>
         <span class="enter-arr">→</span>
       </a>
     </div>
 
     <div class="seal">
       <span data-show="en">Phase 0 · 01 of 03 · Private</span>
-      <span data-show="ar">المرحلة صفر · ٠١ من ٠٣ · خاص</span>
+      <span data-show="ar">المرحلة صفر · 01 من 03 · خاص</span>
     </div>
 
     <script>
@@ -480,7 +421,7 @@
             root.getAttribute("data-theme") === "dark" ? "light" : "dark",
           );
         });
-        applyTheme(root.getAttribute("data-theme") || "light");
+        applyTheme(root.getAttribute("data-theme") || "dark");
       })();
     </script>
   </body>

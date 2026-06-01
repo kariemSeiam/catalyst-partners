@@ -10,149 +10,47 @@
     <title>كاتاليست بارتنرز — التسليم</title>
 
     <script>
-      (function () {
-        try {
-          var l = localStorage.getItem("cp_lang") || "ar";
-          var t = localStorage.getItem("cp_theme");
-          if (!t)
-            t = window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
-          var h = document.documentElement;
-          h.lang = l === "en" ? "en" : "ar";
-          h.dir = l === "en" ? "ltr" : "rtl";
-          h.setAttribute("data-theme", t);
-          h.setAttribute("data-lang", l);
-        } catch (e) {}
-      })();
-    </script>
+// Pre-paint: apply stored lang + theme so first frame is never wrong.
+(function(){
+  try {
+    var l = localStorage.getItem("cp_lang") || "ar";
+    var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
+    var h = document.documentElement;
+    h.lang = l === "en" ? "en" : "ar";
+    h.dir = l === "en" ? "ltr" : "rtl";
+    h.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    h.setAttribute("data-lang", l);
+  } catch(e){}
+})();
+</script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+<link rel="preload" href="../fonts/400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../fonts/700.woff2" as="font" type="font/woff2" crossorigin />
 
-    <style>
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 300;
-        font-display: swap;
-        src: url("../fonts/300.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 400;
-        font-display: swap;
-        src: url("../fonts/400.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 500;
-        font-display: swap;
-        src: url("../fonts/500.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 600;
-        font-display: swap;
-        src: url("../fonts/600.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 700;
-        font-display: swap;
-        src: url("../fonts/700.woff2") format("woff2");
-      }
+<link rel="stylesheet" href="../site/system.css" />
 
-      :root {
-        --paper: #f4efe5;
-        --paper-2: #ebe5d6;
-        --card: #fbf7ed;
-        --ink: #161311;
-        --ink-2: #3b3733;
-        --mute: #6e665c;
-        --hair: #d7cfbe;
-        --bronze: #8c6e3d;
-        --bronze-2: #6e5630;
-        --rule: #1614120f;
-        --sx: clamp(20px, 4vw, 40px);
-        --col: min(680px, 92vw);
-        --col-wide: min(960px, 94vw);
-        --serif: "Instrument Serif", ui-serif, Georgia, serif;
-        --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-        --mono: "JetBrains Mono", ui-monospace, monospace;
-        --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-        --nav-h: 56px;
-        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-        --wa: #25d366;
-        --wa-2: #1da856;
-      }
-      [data-theme="dark"] {
-        --paper: #141210;
-        --paper-2: #1c1916;
-        --card: #1e1b17;
-        --ink: #ede8df;
-        --ink-2: #b8b0a4;
-        --mute: #7a7166;
-        --hair: #2e2a25;
-        --bronze: #a8854d;
-        --bronze-2: #c49a58;
-        --rule: #ffffff0a;
-        --wa: #2eba62;
-        --wa-2: #39d370;
-      }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: calc(var(--nav-h) + 24px);
-      }
-      html[data-lang="en"] [data-show="ar"] {
-        display: none;
-      }
-      html[data-lang="ar"] [data-show="en"] {
-        display: none;
-      }
-      html[data-lang="en"] body {
-        font-family: var(--sans);
-      }
-      html[data-lang="ar"] body {
-        font-family: var(--ar);
-      }
+<style>
+/* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
+html { scroll-behavior: smooth; }
 
-      body {
-        color: var(--ink);
-        background:
-          radial-gradient(
-            1200px 600px at 80% -10%,
-            var(--paper-2) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 500px at -10% 110%,
-            var(--paper-2) 0%,
-            transparent 60%
-          ),
-          var(--paper);
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
-        line-height: 1.7;
-        font-size: 16px;
-      }
-      html[data-lang="ar"] body {
-        line-height: 1.85;
-        font-size: 17px;
-      }
-      ::selection {
-        background: #8c6e3d33;
-        color: var(--ink);
-      }
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, var(--paper-2) 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, var(--paper-2) 0%, transparent 60%),
+    var(--paper);
+  min-height: 100vh;
+}
+
+.en { display: inline; }
+.ar { display: none; }
+[dir="rtl"] .en { display: none; }
+[dir="rtl"] .ar { display: inline; }
+
 
       .masthead {
         position: sticky;
@@ -190,17 +88,17 @@
       }
       .wordmark {
         font-weight: 500;
-        font-size: 15px;
+        font-size: var(--t-5);
         letter-spacing: 0.01em;
         white-space: nowrap;
       }
       html[data-lang="ar"] .wordmark {
         font-weight: 600;
-        font-size: 16px;
+        font-size: var(--t-5);
       }
       .pagetag {
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: var(--t-7);
         text-transform: uppercase;
         letter-spacing: 0.18em;
         color: var(--mute);
@@ -211,7 +109,7 @@
       html[data-lang="ar"] .pagetag {
         font-family: var(--ar);
         letter-spacing: 0;
-        font-size: 11px;
+        font-size: var(--t-7);
         text-transform: none;
       }
 
@@ -228,7 +126,7 @@
         background: var(--card);
         overflow: hidden;
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
       }
       .lang-tog button {
         appearance: none;
@@ -287,7 +185,7 @@
 
       .eyebrow {
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--mute);
@@ -299,7 +197,7 @@
       html[data-lang="ar"] .eyebrow {
         font-family: var(--ar);
         letter-spacing: 0;
-        font-size: 13px;
+        font-size: var(--t-6);
         text-transform: none;
         color: var(--bronze-2);
       }
@@ -318,7 +216,7 @@
         font-family: var(--serif);
         font-weight: 400;
         font-style: italic;
-        font-size: clamp(40px, 6vw, 68px);
+        font-size: var(--t-display);
         line-height: 1.05;
         letter-spacing: -0.01em;
         color: var(--ink);
@@ -330,13 +228,13 @@
         font-weight: 300;
         line-height: 1.2;
         letter-spacing: 0;
-        font-size: clamp(36px, 5.5vw, 60px);
+        font-size: var(--t-1);
         max-width: 16ch;
       }
       .hero .lede {
         margin-top: 28px;
         max-width: var(--col);
-        font-size: clamp(17px, 2vw, 20px);
+        font-size: var(--t-4);
         color: var(--ink-2);
         line-height: 1.55;
       }
@@ -363,12 +261,12 @@
         flex-shrink: 0;
       }
       .track-banner-text {
-        font-size: 14.5px;
+        font-size: var(--t-6);
         color: var(--ink-2);
         line-height: 1.55;
       }
       html[data-lang="ar"] .track-banner-text {
-        font-size: 15.5px;
+        font-size: var(--t-5);
         line-height: 1.75;
       }
       .track-banner-text strong {
@@ -376,11 +274,11 @@
         font-weight: 500;
         display: block;
         margin-bottom: 2px;
-        font-size: 16px;
+        font-size: var(--t-5);
       }
       html[data-lang="ar"] .track-banner-text strong {
         font-weight: 600;
-        font-size: 17px;
+        font-size: var(--t-5);
       }
       .track-banner a {
         color: var(--bronze);
@@ -397,7 +295,7 @@
         font-family: var(--serif);
         font-weight: 400;
         font-style: italic;
-        font-size: clamp(28px, 3.6vw, 42px);
+        font-size: var(--t-2);
         line-height: 1.15;
         letter-spacing: -0.005em;
         max-width: 22ch;
@@ -407,13 +305,13 @@
         font-family: var(--ar);
         font-style: normal;
         font-weight: 400;
-        font-size: clamp(26px, 3.4vw, 38px);
+        font-size: var(--t-2);
         line-height: 1.3;
       }
       .section-sub {
         max-width: var(--col);
         color: var(--ink-2);
-        font-size: 17px;
+        font-size: var(--t-5);
         line-height: 1.65;
         margin-bottom: 40px;
       }
@@ -446,7 +344,7 @@
       .phase-mark {
         font-family: var(--serif);
         font-style: italic;
-        font-size: 48px;
+        font-size: var(--t-1);
         line-height: 1;
         color: var(--bronze);
         min-width: 60px;
@@ -454,14 +352,14 @@
       html[data-lang="ar"] .phase-mark {
         font-family: var(--mono);
         font-style: normal;
-        font-size: 32px;
+        font-size: var(--t-2);
       }
       .phase-body {
         min-width: 0;
       }
       .phase-name {
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--mute);
@@ -471,13 +369,13 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
       .phase h3 {
         font-family: var(--serif);
         font-style: italic;
         font-weight: 400;
-        font-size: clamp(22px, 2.6vw, 28px);
+        font-size: var(--t-3);
         line-height: 1.2;
         color: var(--ink);
         margin-bottom: 10px;
@@ -486,17 +384,17 @@
         font-family: var(--ar);
         font-style: normal;
         font-weight: 500;
-        font-size: clamp(21px, 2.4vw, 25px);
+        font-size: var(--t-3);
         line-height: 1.4;
       }
       .phase p {
         color: var(--ink-2);
-        font-size: 15.5px;
+        font-size: var(--t-5);
         line-height: 1.65;
         max-width: 60ch;
       }
       html[data-lang="ar"] .phase p {
-        font-size: 16.5px;
+        font-size: var(--t-5);
         line-height: 1.85;
       }
 
@@ -515,7 +413,7 @@
       }
       .deliver-label {
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: var(--t-7);
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--bronze-2);
@@ -525,7 +423,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12px;
+        font-size: var(--t-6);
       }
       .deliver ul {
         list-style: none;
@@ -535,14 +433,14 @@
         gap: 6px;
       }
       .deliver li {
-        font-size: 13.5px;
+        font-size: var(--t-6);
         color: var(--ink-2);
         line-height: 1.55;
         padding-inline-start: 14px;
         position: relative;
       }
       html[data-lang="ar"] .deliver li {
-        font-size: 14.5px;
+        font-size: var(--t-6);
         line-height: 1.75;
       }
       .deliver li::before {
@@ -579,7 +477,7 @@
       .own-h {
         font-family: var(--serif);
         font-style: italic;
-        font-size: 22px;
+        font-size: var(--t-3);
         line-height: 1.2;
         color: var(--ink);
       }
@@ -587,12 +485,12 @@
         font-family: var(--ar);
         font-style: normal;
         font-weight: 500;
-        font-size: 20px;
+        font-size: var(--t-3);
         line-height: 1.4;
       }
       .own-sub {
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--bronze-2);
@@ -601,7 +499,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
       .own ul {
         list-style: none;
@@ -612,14 +510,14 @@
         margin-top: 4px;
       }
       .own li {
-        font-size: 14px;
+        font-size: var(--t-6);
         color: var(--ink-2);
         line-height: 1.6;
         padding-inline-start: 16px;
         position: relative;
       }
       html[data-lang="ar"] .own li {
-        font-size: 15px;
+        font-size: var(--t-5);
         line-height: 1.8;
       }
       .own li::before {
@@ -653,11 +551,11 @@
         padding-inline-start: 48px;
         position: relative;
         color: var(--ink);
-        font-size: 16px;
+        font-size: var(--t-5);
         line-height: 1.65;
       }
       html[data-lang="ar"] .need li {
-        font-size: 17px;
+        font-size: var(--t-5);
         line-height: 1.85;
       }
       .need li::before {
@@ -666,7 +564,7 @@
         inset-inline-start: 0;
         top: 1px;
         font-family: var(--mono);
-        font-size: 13px;
+        font-size: var(--t-6);
         color: var(--bronze);
         border: 1px solid var(--bronze);
         border-radius: 50%;
@@ -682,10 +580,10 @@
         display: block;
         margin-top: 4px;
         color: var(--mute);
-        font-size: 13px;
+        font-size: var(--t-6);
       }
       html[data-lang="ar"] .need li small {
-        font-size: 14px;
+        font-size: var(--t-6);
       }
 
       /* Final CTA */
@@ -705,7 +603,7 @@
       }
       .final-eyebrow {
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.22em;
         text-transform: uppercase;
         opacity: 0.65;
@@ -714,14 +612,14 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
         opacity: 0.7;
       }
       .final h2 {
         font-family: var(--serif);
         font-style: italic;
         font-weight: 400;
-        font-size: clamp(28px, 4vw, 40px);
+        font-size: var(--t-2);
         line-height: 1.15;
         max-width: 18ch;
       }
@@ -729,17 +627,17 @@
         font-family: var(--ar);
         font-style: normal;
         font-weight: 400;
-        font-size: clamp(26px, 3.6vw, 36px);
+        font-size: var(--t-2);
         line-height: 1.3;
       }
       .final p {
-        font-size: 16px;
+        font-size: var(--t-5);
         line-height: 1.65;
         max-width: 54ch;
         opacity: 0.85;
       }
       html[data-lang="ar"] .final p {
-        font-size: 17px;
+        font-size: var(--t-5);
         line-height: 1.85;
       }
       .final-actions {
@@ -755,7 +653,7 @@
         padding: 14px 22px;
         border-radius: 999px;
         font: inherit;
-        font-size: 15px;
+        font-size: var(--t-5);
         font-weight: 500;
         display: inline-flex;
         align-items: center;
@@ -766,7 +664,7 @@
           background 0.2s;
       }
       html[data-lang="ar"] .final-btn {
-        font-size: 16px;
+        font-size: var(--t-5);
         font-weight: 600;
       }
       .final-btn:hover {
@@ -803,7 +701,7 @@
       .final-note {
         margin-top: 10px;
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         opacity: 0.55;
@@ -812,7 +710,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 13px;
+        font-size: var(--t-6);
       }
 
       /* Toast */
@@ -825,7 +723,7 @@
         color: var(--paper);
         padding: 12px 22px;
         border-radius: 999px;
-        font-size: 13.5px;
+        font-size: var(--t-6);
         opacity: 0;
         pointer-events: none;
         transition:
@@ -834,7 +732,7 @@
         z-index: 80;
       }
       html[data-lang="ar"] .toast {
-        font-size: 14.5px;
+        font-size: var(--t-6);
       }
       .toast.on {
         opacity: 1;
@@ -851,7 +749,7 @@
         gap: 14px;
         border-top: 1px solid var(--rule);
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         color: var(--mute);
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -860,7 +758,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
 
       .reveal {
@@ -954,10 +852,7 @@
           the line between us at each step.
         </p>
         <p class="lede" data-show="ar">
-          تُبنى كاتاليست بارتنرز على مراحل، لا على روزنامة. كل مرحلة تنتهي عند
-          بلوغها معيار الإتمام، لا عند مرور يومٍ على جدول زمني. الشكل أدناه يتبع
-          المسار الذي اخترتموه في "الأساس" — ما تتسلَّمونه، وما نطلبه منكم، وما
-          يَعبُر الخطّ بيننا في كل خطوة.
+          نبني كاتاليست بارتنرز على مراحل، لا على تواريخ. كل مرحلة تكتمل ببلوغ معيار إتمامها، لا بانتهاء جدول. الشكل أدناه يتبع المسار المختار في "الأساس": ما تتسلّمونه، ما نطلبه منكم، وما يَعبُر بيننا في كل خطوة.
         </p>
 
         <div class="track-banner" id="track-banner">
@@ -998,8 +893,7 @@
           one before is finished to the standard.
         </p>
         <p class="section-sub" data-show="ar">
-          كل مرحلة تنتهي بنهايةٍ واضحة. لا ندخل التالية قبل اكتمال سابقتها وفق
-          المعيار.
+          كل مرحلة تنتهي بمعيار واضح. لا ندخل التالية قبل اكتمال سابقتها وفق المعيار.
         </p>
 
         <div class="phases">
@@ -1022,9 +916,7 @@
                 a moving one.
               </p>
               <p data-show="ar">
-                تأكيدات البوصلة مُوقَّعة. الاسم العربي محسوم. النطاقات مُسجَّلة.
-                مساحة العلامة ومساحة المحتوى قائمتان. ينطلق العمل من نقطة بداية
-                ثابتة، لا متحرّكة.
+                تأكيدات البوصلة مُوقَّعة. الاسم العربي محسوم. النطاقات مُسجَّلة. مساحتا العلامة والمحتوى جاهزتان. ينطلق العمل من نقطة بداية ثابتة.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1087,10 +979,7 @@
                 it does not ship.
               </p>
               <p data-show="ar">
-                هوية ثنائية اللغة كاملة — شعار نصّي، رمز، منظومة، تطبيقات.
-                يُختبَر الشعار في السياقات التي عليه أن يجتازها: أغلفة العروض
-                الحكومية، عروض المديرين، LinkedIn بعرض ٥٦ بكسل، اللافتات بمترين.
-                إما أن ينجح في كل ذلك، أو لا يُسلَّم.
+                هوية ثنائية اللغة كاملة: شعار نصّي، رمز، منظومة، تطبيقات. يُختبَر الشعار في السياقات التي عليه اجتيازها: أغلفة العروض الحكومية، عروض المديرين، LinkedIn بعرض 56 بكسل، اللافتات بمترين. إما أن ينجح في كل ذلك، أو لا يُسلَّم.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1108,8 +997,7 @@
                       card, email signature, LinkedIn set
                     </li>
                     <li data-show="ar">
-                      قوالب: غلاف العروض، البريزنتيشن، بطاقة العمل، توقيع
-                      البريد، حزمة LinkedIn
+                      قوالب: غلاف العروض، العرض التقديمي، بطاقة العمل، توقيع البريد، حزمة LinkedIn
                     </li>
                   </ul>
                 </div>
@@ -1124,7 +1012,7 @@
                       second
                     </li>
                     <li data-show="ar">
-                      جولتا مراجعة مركّزتان — التوجّه أولًا، التهذيب ثانيًا
+                      جولتا مراجعة: التوجّه أولًا، التعديل ثانيًا
                     </li>
                     <li data-show="en">
                       A nominated reviewer for Arabic typography
@@ -1146,7 +1034,7 @@
               </div>
               <h3 data-show="en">A rhythm the firm can keep without strain.</h3>
               <h3 data-show="ar">
-                إيقاعٌ تستطيع الشركة المحافظة عليه دون عناء.
+                إيقاع تستطيع الشركة المحافظة عليه دون عناء.
               </h3>
               <p data-show="en">
                 An editorial system the partners can actually live with — a
@@ -1156,10 +1044,7 @@
                 rhythm.
               </p>
               <p data-show="ar">
-                منظومة تحريرية يقدر الشركاء على العيش معها فعلًا — إيقاع شهري
-                على LinkedIn بالعربية والإنجليزية، سلسلة رؤى فصلية، وهيكل
-                التقرير المرجعي حول الحوكمة. لا روزنامة محتوى تموت في الأسبوع
-                الثالث، بل إيقاع.
+                منظومة تحريرية يقدر الشركاء على الالتزام بها: إيقاع شهري على LinkedIn بالعربية والإنجليزية، سلسلة رؤى فصلية، وهيكل التقرير المرجعي حول الحوكمة. ليس جدول محتوى يتوقّف في الأسبوع الثالث، بل إيقاع مستدام.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
@@ -1220,7 +1105,7 @@
                 The site that earns trust before the first sentence is read.
               </h3>
               <h3 data-show="ar">
-                الموقع الذي يستحق الثقة قبل قراءة أوّل جملة.
+                موقع يستحق الثقة قبل قراءة أول جملة.
               </h3>
               <p data-show="en">
                 A bilingual website that treats Arabic and English as equals,
@@ -1230,10 +1115,7 @@
                 you, always. The architecture is the asset.
               </p>
               <p data-show="ar">
-                موقع ثنائي اللغة يَعدّ العربية والإنجليزية بمنزلة واحدة، يحتضن
-                التقرير المرجعي خلف استمارة استقطاب هادئة، ويُوجّه كل تواصل إلى
-                الشريك المعنيّ. مبنيّ بحيث يبقى كل مكوّن — المحتوى، البيانات،
-                التحليلات — ملكًا لكم، دائمًا. المعمار هو الأصل الحقيقي.
+                موقع ثنائي اللغة يعامل العربية والإنجليزية بمنزلة واحدة. يحتضن التقرير المرجعي خلف استمارة استقطاب هادئة، ويوجّه كل تواصل إلى الشريك المعنيّ. كل مكوّن — المحتوى، البيانات، التحليلات — يبقى ملكًا لكم. المعمار هو الأصل الحقيقي.
               </p>
               <div class="deliver">
                 <div class="deliver-col">

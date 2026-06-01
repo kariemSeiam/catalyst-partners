@@ -10,149 +10,47 @@
     <title>كاتاليست بارتنرز — البوصلة</title>
 
     <script>
-      (function () {
-        try {
-          var l = localStorage.getItem("cp_lang") || "ar";
-          var t = localStorage.getItem("cp_theme");
-          if (!t)
-            t = window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
-          var h = document.documentElement;
-          h.lang = l === "en" ? "en" : "ar";
-          h.dir = l === "en" ? "ltr" : "rtl";
-          h.setAttribute("data-theme", t);
-          h.setAttribute("data-lang", l);
-        } catch (e) {}
-      })();
-    </script>
+// Pre-paint: apply stored lang + theme so first frame is never wrong.
+(function(){
+  try {
+    var l = localStorage.getItem("cp_lang") || "ar";
+    var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
+    var h = document.documentElement;
+    h.lang = l === "en" ? "en" : "ar";
+    h.dir = l === "en" ? "ltr" : "rtl";
+    h.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    h.setAttribute("data-lang", l);
+  } catch(e){}
+})();
+</script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+<link rel="preload" href="../fonts/400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../fonts/700.woff2" as="font" type="font/woff2" crossorigin />
 
-    <style>
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 300;
-        font-display: swap;
-        src: url("../fonts/300.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 400;
-        font-display: swap;
-        src: url("../fonts/400.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 500;
-        font-display: swap;
-        src: url("../fonts/500.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 600;
-        font-display: swap;
-        src: url("../fonts/600.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 700;
-        font-display: swap;
-        src: url("../fonts/700.woff2") format("woff2");
-      }
+<link rel="stylesheet" href="../site/system.css" />
 
-      :root {
-        --paper: #f4efe5;
-        --paper-2: #ebe5d6;
-        --card: #fbf7ed;
-        --ink: #161311;
-        --ink-2: #3b3733;
-        --mute: #6e665c;
-        --hair: #d7cfbe;
-        --bronze: #8c6e3d;
-        --bronze-2: #6e5630;
-        --green: #3d6b52;
-        --green-bg: #3d6b5210;
-        --rule: #1614120f;
-        --sx: clamp(20px, 4vw, 40px);
-        --col: min(680px, 92vw);
-        --col-wide: min(960px, 94vw);
-        --serif: "Instrument Serif", ui-serif, Georgia, serif;
-        --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-        --mono: "JetBrains Mono", ui-monospace, monospace;
-        --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-        --nav-h: 56px;
-        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-      }
-      [data-theme="dark"] {
-        --paper: #141210;
-        --paper-2: #1c1916;
-        --card: #1e1b17;
-        --ink: #ede8df;
-        --ink-2: #b8b0a4;
-        --mute: #7a7166;
-        --hair: #2e2a25;
-        --bronze: #a8854d;
-        --bronze-2: #c49a58;
-        --green: #5a9e78;
-        --green-bg: #5a9e7814;
-        --rule: #ffffff0a;
-      }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: calc(var(--nav-h) + 24px);
-      }
-      html[data-lang="en"] [data-show="ar"] {
-        display: none;
-      }
-      html[data-lang="ar"] [data-show="en"] {
-        display: none;
-      }
-      html[data-lang="en"] body {
-        font-family: var(--sans);
-      }
-      html[data-lang="ar"] body {
-        font-family: var(--ar);
-      }
+<style>
+/* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
+html { scroll-behavior: smooth; }
 
-      body {
-        color: var(--ink);
-        background:
-          radial-gradient(
-            1200px 600px at 80% -10%,
-            var(--paper-2) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 500px at -10% 110%,
-            var(--paper-2) 0%,
-            transparent 60%
-          ),
-          var(--paper);
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
-        line-height: 1.7;
-        font-size: 16px;
-      }
-      html[data-lang="ar"] body {
-        line-height: 1.85;
-        font-size: 17px;
-      }
-      ::selection {
-        background: #8c6e3d33;
-        color: var(--ink);
-      }
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, var(--paper-2) 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, var(--paper-2) 0%, transparent 60%),
+    var(--paper);
+  min-height: 100vh;
+}
+
+.en { display: inline; }
+.ar { display: none; }
+[dir="rtl"] .en { display: none; }
+[dir="rtl"] .ar { display: inline; }
+
 
       .masthead {
         position: sticky;
@@ -190,17 +88,17 @@
       }
       .wordmark {
         font-weight: 500;
-        font-size: 15px;
+        font-size: var(--t-5);
         letter-spacing: 0.01em;
         white-space: nowrap;
       }
       html[data-lang="ar"] .wordmark {
         font-weight: 600;
-        font-size: 16px;
+        font-size: var(--t-5);
       }
       .pagetag {
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: var(--t-7);
         text-transform: uppercase;
         letter-spacing: 0.18em;
         color: var(--mute);
@@ -211,7 +109,7 @@
       html[data-lang="ar"] .pagetag {
         font-family: var(--ar);
         letter-spacing: 0;
-        font-size: 11px;
+        font-size: var(--t-7);
         text-transform: none;
       }
 
@@ -228,7 +126,7 @@
         background: var(--card);
         overflow: hidden;
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
       }
       .lang-tog button {
         appearance: none;
@@ -287,7 +185,7 @@
 
       .eyebrow {
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
         text-transform: uppercase;
         letter-spacing: 0.22em;
         color: var(--mute);
@@ -299,7 +197,7 @@
       html[data-lang="ar"] .eyebrow {
         font-family: var(--ar);
         letter-spacing: 0;
-        font-size: 13px;
+        font-size: var(--t-6);
         text-transform: none;
         color: var(--bronze-2);
       }
@@ -318,7 +216,7 @@
         font-family: var(--serif);
         font-weight: 400;
         font-style: italic;
-        font-size: clamp(40px, 6vw, 68px);
+        font-size: var(--t-display);
         line-height: 1.05;
         letter-spacing: -0.01em;
         color: var(--ink);
@@ -330,13 +228,13 @@
         font-weight: 300;
         line-height: 1.2;
         letter-spacing: 0;
-        font-size: clamp(36px, 5.5vw, 60px);
+        font-size: var(--t-1);
         max-width: 16ch;
       }
       .hero .lede {
         margin-top: 28px;
         max-width: var(--col);
-        font-size: clamp(17px, 2vw, 20px);
+        font-size: var(--t-4);
         color: var(--ink-2);
         line-height: 1.55;
       }
@@ -349,14 +247,14 @@
         flex-wrap: wrap;
         gap: 24px;
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
         color: var(--mute);
         letter-spacing: 0.1em;
         text-transform: uppercase;
       }
       html[data-lang="ar"] .hero .meta {
         font-family: var(--ar);
-        font-size: 13px;
+        font-size: var(--t-6);
         letter-spacing: 0;
         text-transform: none;
       }
@@ -389,8 +287,8 @@
         position: relative;
       }
       .claim[data-state="agreed"] {
-        border-color: var(--green);
-        background: linear-gradient(180deg, var(--green-bg), var(--card) 60%);
+        border-color: var(--sage);
+        background: linear-gradient(180deg, var(--sage-bg), var(--card) 60%);
       }
       .claim[data-state="refined"] {
         border-color: var(--bronze);
@@ -410,7 +308,7 @@
       }
       .claim-id {
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: var(--t-7);
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--bronze-2);
@@ -419,11 +317,11 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 13px;
+        font-size: var(--t-6);
       }
       .claim-state {
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: var(--t-7);
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--mute);
@@ -436,11 +334,11 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12px;
+        font-size: var(--t-6);
       }
       .claim[data-state="agreed"] .claim-state {
-        color: var(--green);
-        border-color: var(--green);
+        color: var(--sage);
+        border-color: var(--sage);
       }
       .claim[data-state="refined"] .claim-state {
         color: var(--bronze);
@@ -452,7 +350,7 @@
         font-family: var(--serif);
         font-style: italic;
         font-weight: 400;
-        font-size: clamp(24px, 3vw, 32px);
+        font-size: var(--t-2);
         line-height: 1.2;
         color: var(--ink);
         max-width: 30ch;
@@ -461,25 +359,25 @@
         font-family: var(--ar);
         font-style: normal;
         font-weight: 500;
-        font-size: clamp(22px, 2.8vw, 28px);
+        font-size: var(--t-3);
         line-height: 1.4;
       }
       .claim p.body {
         margin-top: 14px;
         color: var(--ink-2);
         max-width: 62ch;
-        font-size: 16px;
+        font-size: var(--t-5);
         line-height: 1.65;
       }
       html[data-lang="ar"] .claim p.body {
-        font-size: 16.5px;
+        font-size: var(--t-5);
         line-height: 1.85;
       }
       .claim small.cite {
         display: block;
         margin-top: 14px;
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--mute);
@@ -488,7 +386,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
 
       .claim-actions {
@@ -504,7 +402,7 @@
         background: var(--paper);
         color: var(--ink-2);
         font-family: var(--mono);
-        font-size: 11.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         padding: 10px 18px;
@@ -520,16 +418,16 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 14px;
+        font-size: var(--t-6);
       }
       .act:hover {
         border-color: var(--ink);
         color: var(--ink);
       }
       .act[data-on="true"][data-type="agree"] {
-        background: var(--green);
+        background: var(--sage);
         color: #fff;
-        border-color: var(--green);
+        border-color: var(--sage);
       }
       .act[data-on="true"][data-type="refine"] {
         background: var(--bronze);
@@ -558,7 +456,7 @@
       }
       html[data-lang="ar"] .refine-panel textarea {
         font-family: var(--ar);
-        font-size: 16px;
+        font-size: var(--t-5);
         line-height: 1.85;
       }
       .refine-panel textarea:focus {
@@ -568,7 +466,7 @@
       .refine-help {
         margin-top: 8px;
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--mute);
@@ -577,7 +475,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
 
       /* Inline Arabic-name choice (claim 03) */
@@ -623,7 +521,7 @@
       }
       .name-opt-label {
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: var(--t-7);
         letter-spacing: 0.18em;
         text-transform: uppercase;
         color: var(--mute);
@@ -632,23 +530,23 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12px;
+        font-size: var(--t-6);
       }
       .name-opt-ar {
         font-family: var(--ar);
-        font-size: 24px;
+        font-size: var(--t-3);
         font-weight: 500;
         color: var(--ink);
         direction: rtl;
         text-align: start;
       }
       .name-opt-note {
-        font-size: 13px;
+        font-size: var(--t-6);
         color: var(--ink-2);
         line-height: 1.6;
       }
       html[data-lang="ar"] .name-opt-note {
-        font-size: 14.5px;
+        font-size: var(--t-6);
         line-height: 1.8;
       }
 
@@ -671,11 +569,11 @@
         flex-shrink: 0;
       }
       .scope-mirror-text {
-        font-size: 14.5px;
+        font-size: var(--t-6);
         color: var(--ink-2);
       }
       html[data-lang="ar"] .scope-mirror-text {
-        font-size: 15.5px;
+        font-size: var(--t-5);
       }
       .scope-mirror-text strong {
         color: var(--ink);
@@ -705,7 +603,7 @@
       }
       .summary-title {
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--mute);
@@ -715,7 +613,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 13px;
+        font-size: var(--t-6);
       }
       .summary-grid {
         display: grid;
@@ -735,10 +633,10 @@
         background: var(--paper);
         border: 1px solid var(--hair);
         border-radius: 10px;
-        font-size: 14px;
+        font-size: var(--t-6);
       }
       html[data-lang="ar"] .summary-row {
-        font-size: 15px;
+        font-size: var(--t-5);
       }
       .summary-dot {
         width: 8px;
@@ -748,7 +646,7 @@
         flex-shrink: 0;
       }
       .summary-row[data-state="agreed"] .summary-dot {
-        background: var(--green);
+        background: var(--sage);
       }
       .summary-row[data-state="refined"] .summary-dot {
         background: var(--bronze);
@@ -791,7 +689,7 @@
       }
       .nextcta-eyebrow {
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         letter-spacing: 0.2em;
         text-transform: uppercase;
         opacity: 0.6;
@@ -800,23 +698,23 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
       .nextcta-h {
         font-family: var(--serif);
         font-style: italic;
-        font-size: 22px;
+        font-size: var(--t-3);
         line-height: 1.15;
       }
       html[data-lang="ar"] .nextcta-h {
         font-family: var(--ar);
         font-style: normal;
         font-weight: 500;
-        font-size: 20px;
+        font-size: var(--t-3);
       }
       .nextcta-arr {
         font-family: var(--serif);
-        font-size: 32px;
+        font-size: var(--t-2);
         line-height: 1;
         opacity: 0.9;
       }
@@ -836,7 +734,7 @@
         gap: 14px;
         border-top: 1px solid var(--rule);
         font-family: var(--mono);
-        font-size: 10.5px;
+        font-size: var(--t-7);
         color: var(--mute);
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -845,7 +743,7 @@
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
-        font-size: 12.5px;
+        font-size: var(--t-6);
       }
 
       .reveal {
@@ -926,7 +824,7 @@
           <span data-show="ar">هل قرأناكم بصورةٍ صحيحة؟</span>
         </div>
         <h1 data-show="en">Four readings. Confirm or refine.</h1>
-        <h1 data-show="ar">أربع قراءات. أكِّدوا أو هذِّبوا.</h1>
+        <h1 data-show="ar">أربع قراءات. للتأكيد أو التعديل.</h1>
         <p class="lede" data-show="en">
           We made four readings about Catalyst — about the position, the entry
           segment, the name in Arabic, and the moment to begin. Each one carries
@@ -934,9 +832,7 @@
           each, or write back where we should sharpen it.
         </p>
         <p class="lede" data-show="ar">
-          اتّخذنا أربع قراءات عن كاتاليست — في التموضع، في القطاع الأول، في
-          الاسم العربي، وفي لحظة البدء. كلٌّ منها يحمل أثرًا حقيقيًا فيما يليه
-          من عمل. نطلب منكم تأكيد كل قراءةٍ، أو كتابة ما يلزم تهذيبه.
+          أربع قراءات: التموضع، القطاع الأول، الاسم العربي، لحظة البدء. كل قراءة تؤثّر في ما يليها. نطلب تأكيد كل قراءة، أو تدوين ما يلزم تعديله.
         </p>
         <div class="hero .meta meta">
           <span data-show="en">Foundation → Compass → Handoff</span>
@@ -970,8 +866,7 @@
               restructuring grow around the right partner.
             </h2>
             <h2 data-show="ar">
-              ابدأوا بالتحوّل المؤسسي. ودَعوا إعادة الهيكلة المالية تنمو حول
-              الشريك الصحيح.
+              نوصي بالبدء بالتحوّل المؤسسي. إعادة الهيكلة المالية تنضمّ لاحقًا، عند انضمام الشريك المناسب.
             </h2>
             <p class="body" data-show="en">
               Your brief lists both halves of the work. The market evidence —
@@ -983,11 +878,7 @@
               referenceable track record sits at the table.
             </p>
             <p class="body" data-show="ar">
-              يَذكر الموجز شِقَّي العمل معًا. لكن قراءة السوق — ومجال القوّة
-              الموثَّق في فريق الشركاء اليوم — تقترح أن يكون الصدر للشِق
-              المؤسسي: الحوكمة، الإشراف على البرامج، الأداء، التحوّل، مع طبقة
-              تسليم رقمية تُحدث الفارق. تبقى إعادة الهيكلة المالية ضمن العرض،
-              إلا أنها لا تتصدّر المحادثة حتى يجلس على الطاولة شريكٌ ماليٌ
+              يذكر الموجز الشقّين معًا. تشير قراءة السوق، والكفاءات الموثّقة في فريق الشركاء، إلى التركيز على الشق المؤسسي: الحوكمة، الإشراف على البرامج، الأداء، التحوّل، مع طبقة تسليم رقمية تُحدث الفارق. تبقى إعادة الهيكلة المالية ضمن العرض، إنّما لا تتصدّر المحادثة حتى يجلس على الطاولة شريكٌ ماليٌ
               بسجلٍّ معتمد.
             </p>
             <small class="cite" data-show="en"
@@ -996,9 +887,7 @@
               practice.</small
             >
             <small class="cite" data-show="ar"
-              >المرجع: مسح A&amp;M للتحوّل في الشرق الأوسط، الربع الثاني ٢٠٢٣ —
-              ٧٣٪ يطلبون الشِقَّين معًا، وأقل من ربعهم يَرى ذلك يتحقق
-              فعليًا.</small
+              >المرجع: مسح A&amp;M للتحوّل في الشرق الأوسط، الربع الثاني 2023 — 73% يطلبون الشقّين معًا، أقل من 25% يرونه يتحقّق فعليًا.</small
             >
             <div class="claim-actions">
               <button class="act" data-type="agree" type="button">
@@ -1038,8 +927,7 @@
               front. Banks and investors are reached through both.
             </h2>
             <h2 data-show="ar">
-              الشركات العائلية هي المدخل. الجهات شبه الحكومية هي الجبهة الثانية.
-              البنوك والمستثمرون يُوصَل إليهم عبر الاثنتين.
+              الشركات العائلية: المدخل. الجهات شبه الحكومية: الجبهة الثانية. البنوك والمستثمرون: نصل إليهم عبر الاثنتين.
             </h2>
             <p class="body" data-show="en">
               Roughly 60% of UAE GDP sits inside family enterprises.
@@ -1068,9 +956,7 @@
               Julius Baer (Jan 2025).</small
             >
             <small class="cite" data-show="ar"
-              >المراجع: وزارة الاقتصاد والسياحة الإماراتية (نوفمبر ٢٠٢٥)؛ مسح
-              PwC للشركات العائلية في الشرق الأوسط ٢٠٢١؛ مركز ابتكار DIFC مع
-              جوليوس باير (يناير ٢٠٢٥).</small
+              >المراجع: وزارة الاقتصاد والسياحة الإماراتية (نوفمبر 2025)؛ مسح PwC للشركات العائلية في الشرق الأوسط 2021؛ مركز ابتكار DIFC مع جوليوس باير (يناير 2025).</small
             >
             <div class="claim-actions">
               <button class="act" data-type="agree" type="button">
@@ -1090,8 +976,7 @@
                   differently.</span
                 >
                 <span data-show="ar"
-                  >أخبرونا بالقطاع الذي ترغبون به أولًا، أو الذي تَودّون ترتيبه
-                  على نحوٍ آخر.</span
+                  >نرجو تحديد القطاع الأول، أو إعادة ترتيب القطاعات إن لزم.</span
                 >
               </div>
             </div>
@@ -1114,8 +999,7 @@
               Arabic. We recommend the transliteration; the choice is yours.
             </h2>
             <h2 data-show="ar">
-              النقل الصوتي أسرع. الاسم المُترجَم يحمل أكثر بالعربية. نُوصي
-              بالنقل الصوتي، والقرار قراركم.
+              النقل الصوتي أسرع. الاسم المُترجَم أعمق في العربية. نوصي بالنقل الصوتي. القرار قراركم.
             </h2>
             <p class="body" data-show="en">
               The logo cannot be designed in earnest until this is decided. A
@@ -1127,11 +1011,7 @@
               equal weight in every layout.
             </p>
             <p class="body" data-show="ar">
-              لا يمكن تصميم الشعار بجدّية قبل البتّ في هذا. النقل الصوتي
-              ("كاتاليست بارتنرز") يُبقي العلامة الإنجليزية مألوفةً في اللغتين —
-              خيارٌ أسلم وأكثر دوليّة. أما الاسم المُترجَم ("شركاء التحوّل" أو
-              ما يشابه) فيحمل صدًى أعمق لدى العملاء الحكوميين الناطقين بالعربية،
-              لكنّه يُغيِّر معمارية العلامة؛ إذ على الاسمين عندئذٍ أن يحملا
+              لا يمكن تصميم الشعار قبل حسم هذا. النقل الصوتي ("كاتاليست بارتنرز") يُبقي العلامة موحَّدة بين اللغتين — أسلم وأكثر دوليّة. الاسم المُترجَم ("شركاء التحوّل" أو ما يماثله) أقرب للعملاء الحكوميين الناطقين بالعربية، لكنّه يُغيِّر معمارية العلامة؛ إذ على الاسمين عندئذٍ أن يحملا
               الثقل ذاته في كل تصميم.
             </p>
 
@@ -1147,7 +1027,7 @@
                   ready to design.</span
                 >
                 <span class="name-opt-note" data-show="ar"
-                  >نقل صوتي. دولي، مألوف في الأسواق، جاهز للتصميم.</span
+                  >نقل صوتي: دولي، مألوف في الأسواق، جاهز للتصميم.</span
                 >
               </button>
               <button class="name-opt" data-name="translated" type="button">
@@ -1159,8 +1039,7 @@
                   parallel wordmark and a dedicated naming round.</span
                 >
                 <span class="name-opt-note" data-show="ar"
-                  >اسمٌ عربي مُترجَم. صدى أقوى؛ يستلزم شعارًا عربيًا موازيًا
-                  وجولة تسمية مخصّصة.</span
+                  >اسم عربي مُترجَم: صدى أقوى، يستلزم شعارًا عربيًا موازيًا وجولة تسمية مخصّصة.</span
                 >
               </button>
             </div>
@@ -1183,7 +1062,7 @@
                   consider.</span
                 >
                 <span data-show="ar"
-                  >اكتب الاسم العربي المُقترَح — أو أسماءً للنظر فيها.</span
+                  >الاسم العربي المُقترَح — أو أسماء للنظر فيها.</span
                 >
               </div>
             </div>
@@ -1206,7 +1085,7 @@
               step back and change it.
             </h2>
             <h2 data-show="ar">
-              ننقل اختياركم من "الأساس" — أكِّدوه هنا، أو ارجعوا وغيِّروه.
+              ننقل اختياركم من "الأساس". نرجو تأكيده هنا، أو الرجوع وتعديله.
             </h2>
             <p class="body" data-show="en">
               The track you marked on the previous page sets the shape of
@@ -1216,10 +1095,7 @@
               have seen the full reading.
             </p>
             <p class="body" data-show="ar">
-              المسار الذي اخترتموه في الصفحة السابقة يُحدِّد شكل كل ما يليه: ما
-              المُخرَجات التي تدخل المرحلة الأولى، كيف يُرَتَّب إيقاع العمل، وما
-              الذي نحتاجه منكم قبل البدء. أكِّدوا أن الاختيار لا يزال صحيحًا،
-              بعد أن قرأتم الصورة كاملة.
+              المسار المختار في الصفحة السابقة يُحدّد شكل ما يليه: المُخرَجات التي تدخل المرحلة الأولى، ترتيب إيقاع العمل، وما يلزم منكم قبل البدء. نرجو تأكيد بقاء الاختيار صحيحًا، بعد قراءة الصورة كاملة.
             </p>
             <div class="scope-mirror">
               <span class="scope-mirror-dot"></span>

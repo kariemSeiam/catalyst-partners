@@ -1,1686 +1,1481 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>كاتاليست بارتنرز — الفهم</title>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>كاتاليست بارتنرز — الأساس</title>
 
-    <script>
-      (function () {
-        try {
-          var l = localStorage.getItem("cp_lang") || "ar";
-          var t = localStorage.getItem("cp_theme");
-          if (!t)
-            t = window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
-          var h = document.documentElement;
-          h.lang = l === "en" ? "en" : "ar";
-          h.dir = l === "en" ? "ltr" : "rtl";
-          h.setAttribute("data-theme", t);
-          h.setAttribute("data-lang", l);
-        } catch (e) {}
-      })();
-    </script>
+<script>
+// Pre-paint: apply stored lang + theme so first frame is never wrong.
+(function(){
+  try {
+    var l = localStorage.getItem("cp_lang") || "ar";
+    var t = localStorage.getItem("cp_theme") || "dark"; // default-dark, private night-read
+    document.documentElement.lang = l === "en" ? "en" : "ar";
+    document.documentElement.dir = l === "en" ? "ltr" : "rtl";
+    document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+  } catch(e){}
+})();
+</script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+<link rel="preload" href="../fonts/400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="../fonts/700.woff2" as="font" type="font/woff2" crossorigin />
 
-    <style>
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 300;
-        font-display: swap;
-        src: url("../fonts/300.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 400;
-        font-display: swap;
-        src: url("../fonts/400.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 500;
-        font-display: swap;
-        src: url("../fonts/500.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 600;
-        font-display: swap;
-        src: url("../fonts/600.woff2") format("woff2");
-      }
-      @font-face {
-        font-family: "IBM Plex Sans Arabic";
-        font-weight: 700;
-        font-display: swap;
-        src: url("../fonts/700.woff2") format("woff2");
-      }
+<link rel="stylesheet" href="../site/system.css" />
 
-      :root {
-        --paper: #f4efe5;
-        --paper-2: #ebe5d6;
-        --card: #fbf7ed;
-        --ink: #161311;
-        --ink-2: #3b3733;
-        --mute: #6e665c;
-        --hair: #d7cfbe;
-        --bronze: #8c6e3d;
-        --bronze-2: #6e5630;
-        --rule: #1614120f;
-        --sx: clamp(20px, 4vw, 40px);
-        --col: min(680px, 92vw);
-        --col-wide: min(960px, 94vw);
-        --serif: "Instrument Serif", ui-serif, Georgia, serif;
-        --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-        --mono: "JetBrains Mono", ui-monospace, monospace;
-        --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-        --nav-h: 56px;
-        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-      }
-      [data-theme="dark"] {
-        --paper: #141210;
-        --paper-2: #1c1916;
-        --card: #1e1b17;
-        --ink: #ede8df;
-        --ink-2: #b8b0a4;
-        --mute: #7a7166;
-        --hair: #2e2a25;
-        --bronze: #a8854d;
-        --bronze-2: #c49a58;
-        --rule: #ffffff0a;
-      }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: calc(var(--nav-h) + 24px);
-      }
-      html[data-lang="en"] [data-show="ar"] {
-        display: none;
-      }
-      html[data-lang="ar"] [data-show="en"] {
-        display: none;
-      }
-      html[data-lang="en"] body {
-        font-family: var(--sans);
-      }
-      html[data-lang="ar"] body {
-        font-family: var(--ar);
-      }
+<style>
+/* Page-only CSS — design tokens, type scale, AR @font-face all live in site/system.css. */
+html { scroll-behavior: smooth; }
 
-      body {
-        color: var(--ink);
-        background:
-          radial-gradient(
-            1200px 600px at 80% -10%,
-            var(--paper-2) 0%,
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 500px at -10% 110%,
-            var(--paper-2) 0%,
-            transparent 60%
-          ),
-          var(--paper);
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
-        line-height: 1.7;
-        font-size: 16px;
-      }
-      html[data-lang="ar"] body {
-        line-height: 1.85;
-        font-size: 17px;
-      }
-      ::selection {
-        background: #8c6e3d33;
-        color: var(--ink);
-      }
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, var(--paper-2) 0%, transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, var(--paper-2) 0%, transparent 60%),
+    var(--paper);
+  min-height: 100vh;
+}
 
-      /* Masthead */
-      .masthead {
-        position: sticky;
-        top: 0;
-        z-index: 60;
-        background: color-mix(in oklab, var(--paper) 88%, transparent);
-        backdrop-filter: saturate(1.2) blur(10px);
-        border-bottom: 1px solid var(--hair);
-      }
-      .masthead-row {
-        max-width: var(--col-wide);
-        margin: 0 auto;
-        padding: 14px var(--sx);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        min-height: var(--nav-h);
-      }
-      .markline {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 0;
-      }
-      .glyph {
-        width: 22px;
-        height: 22px;
-        color: var(--bronze);
-        flex-shrink: 0;
-        transition: transform 0.6s var(--ease);
-      }
-      .markline:hover .glyph {
-        transform: rotate(45deg);
-      }
-      .wordmark {
-        font-weight: 500;
-        font-size: 15px;
-        letter-spacing: 0.01em;
-        white-space: nowrap;
-      }
-      html[data-lang="ar"] .wordmark {
-        font-weight: 600;
-        font-size: 16px;
-      }
-      .pagetag {
-        font-family: var(--mono);
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        color: var(--mute);
-        padding: 4px 10px;
-        border: 1px solid var(--hair);
-        border-radius: 999px;
-      }
-      html[data-lang="ar"] .pagetag {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        font-size: 11px;
-        text-transform: none;
-      }
+.en { display: inline; }
+.ar { display: none; }
+[dir="rtl"] .en { display: none; }
+[dir="rtl"] .ar { display: inline; }
 
-      .controls {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .lang-tog {
-        display: flex;
-        align-items: center;
-        border: 1px solid var(--hair);
-        border-radius: 999px;
-        background: var(--card);
-        overflow: hidden;
-        font-family: var(--mono);
-        font-size: 11px;
-      }
-      .lang-tog button {
-        appearance: none;
-        border: 0;
-        background: transparent;
-        color: var(--mute);
-        padding: 7px 12px;
-        cursor: pointer;
-        letter-spacing: 0.06em;
-      }
-      .lang-tog button.on {
-        background: var(--ink);
-        color: var(--paper);
-      }
-      .theme-btn {
-        appearance: none;
-        border: 1px solid var(--hair);
-        background: var(--card);
-        color: var(--mute);
-        cursor: pointer;
-        border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        display: grid;
-        place-items: center;
-        transition:
-          color 0.2s,
-          border-color 0.2s;
-      }
-      .theme-btn:hover {
-        color: var(--bronze);
-        border-color: var(--bronze);
-      }
-      .theme-btn svg {
-        width: 16px;
-        height: 16px;
-      }
 
-      /* Layout */
-      main {
-        max-width: var(--col-wide);
-        margin: 0 auto;
-        padding: 0 var(--sx);
-      }
-      section {
-        padding: 72px 0;
-        border-bottom: 1px solid var(--rule);
-      }
-      section:last-of-type {
-        border-bottom: 0;
-      }
-      @media (max-width: 680px) {
-        section {
-          padding: 56px 0;
-        }
-      }
+.en { display: inline; }
+.ar { display: none; }
+[dir="rtl"] .en { display: none; }
+[dir="rtl"] .ar { display: inline; }
 
-      /* Section label */
-      .eyebrow {
-        font-family: var(--mono);
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.22em;
-        color: var(--mute);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 18px;
-      }
-      html[data-lang="ar"] .eyebrow {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        font-size: 13px;
-        text-transform: none;
-        color: var(--bronze-2);
-      }
-      .eyebrow::before {
-        content: "";
-        width: 18px;
-        height: 1px;
-        background: var(--bronze);
-      }
+/* ─────────────────────────────────────────────────────────────
+   MASTHEAD
+───────────────────────────────────────────────────────────── */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter: saturate(1.2) blur(10px);
+  border-bottom: 1px solid var(--hair);
+}
 
-      /* Hero */
-      .hero {
-        padding: 96px 0 80px;
-        border-bottom: 1px solid var(--rule);
-      }
-      .hero h1 {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-style: italic;
-        font-size: clamp(40px, 6vw, 68px);
-        line-height: 1.05;
-        letter-spacing: -0.01em;
-        color: var(--ink);
-        max-width: 14ch;
-      }
-      html[data-lang="ar"] .hero h1 {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 300;
-        line-height: 1.2;
-        letter-spacing: 0;
-        font-size: clamp(36px, 5.5vw, 60px);
-        max-width: 16ch;
-      }
-      .hero .lede {
-        margin-top: 28px;
-        max-width: var(--col);
-        font-size: clamp(17px, 2vw, 20px);
-        color: var(--ink-2);
-        line-height: 1.55;
-      }
-      html[data-lang="ar"] .hero .lede {
-        line-height: 1.85;
-        font-size: clamp(17px, 2vw, 20px);
-      }
-      .hero .meta {
-        margin-top: 36px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--mute);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      html[data-lang="ar"] .hero .meta {
-        font-family: var(--ar);
-        font-size: 13px;
-        letter-spacing: 0;
-        text-transform: none;
-      }
-      .hero .meta span {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .hero .meta span::before {
-        content: "";
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background: var(--bronze);
-      }
+.masthead-inner {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 12px var(--sx);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 52px;
+}
 
-      /* Section heading */
-      h2.section-h {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-style: italic;
-        font-size: clamp(28px, 3.6vw, 42px);
-        line-height: 1.15;
-        letter-spacing: -0.005em;
-        max-width: 22ch;
-        margin-bottom: 14px;
-      }
-      html[data-lang="ar"] h2.section-h {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 400;
-        font-size: clamp(26px, 3.4vw, 38px);
-        line-height: 1.3;
-      }
-      .section-sub {
-        max-width: var(--col);
-        color: var(--ink-2);
-        font-size: 17px;
-        line-height: 1.65;
-        margin-bottom: 40px;
-      }
-      html[data-lang="ar"] .section-sub {
-        line-height: 1.85;
-      }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-      /* The brief — mirrored */
-      .mirror {
-        background: var(--card);
-        border: 1px solid var(--hair);
-        border-radius: 14px;
-        padding: 36px clamp(24px, 4vw, 40px);
-        margin-top: 8px;
-      }
-      .mirror-label {
-        font-family: var(--mono);
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.22em;
-        color: var(--mute);
-        margin-bottom: 12px;
-      }
-      html[data-lang="ar"] .mirror-label {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12px;
-      }
-      .mirror p {
-        font-family: var(--serif);
-        font-style: italic;
-        font-weight: 400;
-        font-size: clamp(20px, 2.4vw, 26px);
-        line-height: 1.4;
-        color: var(--ink);
-        max-width: 42ch;
-      }
-      html[data-lang="ar"] .mirror p {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 400;
-        font-size: clamp(19px, 2.2vw, 23px);
-        line-height: 1.7;
-      }
-      .mirror cite {
-        display: block;
-        margin-top: 18px;
-        font-style: normal;
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--mute);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-      html[data-lang="ar"] .mirror cite {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 13px;
-      }
+.glyph {
+  width: 22px;
+  height: 22px;
+  color: var(--bronze);
+  flex-shrink: 0;
+  transition: transform 0.6s var(--ease);
+}
 
-      /* Pillars grid (services as we read them) */
-      .pillars {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: var(--hair);
-        border: 1px solid var(--hair);
-        border-radius: 14px;
-        overflow: hidden;
-        margin-top: 36px;
-      }
-      @media (max-width: 780px) {
-        .pillars {
-          grid-template-columns: 1fr;
-        }
-      }
-      .pillar {
-        background: var(--paper);
-        padding: 28px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        min-height: 200px;
-      }
-      .pillar-num {
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--bronze);
-        letter-spacing: 0.18em;
-      }
-      html[data-lang="ar"] .pillar-num {
-        font-family: var(--mono);
-      }
-      .pillar h3 {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-style: italic;
-        font-size: 22px;
-        line-height: 1.2;
-        color: var(--ink);
-      }
-      html[data-lang="ar"] .pillar h3 {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 500;
-        font-size: 21px;
-        line-height: 1.4;
-      }
-      .pillar p {
-        font-size: 14.5px;
-        color: var(--ink-2);
-        line-height: 1.6;
-      }
-      html[data-lang="ar"] .pillar p {
-        font-size: 15.5px;
-        line-height: 1.8;
-      }
-      .pillar ul {
-        list-style: none;
-        padding: 0;
-        margin-top: 6px;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .pillar li {
-        font-family: var(--mono);
-        font-size: 11.5px;
-        color: var(--mute);
-        letter-spacing: 0.04em;
-        padding-inline-start: 14px;
-        position: relative;
-      }
-      html[data-lang="ar"] .pillar li {
-        font-family: var(--ar);
-        font-size: 13.5px;
-        letter-spacing: 0;
-      }
-      .pillar li::before {
-        content: "";
-        position: absolute;
-        inset-inline-start: 0;
-        top: 0.7em;
-        width: 6px;
-        height: 1px;
-        background: var(--bronze);
-      }
+.brand:hover .glyph { transform: rotate(45deg); }
 
-      /* Audience row */
-      .aud-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 14px;
-        margin-top: 32px;
-      }
-      @media (max-width: 780px) {
-        .aud-row {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 480px) {
-        .aud-row {
-          grid-template-columns: 1fr;
-        }
-      }
-      .aud {
-        border: 1px solid var(--hair);
-        border-radius: 10px;
-        padding: 18px 20px;
-        background: var(--card);
-      }
-      .aud-name {
-        font-weight: 500;
-        font-size: 15px;
-        color: var(--ink);
-        margin-bottom: 4px;
-      }
-      html[data-lang="ar"] .aud-name {
-        font-weight: 600;
-        font-size: 16.5px;
-      }
-      .aud-note {
-        font-size: 13px;
-        color: var(--mute);
-        line-height: 1.55;
-      }
-      html[data-lang="ar"] .aud-note {
-        font-size: 14.5px;
-        line-height: 1.7;
-      }
-      .aud[data-primary="true"] {
-        border-color: var(--bronze);
-        background: linear-gradient(
-          180deg,
-          color-mix(in oklab, var(--bronze) 6%, var(--card)) 0%,
-          var(--card) 100%
-        );
-      }
-      .aud-tag {
-        display: inline-block;
-        font-family: var(--mono);
-        font-size: 9.5px;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        color: var(--bronze-2);
-        padding: 2px 8px;
-        border: 1px solid var(--bronze);
-        border-radius: 999px;
-        margin-bottom: 8px;
-      }
-      html[data-lang="ar"] .aud-tag {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 11.5px;
-      }
+.wordmark {
+  font-weight: 500;
+  font-size: var(--t-5);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
 
-      /* Refinement pull */
-      .refine {
-        margin-top: 48px;
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 28px;
-        padding: 32px 0;
-        border-top: 1px solid var(--bronze);
-        border-bottom: 1px solid var(--rule);
-      }
-      @media (max-width: 600px) {
-        .refine {
-          grid-template-columns: 1fr;
-        }
-      }
-      .refine-num {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 42px;
-        color: var(--bronze);
-        line-height: 1;
-      }
-      html[data-lang="ar"] .refine-num {
-        font-family: var(--mono);
-        font-size: 32px;
-        font-style: normal;
-      }
-      .refine p {
-        font-family: var(--serif);
-        font-style: italic;
-        font-weight: 400;
-        font-size: clamp(19px, 2.2vw, 24px);
-        line-height: 1.45;
-        color: var(--ink);
-        max-width: 52ch;
-      }
-      html[data-lang="ar"] .refine p {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 400;
-        font-size: clamp(18px, 2vw, 22px);
-        line-height: 1.75;
-      }
-      .refine small {
-        display: block;
-        margin-top: 14px;
-        font-family: var(--mono);
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: var(--mute);
-      }
-      html[data-lang="ar"] .refine small {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 13px;
-      }
+[dir="rtl"] .wordmark {
+  font-weight: 600;
+  font-size: var(--t-5);
+  letter-spacing: 0;
+}
 
-      /* Tracks — the scope chooser */
-      .tracks {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin-top: 8px;
-      }
-      @media (max-width: 880px) {
-        .tracks {
-          grid-template-columns: 1fr;
-        }
-      }
-      .track {
-        position: relative;
-        background: var(--card);
-        border: 1px solid var(--hair);
-        border-radius: 14px;
-        padding: 28px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        cursor: pointer;
-        text-align: start;
-        transition:
-          border-color 0.25s var(--ease),
-          transform 0.25s var(--ease),
-          box-shadow 0.25s var(--ease);
-        color: inherit;
-        font: inherit;
-      }
-      .track:hover {
-        border-color: var(--bronze);
-        transform: translateY(-2px);
-      }
-      .track[data-selected="true"] {
-        border-color: var(--bronze);
-        box-shadow:
-          0 0 0 1px var(--bronze) inset,
-          0 8px 24px -16px var(--bronze);
-        background: linear-gradient(
-          180deg,
-          color-mix(in oklab, var(--bronze) 5%, var(--card)) 0%,
-          var(--card) 100%
-        );
-      }
-      .track-head {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-      }
-      .track-name {
-        font-family: var(--serif);
-        font-style: italic;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 1.15;
-        color: var(--ink);
-      }
-      html[data-lang="ar"] .track-name {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 500;
-        font-size: 22px;
-        line-height: 1.4;
-      }
-      .track-tier {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.18em;
-        color: var(--bronze-2);
-        text-transform: uppercase;
-      }
-      html[data-lang="ar"] .track-tier {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12px;
-      }
-      .track-line {
-        font-size: 14.5px;
-        color: var(--ink-2);
-        line-height: 1.6;
-      }
-      html[data-lang="ar"] .track-line {
-        font-size: 15.5px;
-        line-height: 1.8;
-      }
-      .track ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-top: 4px;
-      }
-      .track li {
-        font-size: 13.5px;
-        color: var(--ink-2);
-        line-height: 1.55;
-        padding-inline-start: 18px;
-        position: relative;
-      }
-      html[data-lang="ar"] .track li {
-        font-size: 14.5px;
-        line-height: 1.75;
-      }
-      .track li::before {
-        content: "";
-        position: absolute;
-        inset-inline-start: 0;
-        top: 0.75em;
-        width: 8px;
-        height: 1px;
-        background: var(--bronze);
-      }
-      .track-foot {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        margin-top: 8px;
-        padding-top: 14px;
-        border-top: 1px solid var(--rule);
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--mute);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      html[data-lang="ar"] .track-foot {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 13px;
-      }
-      .track-foot strong {
-        color: var(--ink);
-        font-weight: 500;
-      }
-      .track-radio {
-        position: absolute;
-        top: 18px;
-        inset-inline-end: 18px;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        border: 1.5px solid var(--hair);
-        display: grid;
-        place-items: center;
-        transition:
-          border-color 0.2s,
-          background-color 0.2s;
-      }
-      .track[data-selected="true"] .track-radio {
-        border-color: var(--bronze);
-        background: var(--bronze);
-      }
-      .track-radio::after {
-        content: "";
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--paper);
-        opacity: 0;
-        transition: opacity 0.2s;
-      }
-      .track[data-selected="true"] .track-radio::after {
-        opacity: 1;
-      }
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: 12px;
+}
 
-      /* Confirmation row after scope */
-      .confirm-row {
-        margin-top: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 20px 24px;
-        border: 1px dashed var(--hair);
-        border-radius: 12px;
-        background: var(--card);
-        opacity: 0;
-        transform: translateY(8px);
-        transition:
-          opacity 0.35s var(--ease),
-          transform 0.35s var(--ease);
-        pointer-events: none;
-      }
-      .confirm-row[data-on="true"] {
-        opacity: 1;
-        transform: none;
-        pointer-events: auto;
-      }
-      @media (max-width: 680px) {
-        .confirm-row {
-          flex-direction: column;
-          align-items: stretch;
-          text-align: start;
-        }
-      }
-      .confirm-text {
-        flex: 1;
-        font-size: 14.5px;
-        color: var(--ink-2);
-        line-height: 1.5;
-      }
-      html[data-lang="ar"] .confirm-text {
-        font-size: 15.5px;
-        line-height: 1.75;
-      }
-      .confirm-text strong {
-        color: var(--ink);
-        font-weight: 500;
-      }
-      html[data-lang="ar"] .confirm-text strong {
-        font-weight: 600;
-      }
+.step {
+  text-decoration: none;
+  color: var(--mute);
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.08em;
+  transition: color 0.18s;
+}
 
-      /* Next button */
-      .nextcta {
-        margin-top: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-        padding: 24px 28px;
-        background: var(--ink);
-        color: var(--paper);
-        border-radius: 14px;
-        text-decoration: none;
-        transition: background 0.2s;
-      }
-      .nextcta:hover {
-        background: var(--bronze-2);
-      }
-      .nextcta-l {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        min-width: 0;
-      }
-      .nextcta-eyebrow {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        opacity: 0.6;
-      }
-      html[data-lang="ar"] .nextcta-eyebrow {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12.5px;
-      }
-      .nextcta-h {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 22px;
-        line-height: 1.15;
-      }
-      html[data-lang="ar"] .nextcta-h {
-        font-family: var(--ar);
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-      }
-      .nextcta-arr {
-        font-family: var(--serif);
-        font-size: 32px;
-        line-height: 1;
-        opacity: 0.9;
-      }
-      html[data-lang="ar"] .nextcta-arr {
-        transform: scaleX(-1);
-      }
+[dir="rtl"] .step {
+  font-family: var(--ar);
+  font-size: var(--t-6);
+  letter-spacing: 0;
+}
 
-      /* Footer */
-      footer {
-        max-width: var(--col-wide);
-        margin: 48px auto 0;
-        padding: 24px var(--sx) 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        border-top: 1px solid var(--rule);
-        font-family: var(--mono);
-        font-size: 10.5px;
-        color: var(--mute);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-      html[data-lang="ar"] footer {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12.5px;
-      }
+.step.on { color: var(--bronze); font-weight: 500; }
+.step:hover:not(.on) { color: var(--ink); }
 
-      /* Reveal */
-      .reveal {
-        opacity: 0;
-        transform: translateY(14px);
-        transition:
-          opacity 0.7s var(--ease),
-          transform 0.7s var(--ease);
-      }
-      .reveal.in {
-        opacity: 1;
-        transform: none;
-      }
+.step-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--hair);
+}
 
-      /* RTL fine-tuning for serif italics (which lean Latin) — keep Latin in EN only */
-      html[data-lang="ar"] .nextcta-arr {
-        font-family: var(--ar);
-        font-weight: 300;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="masthead">
-      <div class="masthead-row">
-        <div class="markline">
-          <svg
-            class="glyph"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
-            <path d="M4 12 L12 4 L20 12 L12 20 Z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-          <span class="wordmark" data-show="en">Catalyst Partners</span>
-          <span class="wordmark" data-show="ar">كاتاليست بارتنرز</span>
-          <span class="pagetag" data-show="en">Foundation</span>
-          <span class="pagetag" data-show="ar">الأساس</span>
-        </div>
-        <div class="controls">
-          <div class="lang-tog" role="tablist" aria-label="Language">
-            <button id="lng-ar" type="button">ع</button>
-            <button id="lng-en" type="button">EN</button>
-          </div>
-          <button
-            class="theme-btn"
-            id="theme-btn"
-            type="button"
-            aria-label="Toggle theme"
-          >
-            <svg
-              id="theme-icon-moon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-            >
-              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
-            </svg>
-            <svg
-              id="theme-icon-sun"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              style="display: none"
-            >
-              <circle cx="12" cy="12" r="4" />
-              <path
-                d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </header>
+@media (max-width: 560px) {
+  .steps { display: none; }
+}
 
-    <main>
-      <!-- Hero -->
-      <section class="hero">
-        <div class="eyebrow">
-          <span data-show="en">How we read you</span>
-          <span data-show="ar">كيف قرأناكم</span>
-        </div>
-        <h1 data-show="en">Before the brand, the understanding.</h1>
-        <h1 data-show="ar">قبل العلامة، الفهم.</h1>
-        <p class="lede" data-show="en">
-          This document is a mirror. It reflects back what you told us about
-          Catalyst Partners, refined by what we learned about the market you are
-          entering. It is not a proposal. It is the proof that we read you
-          correctly before we touch a single deliverable.
-        </p>
-        <p class="lede" data-show="ar">
-          هذه الوثيقة مرآة. تعكس ما قلتموه لنا عن كاتاليست بارتنرز، مُصاغًا بدقة
-          من خلال ما تعلمناه عن السوق الذي ستدخلونه. ليست عرضًا تجاريًا، بل
-          دليلًا على أننا قرأناكم قبل أن نبدأ بأول مُخرَج.
-        </p>
-        <div class="meta">
-          <span data-show="en">For Mohamed Abdelwahab</span>
-          <span data-show="ar">إلى محمد عبدالوهاب</span>
-          <span data-show="en">Phase 0 · Foundation</span>
-          <span data-show="ar">المرحلة صفر · الأساس</span>
-          <span data-show="en"
-            >Three pages · Foundation → Compass → Handoff</span
-          >
-          <span data-show="ar">ثلاث صفحات · الأساس ← البوصلة ← التسليم</span>
-        </div>
-      </section>
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-      <!-- Section 1 — The firm as you described it -->
-      <section class="reveal">
-        <div class="eyebrow">
-          <span data-show="en">01 — The firm, as you described it</span>
-          <span data-show="ar">٠١ — الشركة كما وصفتموها</span>
-        </div>
-        <h2 class="section-h" data-show="en">
-          Catalyst Partners — a strategic advisory and business transformation
-          firm.
-        </h2>
-        <h2 class="section-h" data-show="ar">
-          كاتاليست بارتنرز — بيت استشارات استراتيجية وتحوّل مؤسسي.
-        </h2>
-        <p class="section-sub" data-show="en">
-          We took your brief in full — every service area, every audience, every
-          line about how the brand should carry itself. We did not rewrite it.
-          We organised it, so the structure underneath the words becomes
-          visible.
-        </p>
-        <p class="section-sub" data-show="ar">
-          أخذنا الموجز كاملًا — كل مجال خدمة، كل جمهور، كل سطر يتحدث عن شخصية
-          العلامة. لم نُعِد كتابته، بل أعدنا ترتيبه حتى يصبح الهيكل تحت الكلمات
-          ظاهرًا.
-        </p>
+.lang {
+  display: flex;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--card);
+}
 
-        <div class="mirror">
-          <div class="mirror-label" data-show="en">In one sentence</div>
-          <div class="mirror-label" data-show="ar">في جملة واحدة</div>
-          <p data-show="en">
-            Catalyst Partners helps complex organisations stabilise,
-            restructure, scale, and protect long-term value — the catalyst that
-            turns difficult moments into deliberate transformations.
-          </p>
-          <p data-show="ar">
-            كاتاليست بارتنرز شريك المؤسسات المعقّدة في الاستقرار، إعادة الهيكلة،
-            النمو، وحماية القيمة على المدى الطويل — المُحفِّز الذي يحوّل اللحظات
-            الصعبة إلى تحوّلات مدروسة.
-          </p>
-          <cite data-show="en"
-            >Drawn from your brand brief · refined for register, not
-            meaning</cite
-          >
-          <cite data-show="ar"
-            >مُستخلص من موجز العلامة · صياغة، لا تعديل في المعنى</cite
-          >
-        </div>
+.lang button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px 11px;
+  font: 500 11px var(--sans);
+  color: var(--mute);
+  letter-spacing: 0.04em;
+}
 
-        <div class="pillars">
-          <div class="pillar">
-            <span class="pillar-num">01</span>
-            <h3 data-show="en">Capital &amp; Recovery</h3>
-            <h3 data-show="ar">رأس المال والتعافي</h3>
-            <p data-show="en">
-              The financial half — when the balance sheet, the lenders, or the
-              structure need a serious answer.
-            </p>
-            <p data-show="ar">
-              الشِق المالي — حين تستدعي الميزانية أو الجهات المُموِّلة أو الهيكل
-              إجابة جادة.
-            </p>
-            <ul>
-              <li data-show="en">
-                Financial restructuring &amp; debt advisory
-              </li>
-              <li data-show="ar">إعادة الهيكلة المالية وإدارة الديون</li>
-              <li data-show="en">Corporate recovery &amp; turnaround</li>
-              <li data-show="ar">التعافي المؤسسي وإدارة التحوّل</li>
-              <li data-show="en">Investment readiness</li>
-              <li data-show="ar">الاستعداد للاستثمار</li>
-            </ul>
-          </div>
-          <div class="pillar">
-            <span class="pillar-num">02</span>
-            <h3 data-show="en">Institution &amp; Governance</h3>
-            <h3 data-show="ar">المؤسسة والحوكمة</h3>
-            <p data-show="en">
-              The operational half — building what holds the value once the
-              capital is sorted.
-            </p>
-            <p data-show="ar">
-              الشِق المؤسسي — بناء ما يحمي القيمة بعد أن يستقر رأس المال.
-            </p>
-            <ul>
-              <li data-show="en">Governance &amp; PMO advisory</li>
-              <li data-show="ar">الحوكمة والإشراف على البرامج</li>
-              <li data-show="en">Performance management</li>
-              <li data-show="ar">إدارة الأداء</li>
-              <li data-show="en">Operational excellence</li>
-              <li data-show="ar">التميّز التشغيلي</li>
-            </ul>
-          </div>
-          <div class="pillar">
-            <span class="pillar-num">03</span>
-            <h3 data-show="en">Strategy &amp; Growth</h3>
-            <h3 data-show="ar">الاستراتيجية والنمو</h3>
-            <p data-show="en">
-              The forward axis — where the firm is going next, and why.
-            </p>
-            <p data-show="ar">المحور الأمامي — إلى أين تتجه المؤسسة، ولماذا.</p>
-            <ul>
-              <li data-show="en">Strategic consulting</li>
-              <li data-show="ar">الاستشارات الاستراتيجية</li>
-              <li data-show="en">Business transformation</li>
-              <li data-show="ar">التحوّل المؤسسي</li>
-              <li data-show="en">Growth advisory</li>
-              <li data-show="ar">استشارات النمو</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+.lang button:last-child {
+  font-family: var(--ar);
+  font-size: var(--t-6);
+  letter-spacing: 0;
+}
 
-      <!-- Section 2 — Who you serve -->
-      <section class="reveal">
-        <div class="eyebrow">
-          <span data-show="en">02 — Who you serve</span>
-          <span data-show="ar">٠٢ — لمن تتحدثون</span>
-        </div>
-        <h2 class="section-h" data-show="en">
-          Six audiences. One is the wedge.
-        </h2>
-        <h2 class="section-h" data-show="ar">
-          ستة جماهير. واحد منها هو المدخل.
-        </h2>
-        <p class="section-sub" data-show="en">
-          Your brief named six client categories. All are real markets, all are
-          reachable. The market evidence — UAE Ministry of Economy figures, PwC
-          succession data, the Family Business Law of 2022 — points to one of
-          them as the cleanest entry: the segment where institutional advisory
-          is most needed and least well served.
-        </p>
-        <p class="section-sub" data-show="ar">
-          حدّد الموجز ستة قطاعات للعملاء. كلها أسواق حقيقية، كلها قابلة للوصول.
-          لكن قراءة السوق — أرقام وزارة الاقتصاد، بيانات PwC حول الخلافة، وقانون
-          الشركات العائلية لعام ٢٠٢٢ — تشير إلى قطاع واحد كنقطة دخول أنظف من
-          غيرها: حيث يكون الاحتياج للاستشارات المؤسسية في أعلى مستوياته، والعرض
-          المتاح في أدناها.
-        </p>
+.lang button.on {
+  background: var(--ink);
+  color: var(--paper);
+}
 
-        <div class="aud-row">
-          <div class="aud" data-primary="true">
-            <span class="aud-tag" data-show="en">Primary wedge</span>
-            <span class="aud-tag" data-show="ar">المدخل الأساسي</span>
-            <div class="aud-name" data-show="en">Family enterprises</div>
-            <div class="aud-name" data-show="ar">الشركات العائلية</div>
-            <p class="aud-note" data-show="en">
-              ~60% of UAE GDP. Generational handover in motion. Governance &amp;
-              succession gaps are documented and large.
-            </p>
-            <p class="aud-note" data-show="ar">
-              نحو ٦٠٪ من الناتج المحلي الإماراتي. انتقال الجيل في جريانه. فجوات
-              الحوكمة والخلافة موثّقة وكبيرة.
-            </p>
-          </div>
-          <div class="aud">
-            <div class="aud-name" data-show="en">
-              Semi-government &amp; government entities
-            </div>
-            <div class="aud-name" data-show="ar">
-              الجهات الحكومية وشبه الحكومية
-            </div>
-            <p class="aud-note" data-show="en">
-              Excellence cycles, EFQM/GEM, performance mandates — the firm's
-              verifiable strength.
-            </p>
-            <p class="aud-note" data-show="ar">
-              دورات التميّز، EFQM ونموذج التميّز الحكومي، تكليفات الأداء — نقطة
-              قوّة موثّقة للشركة.
-            </p>
-          </div>
-          <div class="aud">
-            <div class="aud-name" data-show="en">
-              Mid-market &amp; industrial groups
-            </div>
-            <div class="aud-name" data-show="ar">
-              المجموعات المتوسطة والصناعية
-            </div>
-            <p class="aud-note" data-show="en">
-              Margin pressure, post-acquisition integration, performance
-              turnaround.
-            </p>
-            <p class="aud-note" data-show="ar">
-              ضغط الهوامش، تكامل ما بعد الاستحواذ، تحسين الأداء.
-            </p>
-          </div>
-          <div class="aud">
-            <div class="aud-name" data-show="en">
-              Banks &amp; financial institutions
-            </div>
-            <div class="aud-name" data-show="ar">البنوك والمؤسسات المالية</div>
-            <p class="aud-note" data-show="en">
-              Referral-rich. Reached through demonstrable outcomes on family
-              &amp; mid-market mandates.
-            </p>
-            <p class="aud-note" data-show="ar">
-              شريحة غنيّة بالإحالات. يُصل إليها عبر مُخرَجات ملموسة في تكليفات
-              العائلات والقطاع المتوسط.
-            </p>
-          </div>
-          <div class="aud">
-            <div class="aud-name" data-show="en">
-              Investors &amp; holding companies
-            </div>
-            <div class="aud-name" data-show="ar">
-              المستثمرون والشركات القابضة
-            </div>
-            <p class="aud-note" data-show="en">
-              Post-deal value protection. Where strategy meets governance.
-            </p>
-            <p class="aud-note" data-show="ar">
-              حماية القيمة بعد الصفقة. حيث تلتقي الاستراتيجية بالحوكمة.
-            </p>
-          </div>
-          <div class="aud">
-            <div class="aud-name" data-show="en">Large enterprises</div>
-            <div class="aud-name" data-show="ar">المؤسسات الكبرى</div>
-            <p class="aud-note" data-show="en">
-              Strategic and transformation programmes — engaged later, once the
-              brand earns the door.
-            </p>
-            <p class="aud-note" data-show="ar">
-              برامج الاستراتيجية والتحوّل — يُتعامل معها لاحقًا، بعد أن تستحق
-              العلامة بابها.
-            </p>
-          </div>
-        </div>
+.theme-btn {
+  appearance: none;
+  border: 1px solid var(--hair);
+  background: var(--card);
+  color: var(--mute);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  transition: color 0.18s, border-color 0.18s;
+}
 
-        <div class="refine">
-          <div class="refine-num">01</div>
-          <div>
-            <p data-show="en">
-              Lead with the institutional half — governance, PMO, performance,
-              transformation — while the financial restructuring practice grows
-              around credentialed finance partners. The market rewards firms
-              that pair the two; almost no boutique delivers both. That is the
-              white space.
-            </p>
-            <p data-show="ar">
-              ابدأوا بالشِق المؤسسي — الحوكمة، الإشراف على البرامج، الأداء،
-              التحوّل — ودَعوا ممارسة إعادة الهيكلة المالية تنمو حول شركاء
-              ماليين بسجلٍ معتمد. السوق يكافئ من يجمع بين الاثنين، وقلّةٌ من
-              البوتيك يفعلها. هذه هي المساحة الخالية.
-            </p>
-            <small data-show="en"
-              >Source: A&amp;M Middle East Turnaround &amp; Restructuring
-              Survey, Q2 2023 — 73% advocate operational + financial
-              restructuring together; fewer than a quarter see it
-              delivered.</small
-            >
-            <small data-show="ar"
-              >المصدر: مسح A&amp;M للتحوّل وإعادة الهيكلة في الشرق الأوسط، الربع
-              الثاني ٢٠٢٣ — ٧٣٪ يدعون لإقران إعادة الهيكلة المالية بالتشغيلية،
-              وأقل من الرُبع يشاهدها تتحقق فعليًا.</small
-            >
-          </div>
-        </div>
-      </section>
+.theme-btn:hover {
+  color: var(--bronze);
+  border-color: var(--bronze);
+}
 
-      <!-- Section 3 — What we build for you (tracks) -->
-      <section class="reveal">
-        <div class="eyebrow">
-          <span data-show="en">03 — What we build for you</span>
-          <span data-show="ar">٠٣ — ما الذي نبنيه لكم</span>
-        </div>
-        <h2 class="section-h" data-show="en">
-          Three tracks. You choose where to begin.
-        </h2>
-        <h2 class="section-h" data-show="ar">
-          ثلاثة مسارات. أنتم تختارون من أين نبدأ.
-        </h2>
-        <p class="section-sub" data-show="en">
-          Every firm carries the full ambition; not every firm is ready for it
-          at once. The tracks below are nested — each contains the one before
-          it. There is no wrong choice, only the right starting line for where
-          Catalyst is today.
-        </p>
-        <p class="section-sub" data-show="ar">
-          كل شركة تحمل الطموح كاملًا، وليست كل شركة جاهزة له دفعة واحدة.
-          المسارات الثلاثة بالأسفل مُتدرِّجة — كل واحد يحوي الذي قبله. لا خيار
-          خاطئ، بل نقطة انطلاق صحيحة بحسب موضع كاتاليست اليوم.
-        </p>
+.theme-btn svg { width: 15px; height: 15px; }
 
-        <div class="tracks" id="tracks">
-          <button class="track" data-scope="identity" type="button">
-            <span class="track-radio" aria-hidden="true"></span>
-            <div class="track-head">
-              <div class="track-name" data-show="en">The Identity</div>
-              <div class="track-name" data-show="ar">الهوية</div>
-            </div>
-            <div class="track-tier" data-show="en">Track 01 — Brand only</div>
-            <div class="track-tier" data-show="ar">
-              المسار الأول — العلامة فقط
-            </div>
-            <p class="track-line" data-show="en">
-              A complete identity system the firm can carry into any room —
-              proposals, presentations, government tenders, LinkedIn — without
-              it being mistaken for anything generic.
-            </p>
-            <p class="track-line" data-show="ar">
-              منظومة هوية كاملة تدخل بها الشركة أي غرفة — العروض، التقارير،
-              المناقصات الحكومية، LinkedIn — دون أن تُخلَط بشيء عابر.
-            </p>
-            <ul>
-              <li data-show="en">Bilingual wordmark &amp; logomark</li>
-              <li data-show="ar">شعار ثنائي اللغة (العربية والإنجليزية)</li>
-              <li data-show="en">Full identity system &amp; usage rules</li>
-              <li data-show="ar">منظومة هوية كاملة وقواعد استخدام</li>
-              <li data-show="en">
-                Templates: proposal cover, deck, business card, signature,
-                social profile set
-              </li>
-              <li data-show="ar">
-                قوالب: غلاف العروض، البريزنتيشن، بطاقة العمل، التوقيع، حزمة
-                الحسابات الاجتماعية
-              </li>
-            </ul>
-            <div class="track-foot">
-              <span
-                ><strong data-show="en">For:</strong
-                ><strong data-show="ar">يناسب:</strong>
-                <span data-show="en"
-                  >launching with a credible mark, before any media or site work
-                  begins.</span
-                ><span data-show="ar"
-                  >الانطلاق بعلامة موثوقة قبل أي عمل على الإعلام أو
-                  الموقع.</span
-                ></span
-              >
-            </div>
-          </button>
+/* Progress strand */
+.strand {
+  height: 2px;
+  background: var(--hair);
+  position: relative;
+  overflow: hidden;
+}
 
-          <button class="track" data-scope="identity-voice" type="button">
-            <span class="track-radio" aria-hidden="true"></span>
-            <div class="track-head">
-              <div class="track-name" data-show="en">Identity &amp; Voice</div>
-              <div class="track-name" data-show="ar">الهوية والصوت</div>
-            </div>
-            <div class="track-tier" data-show="en">
-              Track 02 — Brand + media engine
-            </div>
-            <div class="track-tier" data-show="ar">
-              المسار الثاني — العلامة + ماكينة الإعلام
-            </div>
-            <p class="track-line" data-show="en">
-              Everything in The Identity, plus the voice that carries it: a
-              disciplined LinkedIn cadence, a quarterly content rhythm, and the
-              foundations of a thought-leadership programme around governance
-              and family enterprises.
-            </p>
-            <p class="track-line" data-show="ar">
-              كل ما في "الهوية"، بالإضافة إلى الصوت الذي يحملها: إيقاع منضبط على
-              LinkedIn، تردد محتوى فصلي، وأساسات برنامج قيادة فكرية حول الحوكمة
-              والشركات العائلية.
-            </p>
-            <ul>
-              <li data-show="en">
-                Editorial framework (themes, tone, Arabic register)
-              </li>
-              <li data-show="ar">
-                إطار تحريري (المحاور، نبرة الصوت، السجل العربي الرسمي)
-              </li>
-              <li data-show="en">
-                LinkedIn programme — partner-led, bilingual, monthly cadence
-              </li>
-              <li data-show="ar">
-                برنامج LinkedIn — بقيادة الشركاء، ثنائي اللغة، شهري الإيقاع
-              </li>
-              <li data-show="en">
-                Quarterly insight series + flagship report scaffold
-              </li>
-              <li data-show="ar">
-                سلسلة فصلية للرؤى + هيكل التقرير المرجعي السنوي
-              </li>
-              <li data-show="en">
-                Visual content system: stat cards, quote cards, report covers
-              </li>
-              <li data-show="ar">
-                منظومة محتوى مرئي: بطاقات إحصاءات، اقتباسات، أغلفة تقارير
-              </li>
-            </ul>
-            <div class="track-foot">
-              <span
-                ><strong data-show="en">For:</strong
-                ><strong data-show="ar">يناسب:</strong>
-                <span data-show="en"
-                  >building authority while the website conversation
-                  matures.</span
-                ><span data-show="ar"
-                  >بناء المرجعية بينما تنضج محادثة الموقع.</span
-                ></span
-              >
-            </div>
-          </button>
+.strand i {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--bronze) 0%, var(--bronze-2) 100%);
+  transition: width 0.6s var(--ease);
+}
 
-          <button class="track" data-scope="full" type="button">
-            <span class="track-radio" aria-hidden="true"></span>
-            <div class="track-head">
-              <div class="track-name" data-show="en">The Institution</div>
-              <div class="track-name" data-show="ar">المؤسسة</div>
-            </div>
-            <div class="track-tier" data-show="en">
-              Track 03 — Brand + media + the digital home
-            </div>
-            <div class="track-tier" data-show="ar">
-              المسار الثالث — العلامة + الإعلام + البيت الرقمي
-            </div>
-            <p class="track-line" data-show="en">
-              Everything above, plus the bilingual digital home — the authority
-              engine and quiet lead system that does not look or behave like a
-              consultancy site. Built so every tool, every vendor, every piece
-              of content is yours to take with you, always.
-            </p>
-            <p class="track-line" data-show="ar">
-              كل ما سبق، إضافة إلى البيت الرقمي ثنائي اللغة — منصة المرجعية
-              ونظام استقطاب هادئ لا يشبه مواقع الاستشارات في شكله ولا سلوكه.
-              مبني بحيث تبقى كل أداة، وكل مورد، وكل قطعة محتوى ملكًا لكم،
-              دائمًا.
-            </p>
-            <ul>
-              <li data-show="en">
-                Bilingual website — Arabic and English as first-class peers
-              </li>
-              <li data-show="ar">
-                موقع ثنائي اللغة — العربية والإنجليزية بمنزلة واحدة
-              </li>
-              <li data-show="en">
-                Gated flagship report &amp; insights engine
-              </li>
-              <li data-show="ar">
-                تقرير مرجعي محجوب وراء استمارة + ماكينة رؤى
-              </li>
-              <li data-show="en">
-                Quiet lead system — captured, scored, routed to the right
-                partner
-              </li>
-              <li data-show="ar">
-                نظام استقطاب هادئ — تسجيل وتقييم وتوجيه إلى الشريك المعنيّ
-              </li>
-              <li data-show="en">
-                Ownership by architecture — every component yours to keep
-              </li>
-              <li data-show="ar">
-                ملكية بالتصميم — كل مكوّن يبقى ملكًا للشركة
-              </li>
-            </ul>
-            <div class="track-foot">
-              <span
-                ><strong data-show="en">For:</strong
-                ><strong data-show="ar">يناسب:</strong>
-                <span data-show="en"
-                  >launching as an institution from day one — single deliberate
-                  motion.</span
-                ><span data-show="ar"
-                  >الانطلاق كمؤسسة منذ اليوم الأول — حركة واحدة مدروسة.</span
-                ></span
-              >
-            </div>
-          </button>
-        </div>
+/* ─────────────────────────────────────────────────────────────
+   LAYOUT
+───────────────────────────────────────────────────────────── */
+main { padding: 48px var(--sx) 96px; }
+.col { max-width: var(--col); margin-inline: auto; }
+.col-wide { max-width: var(--col-wide); margin-inline: auto; }
 
-        <div class="confirm-row" id="confirm-row" aria-live="polite">
-          <div class="confirm-text">
-            <span data-show="en"
-              >You marked <strong id="conf-scope-en">—</strong> as your starting
-              line. We will read the rest of this conversation through that
-              lens.</span
-            >
-            <span data-show="ar"
-              >اخترتم <strong id="conf-scope-ar">—</strong> نقطةً للانطلاق.
-              سنقرأ بقية هذه المحادثة من خلال تلك العدسة.</span
-            >
-          </div>
-        </div>
+.chapter {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--hair);
+}
 
-        <a class="nextcta" id="next-cta" href="compass.html">
-          <div class="nextcta-l">
-            <span class="nextcta-eyebrow" data-show="en">Next · Compass</span>
-            <span class="nextcta-eyebrow" data-show="ar">التالي · البوصلة</span>
-            <span class="nextcta-h" data-show="en">Did we read you right?</span>
-            <span class="nextcta-h" data-show="ar"
-              >هل قرأناكم بصورةٍ صحيحة؟</span
-            >
-          </div>
-          <span class="nextcta-arr">→</span>
+.chapter:last-of-type { border-bottom: 0; }
+
+/* Section marker */
+.marker {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.marker .num {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.16em;
+  color: var(--bronze);
+}
+
+[dir="rtl"] .marker .num {
+  font-family: var(--mono);
+}
+
+.marker .label {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+[dir="rtl"] .marker .label {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+.marker .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--hair);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────────────────────── */
+.hero {
+  padding: 64px 0 72px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.salutation {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 28px;
+}
+
+[dir="rtl"] .salutation {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-display);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+[dir="rtl"] .hero h1 {
+  font-family: var(--ar);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  font-size: var(--t-1);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--bronze-2);
+}
+
+[dir="rtl"] .hero h1 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.hero .deck {
+  font-size: var(--t-4);
+  color: var(--ink-2);
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+[dir="rtl"] .hero .deck {
+  font-size: var(--t-4);
+  line-height: 1.85;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--hair);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta dt {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+[dir="rtl"] .meta dt {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+.meta dd {
+  font-size: var(--t-6);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+[dir="rtl"] .meta dd {
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TYPOGRAPHY
+───────────────────────────────────────────────────────────── */
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-2);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
+[dir="rtl"] h2 {
+  font-family: var(--ar);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+  font-size: var(--t-2);
+}
+
+h2 em {
+  font-style: italic;
+  color: var(--bronze-2);
+}
+
+[dir="rtl"] h2 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.prose {
+  max-width: var(--col);
+}
+
+.prose p {
+  margin-bottom: 16px;
+  color: var(--ink-2);
+}
+
+.prose p:last-child { margin-bottom: 0; }
+
+.bronze { color: var(--bronze); font-weight: 500; }
+[dir="rtl"] .bronze { font-weight: 600; }
+
+/* ─────────────────────────────────────────────────────────────
+   PULL QUOTE
+───────────────────────────────────────────────────────────── */
+.pull {
+  margin: 36px 0 8px;
+  padding: 28px 28px 30px;
+  background: var(--card);
+  border: 1px solid var(--hair);
+  border-radius: 4px;
+  position: relative;
+}
+
+.pull::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 3px;
+  background: var(--bronze);
+  border-radius: 2px;
+}
+
+.pull p {
+  font-family: var(--serif);
+  font-size: var(--t-3);
+  line-height: 1.35;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+[dir="rtl"] .pull p {
+  font-family: var(--ar);
+  font-size: var(--t-3);
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.pull p em {
+  font-style: italic;
+  color: var(--bronze-2);
+}
+
+[dir="rtl"] .pull p em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.pull cite {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  font-style: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+[dir="rtl"] .pull cite {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FIGURES / STATS
+───────────────────────────────────────────────────────────── */
+.figs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 28px;
+}
+
+@media (max-width: 680px) {
+  .figs { grid-template-columns: 1fr; }
+}
+
+.fig {
+  background: var(--paper);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fig .n {
+  font-family: var(--serif);
+  font-size: var(--t-1);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+[dir="rtl"] .fig .n {
+  font-family: var(--ar);
+  font-weight: 600;
+}
+
+.fig .n small {
+  font-size: var(--t-3);
+}
+
+.fig .u {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+[dir="rtl"] .fig .u {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+.fig .t {
+  font-size: var(--t-6);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+[dir="rtl"] .fig .t {
+  font-size: var(--t-6);
+  line-height: 1.7;
+}
+
+.fig .s {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.1em;
+  color: var(--mute);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+[dir="rtl"] .fig .s {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-7);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PILLARS (Services)
+───────────────────────────────────────────────────────────── */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 28px;
+}
+
+@media (max-width: 780px) {
+  .pillars { grid-template-columns: 1fr; }
+}
+
+.pillar {
+  background: var(--paper);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pillar-num {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  color: var(--bronze);
+  letter-spacing: 0.16em;
+}
+
+.pillar h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: var(--t-3);
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+[dir="rtl"] .pillar h3 {
+  font-family: var(--ar);
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--t-3);
+  line-height: 1.4;
+}
+
+.pillar p {
+  font-size: var(--t-6);
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+[dir="rtl"] .pillar p {
+  font-size: var(--t-5);
+  line-height: 1.75;
+}
+
+.pillar ul {
+  list-style: none;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pillar li {
+  font-size: var(--t-6);
+  color: var(--mute);
+  padding-inline-start: 14px;
+  position: relative;
+}
+
+[dir="rtl"] .pillar li {
+  font-size: var(--t-6);
+}
+
+.pillar li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 1px;
+  background: var(--bronze);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   AUDIENCE
+───────────────────────────────────────────────────────────── */
+.audiences {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+@media (max-width: 780px) {
+  .audiences { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .audiences { grid-template-columns: 1fr; }
+}
+
+.aud {
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  padding: 18px 20px;
+  background: var(--card);
+}
+
+.aud[data-primary] {
+  border-color: var(--bronze);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--bronze) 6%, var(--card)) 0%, var(--card) 100%);
+}
+
+.aud-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--bronze-2);
+  padding: 2px 8px;
+  border: 1px solid var(--bronze);
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+[dir="rtl"] .aud-tag {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-7);
+}
+
+.aud-name {
+  font-weight: 500;
+  font-size: var(--t-5);
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+[dir="rtl"] .aud-name {
+  font-weight: 600;
+  font-size: var(--t-5);
+}
+
+.aud-note {
+  font-size: var(--t-6);
+  color: var(--mute);
+  line-height: 1.5;
+}
+
+[dir="rtl"] .aud-note {
+  font-size: var(--t-6);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TRACKS (Scope chooser)
+───────────────────────────────────────────────────────────── */
+.tracks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 28px;
+}
+
+@media (max-width: 880px) {
+  .tracks { grid-template-columns: 1fr; }
+}
+
+.track {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  text-align: start;
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  color: inherit;
+  font: inherit;
+}
+
+.track:hover {
+  border-color: var(--bronze);
+  transform: translateY(-2px);
+}
+
+.track[data-selected="true"] {
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 1px var(--bronze) inset, 0 8px 24px -16px var(--bronze);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--bronze) 5%, var(--card)) 0%, var(--card) 100%);
+}
+
+.track-radio {
+  position: absolute;
+  top: 18px;
+  inset-inline-end: 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--hair);
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.track[data-selected="true"] .track-radio {
+  border-color: var(--bronze);
+  background: var(--bronze);
+}
+
+.track-radio::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--paper);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.track[data-selected="true"] .track-radio::after { opacity: 1; }
+
+.track-tier {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bronze-2);
+}
+
+[dir="rtl"] .track-tier {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+.track-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--t-3);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+[dir="rtl"] .track-name {
+  font-family: var(--ar);
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--t-3);
+  line-height: 1.4;
+}
+
+.track-desc {
+  font-size: var(--t-6);
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+[dir="rtl"] .track-desc {
+  font-size: var(--t-5);
+  line-height: 1.75;
+}
+
+.track ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.track li {
+  font-size: var(--t-6);
+  color: var(--ink-2);
+  padding-inline-start: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+
+[dir="rtl"] .track li {
+  font-size: var(--t-6);
+  line-height: 1.7;
+}
+
+.track li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.7em;
+  width: 8px;
+  height: 1px;
+  background: var(--bronze);
+}
+
+.track-foot {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  color: var(--mute);
+  letter-spacing: 0.08em;
+}
+
+[dir="rtl"] .track-foot {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  font-size: var(--t-6);
+}
+
+.track-foot strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+[dir="rtl"] .track-foot strong {
+  font-weight: 600;
+}
+
+/* Confirmation */
+.confirm {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 1px dashed var(--hair);
+  border-radius: 10px;
+  background: var(--card);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  pointer-events: none;
+}
+
+.confirm[data-on="true"] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.confirm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sage);
+  flex-shrink: 0;
+}
+
+.confirm-text {
+  flex: 1;
+  font-size: var(--t-6);
+  color: var(--ink-2);
+}
+
+[dir="rtl"] .confirm-text {
+  font-size: var(--t-5);
+}
+
+.confirm-text strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+[dir="rtl"] .confirm-text strong {
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NEXT CTA
+───────────────────────────────────────────────────────────── */
+.nextcta {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 26px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nextcta:hover { background: var(--bronze-2); }
+
+.nextcta-l {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nextcta-eyebrow {
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+[dir="rtl"] .nextcta-eyebrow {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+.nextcta-h {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--t-3);
+  line-height: 1.15;
+}
+
+[dir="rtl"] .nextcta-h {
+  font-family: var(--ar);
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--t-4);
+}
+
+.nextcta-arr {
+  font-family: var(--serif);
+  font-size: var(--t-2);
+  line-height: 1;
+  opacity: 0.9;
+}
+
+[dir="rtl"] .nextcta-arr {
+  transform: scaleX(-1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────────────────────── */
+footer {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 24px var(--sx) 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: var(--t-7);
+  color: var(--mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+[dir="rtl"] footer {
+  font-family: var(--ar);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: var(--t-6);
+}
+
+/* Reveal */
+.rev {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.rev.in {
+  opacity: 1;
+  transform: none;
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 12 L12 4 L20 12 L12 20 Z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      <span class="wordmark">
+        <span class="en">Catalyst Partners</span>
+        <span class="ar">كاتاليست بارتنرز</span>
+      </span>
+      <div class="steps">
+        <a class="step on" href="foundation.html">
+          <span class="en">Foundation</span>
+          <span class="ar">الأساس</span>
         </a>
-      </section>
-    </main>
+        <span class="step-dot"></span>
+        <a class="step" href="compass.html">
+          <span class="en">Compass</span>
+          <span class="ar">البوصلة</span>
+        </a>
+        <span class="step-dot"></span>
+        <a class="step" href="handoff.html">
+          <span class="en">Handoff</span>
+          <span class="ar">التسليم</span>
+        </a>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="lang">
+        <button id="lng-en" type="button">EN</button>
+        <button id="lng-ar" type="button">ع</button>
+      </div>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle theme">
+        <svg id="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg id="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="strand"><i id="progress"></i></div>
+</header>
 
-    <footer>
-      <span data-show="en"
-        >Catalyst Partners · Private partner brief · Phase 0</span
-      >
-      <span data-show="ar"
-        >كاتاليست بارتنرز · موجز خاص بالشركاء · المرحلة صفر</span
-      >
-      <span data-show="en">01 / 03</span>
-      <span data-show="ar">٠١ / ٠٣</span>
-    </footer>
+<main>
 
-    <script>
-      (function () {
-        var root = document.documentElement;
-        var btnAr = document.getElementById("lng-ar");
-        var btnEn = document.getElementById("lng-en");
-        var themeBtn = document.getElementById("theme-btn");
-        var moon = document.getElementById("theme-icon-moon");
-        var sun = document.getElementById("theme-icon-sun");
+  <!-- HERO -->
+  <section class="hero col rev">
+    <div class="salutation">
+      <span class="en">For Mohamed Abdelwahab</span>
+      <span class="ar">إلى محمد عبدالوهاب</span>
+    </div>
+    <h1>
+      <span class="en">Before the brand, <em>the understanding.</em></span>
+      <span class="ar">قبل الهوية، <em>الفهم.</em></span>
+    </h1>
+    <p class="deck">
+      <span class="en">This is a mirror. It shows what we understood about Catalyst Partners — refined through market evidence, sharpened by what we learned. Not a proposal. Proof that we read you correctly before we build anything.</span>
+      <span class="ar">هذا ملخّص ما فهمناه عن كاتاليست بارتنرز، بعد مراجعته في ضوء السوق وتعديله بما تعلّمناه. ليس عرضًا تجاريًا، بل وثيقة فهم نطلب تأكيدها قبل البدء بأي بناء.</span>
+    </p>
+    <dl class="hero-meta">
+      <div class="meta">
+        <dt><span class="en">Status</span><span class="ar">الحالة</span></dt>
+        <dd><span class="en">Phase 0 — Foundation</span><span class="ar">المرحلة صفر — الأساس</span></dd>
+      </div>
+      <div class="meta">
+        <dt><span class="en">Pages</span><span class="ar">الصفحات</span></dt>
+        <dd><span class="en">Foundation → Compass → Handoff</span><span class="ar">الأساس ← البوصلة ← التسليم</span></dd>
+      </div>
+      <div class="meta">
+        <dt><span class="en">Your role</span><span class="ar">دوركم</span></dt>
+        <dd><span class="en">Confirm or refine each reading</span><span class="ar">تأكيد أو تهذيب كل قراءة</span></dd>
+      </div>
+    </dl>
+  </section>
 
-        function applyLang(l) {
-          l = l === "en" ? "en" : "ar";
-          root.lang = l === "en" ? "en" : "ar";
-          root.dir = l === "en" ? "ltr" : "rtl";
-          root.setAttribute("data-lang", l);
-          btnAr.classList.toggle("on", l === "ar");
-          btnEn.classList.toggle("on", l === "en");
-          try {
-            localStorage.setItem("cp_lang", l);
-          } catch (e) {}
-        }
-        btnAr.addEventListener("click", function () {
-          applyLang("ar");
-        });
-        btnEn.addEventListener("click", function () {
-          applyLang("en");
-        });
-        applyLang(root.getAttribute("data-lang") || "ar");
+  <!-- 01 THE FIRM -->
+  <section class="chapter col">
+    <div class="marker rev">
+      <span class="num">01</span>
+      <span class="label"><span class="en">The firm</span><span class="ar">الشركة</span></span>
+      <span class="rule"></span>
+    </div>
 
-        function applyTheme(t) {
-          t = t === "light" ? "light" : "dark";
-          root.setAttribute("data-theme", t);
-          moon.style.display = t === "dark" ? "none" : "block";
-          sun.style.display = t === "dark" ? "block" : "none";
-          try {
-            localStorage.setItem("cp_theme", t);
-          } catch (e) {}
-        }
-        themeBtn.addEventListener("click", function () {
-          var cur =
-            root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-          applyTheme(cur === "dark" ? "light" : "dark");
-        });
-        applyTheme(root.getAttribute("data-theme") || "light");
+    <h2 class="rev">
+      <span class="en">A strategic advisory firm for <em>institutional transformation.</em></span>
+      <span class="ar">شركة استشارات استراتيجية في <em>التحول المؤسسي.</em></span>
+    </h2>
 
-        // Scope picker
-        var tracks = document.querySelectorAll(".track");
-        var confirmRow = document.getElementById("confirm-row");
-        var confEn = document.getElementById("conf-scope-en");
-        var confAr = document.getElementById("conf-scope-ar");
-        var labels = {
-          identity: { en: "The Identity", ar: "الهوية" },
-          "identity-voice": { en: "Identity & Voice", ar: "الهوية والصوت" },
-          full: { en: "The Institution", ar: "المؤسسة" },
-        };
-        function applyScope(s) {
-          tracks.forEach(function (t) {
-            t.setAttribute(
-              "data-selected",
-              t.getAttribute("data-scope") === s ? "true" : "false",
-            );
-          });
-          if (labels[s]) {
-            confEn.textContent = labels[s].en;
-            confAr.textContent = labels[s].ar;
-            confirmRow.setAttribute("data-on", "true");
-          } else {
-            confirmRow.setAttribute("data-on", "false");
-          }
-          try {
-            localStorage.setItem("cp_scope", s);
-          } catch (e) {}
-        }
-        tracks.forEach(function (t) {
-          t.addEventListener("click", function () {
-            applyScope(t.getAttribute("data-scope"));
-          });
-        });
-        var saved = (function () {
-          try {
-            return localStorage.getItem("cp_scope");
-          } catch (e) {
-            return null;
-          }
-        })();
-        if (saved && labels[saved]) applyScope(saved);
+    <div class="prose rev">
+      <p>
+        <span class="en">Catalyst Partners works with organizations navigating restructuring, governance reform, performance turnaround, and growth acceleration. The firm acts as the catalyst that converts difficult moments into deliberate transformations.</span>
+        <span class="ar">تعمل كاتاليست بارتنرز مع المؤسسات في مراحل إعادة الهيكلة، وإصلاح الحوكمة، وتحسين الأداء، وتسريع النمو. دور الشركة: تحويل اللحظات الحرجة إلى تحوّلات مُدارة.</span>
+      </p>
+    </div>
 
-        // Reveal
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (en) {
-              if (en.isIntersecting) en.target.classList.add("in");
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-        );
-        document.querySelectorAll(".reveal").forEach(function (el) {
-          io.observe(el);
-        });
-      })();
-    </script>
-  </body>
+    <div class="pillars rev">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <h3><span class="en">Capital & Recovery</span><span class="ar">رأس المال والتعافي</span></h3>
+        <p><span class="en">The financial half — when the balance sheet, the lenders, or the structure need serious answers.</span><span class="ar">الشق المالي: حين تطلب الميزانية أو الجهات المموّلة أو الهيكل إجابات جادّة.</span></p>
+        <ul>
+          <li><span class="en">Financial restructuring & debt advisory</span><span class="ar">إعادة الهيكلة المالية والديون</span></li>
+          <li><span class="en">Corporate recovery & turnaround</span><span class="ar">التعافي المؤسسي وإدارة الأزمات</span></li>
+          <li><span class="en">Investment readiness</span><span class="ar">الاستعداد للاستثمار</span></li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <h3><span class="en">Institution & Governance</span><span class="ar">المؤسسة والحوكمة</span></h3>
+        <p><span class="en">The operational half — building what holds the value once the capital is sorted.</span><span class="ar">الشق التشغيلي: بناء ما يحمي القيمة بعد ضبط رأس المال.</span></p>
+        <ul>
+          <li><span class="en">Governance & PMO advisory</span><span class="ar">استشارات الحوكمة وإدارة البرامج</span></li>
+          <li><span class="en">Performance management</span><span class="ar">إدارة الأداء</span></li>
+          <li><span class="en">Operational excellence</span><span class="ar">التميز التشغيلي</span></li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <h3><span class="en">Strategy & Growth</span><span class="ar">الاستراتيجية والنمو</span></h3>
+        <p><span class="en">The forward axis — where the firm is going next, and why.</span><span class="ar">المحور الأمامي: إلى أين تتجه المؤسسة، ولماذا.</span></p>
+        <ul>
+          <li><span class="en">Strategic consulting</span><span class="ar">الاستشارات الاستراتيجية</span></li>
+          <li><span class="en">Business transformation</span><span class="ar">التحول المؤسسي</span></li>
+          <li><span class="en">Growth advisory</span><span class="ar">استشارات النمو</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 THE MARKET -->
+  <section class="chapter col-wide">
+    <div class="marker rev">
+      <span class="num">02</span>
+      <span class="label"><span class="en">The market</span><span class="ar">السوق</span></span>
+      <span class="rule"></span>
+    </div>
+
+    <div class="col">
+      <h2 class="rev">
+        <span class="en">Most restructurers fix the balance sheet and <em>leave.</em></span>
+        <span class="ar">معظم شركات إعادة الهيكلة تُصلح الميزانية <em>ثم ترحل.</em></span>
+      </h2>
+
+      <div class="prose rev">
+        <p>
+          <span class="en">Alvarez & Marsal's Middle East Turnaround Survey found that 73% of respondents want operational and financial restructuring delivered together — but fewer than 25% actually see it happen. That gap is where Catalyst operates: rebuilding the institution after the capital is sorted.</span>
+          <span class="ar">بحسب مسح Alvarez & Marsal للتحوّل في الشرق الأوسط: 73% من المؤسسات تطلب إعادة الهيكلة التشغيلية والمالية معًا. أقل من 25% يحصلون عليها. تعمل كاتاليست في هذه الفجوة — إعادة بناء المؤسسة بعد ضبط رأس المال.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="figs rev">
+      <div class="fig">
+        <span class="n">~60<small>%</small></span>
+        <span class="u"><span class="en">Of UAE GDP</span><span class="ar">من الناتج الإماراتي</span></span>
+        <span class="t"><span class="en">Family enterprises' contribution to non-oil GDP</span><span class="ar">مساهمة الشركات العائلية في الناتج غير النفطي</span></span>
+        <span class="s"><span class="en">UAE Ministry of Economy</span><span class="ar">وزارة الاقتصاد الإماراتية</span></span>
+      </div>
+      <div class="fig">
+        <span class="n">33<small>%</small></span>
+        <span class="u"><span class="en">Have a plan</span><span class="ar">لديهم خطة</span></span>
+        <span class="t"><span class="en">Middle East family businesses with a robust succession plan</span><span class="ar">الشركات العائلية في الشرق الأوسط التي تملك خطة توارث متينة</span></span>
+        <span class="s"><span class="en">PwC Middle East</span><span class="ar">PwC الشرق الأوسط</span></span>
+      </div>
+      <div class="fig">
+        <span class="n">&lt;25<small>%</small></span>
+        <span class="u"><span class="en">See both delivered</span><span class="ar">يرون الاثنين معاً</span></span>
+        <span class="t"><span class="en">Clients receiving operational + financial restructuring as one engagement</span><span class="ar">العملاء الذين يتلقون إعادة هيكلة تشغيلية ومالية في تعاقد واحد</span></span>
+        <span class="s"><span class="en">Alvarez & Marsal MENA</span><span class="ar">Alvarez & Marsal الشرق الأوسط</span></span>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="pull rev">
+        <p>
+          <span class="en">Most firms restructure the balance sheet and leave. Catalyst rebuilds the <em>institution</em> that has to perform after the capital has settled.</span>
+          <span class="ar">معظم الشركات تُعيد هيكلة الميزانية، ثم تغادر. كاتاليست تعيد بناء <em>المؤسسة</em> التي ينبغي أن تعمل بعد استقرار رأس المال.</span>
+        </p>
+        <cite>
+          <span class="en">The positioning principle</span>
+          <span class="ar">مبدأ التموضع</span>
+        </cite>
+      </div>
+
+      <div class="prose rev" style="margin-top: 18px">
+        <p>
+          <span class="en">The primary entry segment is <span class="bronze">family enterprise governance and succession</span>, with semi-government excellence as the second front and mid-market performance as the third. The differentiator is a digital delivery layer — a live governance portal, KPI dashboards, board-pack automation — so the work outlives the engagement.</span>
+          <span class="ar">قطاع الدخول الأساسي هو <span class="bronze">حوكمة الشركات العائلية والتوارث</span>. الجبهة الثانية: التميّز في الجهات شبه الحكومية. الثالثة: أداء الشركات المتوسطة. عامل التمييز: طبقة تسليم رقمية — منصّة حوكمة، لوحات مؤشّرات، إعداد حزم مجالس الإدارة آليًا — تُبقي العمل قائمًا بعد انتهاء التعاقد.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 THE AUDIENCE -->
+  <section class="chapter col">
+    <div class="marker rev">
+      <span class="num">03</span>
+      <span class="label"><span class="en">The audience</span><span class="ar">الجمهور</span></span>
+      <span class="rule"></span>
+    </div>
+
+    <h2 class="rev">
+      <span class="en">Six audiences. One is the <em>wedge.</em></span>
+      <span class="ar">ستة جماهير. واحد منها هو <em>نقطة الدخول.</em></span>
+    </h2>
+
+    <div class="prose rev">
+      <p>
+        <span class="en">Your brief named six client categories. The market evidence — UAE Ministry of Economy figures, PwC succession data, the Family Business Law of 2022 — points to one of them as the cleanest entry: family enterprises.</span>
+        <span class="ar">حدّد الموجز ستة قطاعات. تشير قراءة السوق — أرقام وزارة الاقتصاد الإماراتية، بيانات PwC عن التوارث، قانون الشركات العائلية 2022 — إلى أن أوضح نقطة دخول هي: الشركات العائلية.</span>
+      </p>
+    </div>
+
+    <div class="audiences rev">
+      <div class="aud" data-primary>
+        <span class="aud-tag"><span class="en">Primary wedge</span><span class="ar">نقطة الدخول</span></span>
+        <div class="aud-name"><span class="en">Family enterprises</span><span class="ar">الشركات العائلية</span></div>
+        <p class="aud-note"><span class="en">~60% of UAE GDP. Generational handover in motion. Governance gaps are documented and large.</span><span class="ar">نحو 60% من الناتج الإماراتي. الانتقال بين الأجيال جارٍ. فجوات الحوكمة موثّقة وكبيرة.</span></p>
+      </div>
+      <div class="aud">
+        <div class="aud-name"><span class="en">Semi-government & government</span><span class="ar">الجهات الحكومية وشبه الحكومية</span></div>
+        <p class="aud-note"><span class="en">Excellence cycles, EFQM/GEM, performance mandates.</span><span class="ar">دورات التميّز، نموذج EFQM ونموذج التميّز الحكومي، تكليفات الأداء.</span></p>
+      </div>
+      <div class="aud">
+        <div class="aud-name"><span class="en">Mid-market & industrial groups</span><span class="ar">الشركات المتوسطة والمجموعات الصناعية</span></div>
+        <p class="aud-note"><span class="en">Margin pressure, post-acquisition integration, performance turnaround.</span><span class="ar">ضغط الهوامش، التكامل بعد الاستحواذ، تحسين الأداء.</span></p>
+      </div>
+      <div class="aud">
+        <div class="aud-name"><span class="en">Banks & financial institutions</span><span class="ar">البنوك والمؤسسات المالية</span></div>
+        <p class="aud-note"><span class="en">Referral-rich. Reached through outcomes on family & mid-market mandates.</span><span class="ar">غنيّة بالإحالات. الوصول إليها عبر نتائج تعاقدات العائلات والقطاع المتوسط.</span></p>
+      </div>
+      <div class="aud">
+        <div class="aud-name"><span class="en">Investors & holding companies</span><span class="ar">المستثمرون والشركات القابضة</span></div>
+        <p class="aud-note"><span class="en">Post-deal value protection. Where strategy meets governance.</span><span class="ar">حماية القيمة بعد الصفقة. عند التقاء الاستراتيجية بالحوكمة.</span></p>
+      </div>
+      <div class="aud">
+        <div class="aud-name"><span class="en">Large enterprises</span><span class="ar">المؤسسات الكبرى</span></div>
+        <p class="aud-note"><span class="en">Strategic and transformation programmes — engaged later, once the brand earns the door.</span><span class="ar">برامج الاستراتيجية والتحوّل: في مرحلة لاحقة، بعد أن تثبت العلامة موقعها.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 YOUR TRACK -->
+  <section class="chapter col">
+    <div class="marker rev">
+      <span class="num">04</span>
+      <span class="label"><span class="en">Your track</span><span class="ar">مساركم</span></span>
+      <span class="rule"></span>
+    </div>
+
+    <h2 class="rev">
+      <span class="en">Three tracks. <em>You choose</em> where we begin.</span>
+      <span class="ar">ثلاثة مسارات. <em>أنتم تختارون</em> من أين نبدأ.</span>
+    </h2>
+
+    <div class="prose rev">
+      <p>
+        <span class="en">Every firm carries the full ambition; not every firm is ready for it at once. The tracks below are nested — each contains the one before it. There is no wrong choice, only the right starting line for where Catalyst is today.</span>
+        <span class="ar">كل شركة تحمل الطموح كاملاً، وليست كل شركة جاهزة له دفعة واحدة. المسارات أدناه متدرجة — كل واحد يتضمن ما قبله. لا خيار خاطئ، فقط نقطة الانطلاق المناسبة لموقع كاتاليست اليوم.</span>
+      </p>
+    </div>
+
+    <div class="tracks rev" id="tracks">
+      <button class="track" data-scope="identity" type="button">
+        <span class="track-radio"></span>
+        <span class="track-tier"><span class="en">Track 01</span><span class="ar">المسار الأول</span></span>
+        <span class="track-name"><span class="en">The Identity</span><span class="ar">الهوية</span></span>
+        <p class="track-desc"><span class="en">A complete bilingual identity system — logo, guidelines, templates — for proposals, government tenders, LinkedIn, and signage.</span><span class="ar">منظومة هوية ثنائية اللغة كاملة — شعار، دليل علامة، قوالب — للعروض والمناقصات الحكومية وLinkedIn واللافتات.</span></p>
+        <ul>
+          <li><span class="en">Bilingual wordmark & logomark</span><span class="ar">شعار نصي ورمزي ثنائي اللغة</span></li>
+          <li><span class="en">Full identity system & brand guidelines</span><span class="ar">منظومة هوية كاملة ودليل علامة</span></li>
+          <li><span class="en">Templates: proposal, deck, business card, signature, LinkedIn</span><span class="ar">قوالب: عروض، عرض تقديمي، بطاقة عمل، توقيع، LinkedIn</span></li>
+        </ul>
+        <div class="track-foot"><strong><span class="en">For:</span><span class="ar">مناسب لـ:</span></strong> <span class="en">launching with a credible mark before media or site work begins.</span><span class="ar">الانطلاق بعلامة موثوقة قبل العمل على الإعلام أو الموقع.</span></div>
+      </button>
+
+      <button class="track" data-scope="identity-voice" type="button">
+        <span class="track-radio"></span>
+        <span class="track-tier"><span class="en">Track 02</span><span class="ar">المسار الثاني</span></span>
+        <span class="track-name"><span class="en">Identity & Voice</span><span class="ar">الهوية والصوت</span></span>
+        <p class="track-desc"><span class="en">Everything in Track 01, plus the voice: a LinkedIn cadence, quarterly insights, and the scaffold for a flagship governance report.</span><span class="ar">كل ما في المسار الأول، إضافة إلى الصوت: إيقاع LinkedIn، رؤى فصلية، وهيكل تقرير الحوكمة المرجعي.</span></p>
+        <ul>
+          <li><span class="en">Editorial framework & tone of voice</span><span class="ar">إطار تحريري ونبرة صوت</span></li>
+          <li><span class="en">LinkedIn programme — monthly, partner-led, bilingual</span><span class="ar">برنامج LinkedIn — شهري، بقيادة الشركاء، ثنائي اللغة</span></li>
+          <li><span class="en">Quarterly insight series & flagship report scaffold</span><span class="ar">سلسلة رؤى فصلية وهيكل التقرير المرجعي</span></li>
+        </ul>
+        <div class="track-foot"><strong><span class="en">For:</span><span class="ar">مناسب لـ:</span></strong> <span class="en">building authority while the website conversation matures.</span><span class="ar">بناء المرجعية بينما تنضج محادثة الموقع.</span></div>
+      </button>
+
+      <button class="track" data-scope="full" type="button">
+        <span class="track-radio"></span>
+        <span class="track-tier"><span class="en">Track 03</span><span class="ar">المسار الثالث</span></span>
+        <span class="track-name"><span class="en">The Institution</span><span class="ar">المؤسسة</span></span>
+        <p class="track-desc"><span class="en">Everything above, plus the bilingual digital home — an authority engine with a quiet lead system. Built so every component is yours to keep.</span><span class="ar">كل ما سبق، إضافة إلى البيت الرقمي ثنائي اللغة — منصة مرجعية مع نظام استقطاب هادئ. مبني بحيث يبقى كل مكون ملكاً لكم.</span></p>
+        <ul>
+          <li><span class="en">Bilingual website — Arabic and English as equals</span><span class="ar">موقع ثنائي اللغة — العربية والإنجليزية بمنزلة واحدة</span></li>
+          <li><span class="en">Gated flagship report & insights engine</span><span class="ar">تقرير مرجعي محجوب ومحرك رؤى</span></li>
+          <li><span class="en">Lead system — captured, scored, routed to the right partner</span><span class="ar">نظام استقطاب — تسجيل وتقييم وتوجيه إلى الشريك المعني</span></li>
+        </ul>
+        <div class="track-foot"><strong><span class="en">For:</span><span class="ar">مناسب لـ:</span></strong> <span class="en">launching as an institution from day one.</span><span class="ar">الانطلاق كمؤسسة من اليوم الأول.</span></div>
+      </button>
+    </div>
+
+    <div class="confirm" id="confirm">
+      <span class="confirm-dot"></span>
+      <div class="confirm-text">
+        <span class="en">You selected <strong id="conf-en">—</strong>. The next two pages build on this choice.</span>
+        <span class="ar">اخترتم <strong id="conf-ar">—</strong>. الصفحتان التاليتان مبنيتان على هذا الاختيار.</span>
+      </div>
+    </div>
+
+    <a class="nextcta rev" href="compass.html">
+      <div class="nextcta-l">
+        <span class="nextcta-eyebrow"><span class="en">Next · Compass</span><span class="ar">التالي · البوصلة</span></span>
+        <span class="nextcta-h"><span class="en">Did we read you right?</span><span class="ar">هل قرأناكم قراءة صحيحة؟</span></span>
+      </div>
+      <span class="nextcta-arr">→</span>
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <span><span class="en">Catalyst Partners · Private brief · Phase 0</span><span class="ar">كاتاليست بارتنرز · موجز خاص · المرحلة صفر</span></span>
+  <span><span class="en">01 / 03</span><span class="ar">٠١ / ٠٣</span></span>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var btnEn = document.getElementById("lng-en");
+  var btnAr = document.getElementById("lng-ar");
+  var themeBtn = document.getElementById("theme-btn");
+  var moon = document.getElementById("ico-moon");
+  var sun = document.getElementById("ico-sun");
+  var progress = document.getElementById("progress");
+
+  function applyLang(l) {
+    l = l === "en" ? "en" : "ar";
+    root.lang = l;
+    root.dir = l === "en" ? "ltr" : "rtl";
+    btnEn.classList.toggle("on", l === "en");
+    btnAr.classList.toggle("on", l === "ar");
+    try { localStorage.setItem("cp_lang", l); } catch(e){}
+  }
+  btnEn.addEventListener("click", function(){ applyLang("en"); });
+  btnAr.addEventListener("click", function(){ applyLang("ar"); });
+  applyLang(root.lang || "ar");
+
+  function applyTheme(t) {
+    t = t === "light" ? "light" : "dark";
+    root.setAttribute("data-theme", t);
+    moon.style.display = t === "dark" ? "none" : "block";
+    sun.style.display = t === "dark" ? "block" : "none";
+    try { localStorage.setItem("cp_theme", t); } catch(e){}
+  }
+  themeBtn.addEventListener("click", function(){
+    applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  });
+  applyTheme(root.getAttribute("data-theme") || "light");
+
+  // Progress
+  function updateProgress() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0;
+    progress.style.width = pct + "%";
+  }
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  // Track selector
+  var tracks = document.querySelectorAll(".track");
+  var confirm = document.getElementById("confirm");
+  var confEn = document.getElementById("conf-en");
+  var confAr = document.getElementById("conf-ar");
+  var labels = {
+    "identity":       { en: "The Identity",      ar: "الهوية" },
+    "identity-voice": { en: "Identity & Voice",  ar: "الهوية والصوت" },
+    "full":           { en: "The Institution",   ar: "المؤسسة" }
+  };
+
+  function applyScope(s) {
+    tracks.forEach(function(t) {
+      t.setAttribute("data-selected", t.getAttribute("data-scope") === s ? "true" : "false");
+    });
+    if (labels[s]) {
+      confEn.textContent = labels[s].en;
+      confAr.textContent = labels[s].ar;
+      confirm.setAttribute("data-on", "true");
+    } else {
+      confirm.setAttribute("data-on", "false");
+    }
+    try { localStorage.setItem("cp_scope", s); } catch(e){}
+  }
+
+  tracks.forEach(function(t) {
+    t.addEventListener("click", function() {
+      applyScope(t.getAttribute("data-scope"));
+    });
+  });
+
+  var saved = (function(){ try { return localStorage.getItem("cp_scope"); } catch(e){ return null; }})();
+  if (saved && labels[saved]) applyScope(saved);
+
+  // Reveal on scroll
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) {
+      if (en.isIntersecting) en.target.classList.add("in");
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".rev").forEach(function(el) { io.observe(el); });
+})();
+</script>
+
+</body>
 </html>
