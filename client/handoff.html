@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,43 +7,64 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Catalyst Partners — Handoff</title>
+    <title>كاتاليست بارتنرز — التسليم</title>
+
+    <script>
+      (function () {
+        try {
+          var l = localStorage.getItem("cp_lang") || "ar";
+          var t = localStorage.getItem("cp_theme");
+          if (!t)
+            t = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          var h = document.documentElement;
+          h.lang = l === "en" ? "en" : "ar";
+          h.dir = l === "en" ? "ltr" : "rtl";
+          h.setAttribute("data-theme", t);
+          h.setAttribute("data-lang", l);
+        } catch (e) {}
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     />
+
     <style>
       @font-face {
         font-family: "IBM Plex Sans Arabic";
-        font-style: normal;
         font-weight: 300;
         font-display: swap;
         src: url("../fonts/300.woff2") format("woff2");
       }
       @font-face {
         font-family: "IBM Plex Sans Arabic";
-        font-style: normal;
         font-weight: 400;
         font-display: swap;
         src: url("../fonts/400.woff2") format("woff2");
       }
       @font-face {
         font-family: "IBM Plex Sans Arabic";
-        font-style: normal;
         font-weight: 500;
         font-display: swap;
         src: url("../fonts/500.woff2") format("woff2");
       }
       @font-face {
         font-family: "IBM Plex Sans Arabic";
-        font-style: normal;
         font-weight: 600;
         font-display: swap;
         src: url("../fonts/600.woff2") format("woff2");
       }
-
+      @font-face {
+        font-family: "IBM Plex Sans Arabic";
+        font-weight: 700;
+        font-display: swap;
+        src: url("../fonts/700.woff2") format("woff2");
+      }
 
       :root {
         --paper: #f4efe5;
@@ -55,14 +76,18 @@
         --hair: #d7cfbe;
         --bronze: #8c6e3d;
         --bronze-2: #6e5630;
-        --green: #3d6b52;
-        --sx: clamp(18px, 4vw, 32px);
-        --col: min(640px, 92vw);
-        --col-wide: min(880px, 94vw);
+        --rule: #1614120f;
+        --sx: clamp(20px, 4vw, 40px);
+        --col: min(680px, 92vw);
+        --col-wide: min(960px, 94vw);
         --serif: "Instrument Serif", ui-serif, Georgia, serif;
         --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
         --mono: "JetBrains Mono", ui-monospace, monospace;
         --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+        --nav-h: 56px;
+        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+        --wa: #25d366;
+        --wa-2: #1da856;
       }
       [data-theme="dark"] {
         --paper: #141210;
@@ -70,43 +95,39 @@
         --card: #1e1b17;
         --ink: #ede8df;
         --ink-2: #b8b0a4;
-        --mute: #6b6259;
+        --mute: #7a7166;
         --hair: #2e2a25;
         --bronze: #a8854d;
         --bronze-2: #c49a58;
-        --green: #5a9e78;
+        --rule: #ffffff0a;
+        --wa: #2eba62;
+        --wa-2: #39d370;
       }
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-          --paper: #141210;
-          --paper-2: #1c1916;
-          --card: #1e1b17;
-          --ink: #ede8df;
-          --ink-2: #b8b0a4;
-          --mute: #6b6259;
-          --hair: #2e2a25;
-          --bronze: #a8854d;
-          --bronze-2: #c49a58;
-          --green: #5a9e78;
-        }
-      }
+
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
-      html,
-      body {
-        background: var(--paper);
-        color: var(--ink);
-        font-family: var(--sans);
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: calc(var(--nav-h) + 24px);
       }
+      html[data-lang="en"] [data-show="ar"] {
+        display: none;
+      }
+      html[data-lang="ar"] [data-show="en"] {
+        display: none;
+      }
+      html[data-lang="en"] body {
+        font-family: var(--sans);
+      }
+      html[data-lang="ar"] body {
+        font-family: var(--ar);
+      }
+
       body {
-        font-size: 17px;
-        line-height: 1.62;
-        letter-spacing: -0.005em;
+        color: var(--ink);
         background:
           radial-gradient(
             1200px 600px at 80% -10%,
@@ -120,40 +141,25 @@
           ),
           var(--paper);
         min-height: 100vh;
-        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.7;
+        font-size: 16px;
       }
-      [dir="rtl"] body {
-        font-family: var(--ar);
-        font-size: 17px;
+      html[data-lang="ar"] body {
         line-height: 1.85;
-        letter-spacing: 0;
+        font-size: 17px;
       }
       ::selection {
         background: #8c6e3d33;
         color: var(--ink);
       }
 
-      .en {
-        display: initial;
-      }
-      .ar {
-        display: none;
-      }
-      [dir="rtl"] .en {
-        display: none;
-      }
-      [dir="rtl"] .ar {
-        display: initial;
-      }
-
-      /* masthead */
       .masthead {
         position: sticky;
         top: 0;
-        z-index: 50;
-        background: color-mix(in oklab, var(--paper) 86%, transparent);
+        z-index: 60;
+        background: color-mix(in oklab, var(--paper) 88%, transparent);
         backdrop-filter: saturate(1.2) blur(10px);
-        -webkit-backdrop-filter: saturate(1.2) blur(10px);
         border-bottom: 1px solid var(--hair);
       }
       .masthead-row {
@@ -164,90 +170,78 @@
         align-items: center;
         justify-content: space-between;
         gap: 16px;
+        min-height: var(--nav-h);
       }
       .markline {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
         min-width: 0;
       }
       .glyph {
         width: 22px;
         height: 22px;
-        display: grid;
-        place-items: center;
         color: var(--bronze);
+        flex-shrink: 0;
+        transition: transform 0.6s var(--ease);
+      }
+      .markline:hover .glyph {
+        transform: rotate(45deg);
       }
       .wordmark {
-        font-family: var(--serif);
-        font-size: 20px;
-        line-height: 1;
-        letter-spacing: 0.005em;
-        color: var(--ink);
+        font-weight: 500;
+        font-size: 15px;
+        letter-spacing: 0.01em;
         white-space: nowrap;
       }
-      [dir="rtl"] .wordmark {
-        font-family: var(--ar);
-        font-weight: 500;
-        font-size: 18px;
+      html[data-lang="ar"] .wordmark {
+        font-weight: 600;
+        font-size: 16px;
       }
-      .steps {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-inline-start: 8px;
-      }
-      .step {
-        text-decoration: none;
+      .pagetag {
+        font-family: var(--mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
         color: var(--mute);
-        transition: color 0.18s;
-        white-space: nowrap;
+        padding: 4px 10px;
+        border: 1px solid var(--hair);
+        border-radius: 999px;
       }
-      .step.on {
-        color: var(--bronze);
-        font-weight: 500;
+      html[data-lang="ar"] .pagetag {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        font-size: 11px;
+        text-transform: none;
       }
-      .step-sep {
-        width: 3px;
-        height: 3px;
-        border-radius: 50%;
-        background: var(--hair);
-      }
-      @media (max-width: 480px) {
-        .steps {
-          display: none;
-        }
-      }
+
       .controls {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 6px;
       }
-      .lang {
-        display: inline-flex;
+      .lang-tog {
+        display: flex;
+        align-items: center;
         border: 1px solid var(--hair);
         border-radius: 999px;
-        overflow: hidden;
         background: var(--card);
+        overflow: hidden;
+        font-family: var(--mono);
+        font-size: 11px;
       }
-      .lang button {
+      .lang-tog button {
         appearance: none;
         border: 0;
         background: transparent;
-        cursor: pointer;
-        padding: 6px 12px;
-        font: 500 12px var(--sans);
         color: var(--mute);
-        letter-spacing: 0.04em;
+        padding: 7px 12px;
+        cursor: pointer;
+        letter-spacing: 0.06em;
       }
-      .lang button.on {
+      .lang-tog button.on {
         background: var(--ink);
         color: var(--paper);
-      }
-      .lang button:last-child {
-        font-family: var(--ar);
-        font-size: 13.5px;
-        letter-spacing: 0;
       }
       .theme-btn {
         appearance: none;
@@ -256,479 +250,633 @@
         color: var(--mute);
         cursor: pointer;
         border-radius: 50%;
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         display: grid;
         place-items: center;
         transition:
-          color 0.18s,
-          border-color 0.18s,
-          background 0.18s;
+          color 0.2s,
+          border-color 0.2s;
       }
       .theme-btn:hover {
         color: var(--bronze);
         border-color: var(--bronze);
       }
-      .strand {
-        height: 2px;
-        background: var(--hair);
-        position: relative;
-        overflow: hidden;
-      }
-      .strand i {
-        position: absolute;
-        inset-inline-start: 0;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        background: linear-gradient(
-          90deg,
-          var(--bronze) 0%,
-          var(--bronze-2) 100%
-        );
-      }
-
-      /* layout */
-      main {
-        padding: 48px var(--sx) 96px;
-      }
-      .col {
-        max-width: var(--col);
-        margin-inline: auto;
-      }
-
-      /* hero */
-      .hero {
-        padding: 56px 0 60px;
-        border-bottom: 1px solid var(--hair);
-      }
-      .salutation {
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--bronze);
-        margin-bottom: 24px;
-      }
-      [dir="rtl"] .salutation {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 13px;
-      }
-      .hero h1 {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-size: clamp(34px, 5.4vw, 58px);
-        line-height: 1.06;
-        letter-spacing: -0.02em;
-        color: var(--ink);
-        margin-bottom: 20px;
-      }
-      [dir="rtl"] .hero h1 {
-        font-family: var(--ar);
-        font-weight: 500;
-        line-height: 1.25;
-        letter-spacing: 0;
-        font-size: clamp(28px, 4.8vw, 46px);
-      }
-      .hero h1 em {
-        font-style: italic;
-        color: var(--bronze-2);
-      }
-      [dir="rtl"] .hero h1 em {
-        font-style: normal;
-        color: var(--bronze-2);
-        font-weight: 600;
-      }
-      .hero .deck {
-        font-size: 17px;
-        color: var(--ink-2);
-        max-width: 520px;
-        line-height: 1.65;
-      }
-      [dir="rtl"] .hero .deck {
-        font-size: 17.5px;
-        line-height: 1.9;
-      }
-
-      /* section marker */
-      .marker {
-        display: flex;
-        align-items: baseline;
-        gap: 14px;
-        margin-bottom: 20px;
-        margin-top: 48px;
-      }
-      .marker .num {
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        color: var(--bronze);
-      }
-      [dir="rtl"] .marker .num {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        font-size: 13px;
-      }
-      .marker .label {
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--mute);
-      }
-      [dir="rtl"] .marker .label {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 13px;
-      }
-      .marker .rule {
-        flex: 1;
-        height: 1px;
-        background: var(--hair);
-      }
-
-      /* what you did — completion chips */
-      .completed-note {
-        padding: 18px 20px;
-        background: color-mix(in oklab, var(--green) 8%, transparent);
-        border: 1px solid color-mix(in oklab, var(--green) 30%, transparent);
-        border-radius: 6px;
-        margin-bottom: 24px;
-        font-size: 15px;
-        color: var(--ink-2);
-        line-height: 1.55;
-      }
-      [dir="rtl"] .completed-note {
-        font-size: 15.5px;
-        line-height: 1.8;
-      }
-      .completed-note .tick {
-        color: var(--green);
-        font-weight: 600;
-        margin-inline-end: 6px;
-      }
-      .completed-items {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .completed-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        font-size: 14px;
-        color: var(--mute);
-      }
-      [dir="rtl"] .completed-item {
-        font-size: 15px;
-      }
-      .completed-item .ci-dot {
-        flex-shrink: 0;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--green);
-        margin-top: 5px;
-      }
-
-      /* timeline */
-      .timeline {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-      }
-      .week {
-        display: grid;
-        grid-template-columns: 90px 1fr;
-        gap: 18px;
-        padding: 18px 0;
-        border-top: 1px solid var(--hair);
-        align-items: start;
-      }
-      .week:last-child {
-        border-bottom: 1px solid var(--hair);
-      }
-      .week-label {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--bronze);
-        padding-top: 3px;
-      }
-      [dir="rtl"] .week-label {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12.5px;
-      }
-      .week-items {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .week-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      .week-item .wi-dot {
-        flex-shrink: 0;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--hair);
-        margin-top: 6px;
-      }
-      .week-item .wi-title {
-        font-size: 15px;
-        color: var(--ink);
-        font-weight: 500;
-        margin-bottom: 1px;
-      }
-      [dir="rtl"] .week-item .wi-title {
-        font-size: 16px;
-      }
-      .week-item .wi-detail {
-        font-size: 13px;
-        color: var(--mute);
-        line-height: 1.5;
-      }
-      [dir="rtl"] .week-item .wi-detail {
-        font-size: 14px;
-        line-height: 1.7;
-      }
-
-      /* owner map */
-      .owner-map {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2px;
-        margin-top: 4px;
-        background: var(--hair);
-        border: 1px solid var(--hair);
-      }
-      @media (max-width: 480px) {
-        .owner-map {
-          grid-template-columns: 1fr;
-        }
-      }
-      .owner-col {
-        background: var(--card);
-        padding: 20px;
-      }
-      .owner-col-head {
-        font-family: var(--mono);
-        font-size: 10.5px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--bronze);
-        margin-bottom: 14px;
-      }
-      [dir="rtl"] .owner-col-head {
-        font-family: var(--ar);
-        letter-spacing: 0;
-        text-transform: none;
-        font-size: 12.5px;
-      }
-      .owner-list {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .owner-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        font-size: 14px;
-        color: var(--ink-2);
-        line-height: 1.45;
-      }
-      [dir="rtl"] .owner-item {
-        font-size: 15px;
-        line-height: 1.65;
-      }
-      .owner-item .oi-dot {
-        flex-shrink: 0;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--bronze);
-        margin-top: 5px;
-      }
-
-      /* the ask / CTA */
-      .the-ask {
-        margin-top: 48px;
-        padding: 36px;
-        background: var(--ink);
-        border-radius: 8px;
-        color: var(--paper);
-      }
-      .the-ask h2 {
-        font-family: var(--serif);
-        font-weight: 400;
-        font-size: clamp(26px, 3.4vw, 36px);
-        line-height: 1.12;
-        letter-spacing: -0.01em;
-        margin-bottom: 12px;
-      }
-      [dir="rtl"] .the-ask h2 {
-        font-family: var(--ar);
-        font-weight: 500;
-        line-height: 1.35;
-        letter-spacing: 0;
-        font-size: clamp(22px, 3vw, 30px);
-      }
-      .the-ask h2 em {
-        font-style: italic;
-        color: var(--bronze-2);
-      }
-      [dir="rtl"] .the-ask h2 em {
-        font-style: normal;
-        color: var(--bronze-2);
-        font-weight: 600;
-      }
-      .the-ask p {
-        font-size: 15.5px;
-        color: color-mix(in oklab, var(--paper) 65%, transparent);
-        line-height: 1.6;
-        margin-bottom: 24px;
-        max-width: 480px;
-      }
-      [dir="rtl"] .the-ask p {
-        font-size: 16px;
-        line-height: 1.85;
-      }
-      .cta-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        appearance: none;
-        border: 0;
-        cursor: pointer;
-        background: var(--bronze);
-        color: var(--paper);
-        padding: 16px 26px;
-        border-radius: 999px;
-        font: 600 15px var(--sans);
-        letter-spacing: -0.005em;
-        transition:
-          background 0.18s,
-          transform 0.12s;
-        text-decoration: none;
-      }
-      [dir="rtl"] .cta-btn {
-        font-family: var(--ar);
-        font-size: 16px;
-        font-weight: 600;
-      }
-      .cta-btn:hover {
-        background: var(--bronze-2);
-        transform: translateY(-1px);
-      }
-      .cta-btn svg {
+      .theme-btn svg {
         width: 16px;
         height: 16px;
       }
 
-      /* page nav */
-      .page-nav {
-        max-width: var(--col);
-        margin-inline: auto;
-        padding: 32px var(--sx) 0;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+      main {
+        max-width: var(--col-wide);
+        margin: 0 auto;
+        padding: 0 var(--sx);
       }
-      .page-back {
+      section {
+        padding: 72px 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      section:last-of-type {
+        border-bottom: 0;
+      }
+      @media (max-width: 680px) {
+        section {
+          padding: 56px 0;
+        }
+      }
+
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--mute);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      html[data-lang="ar"] .eyebrow {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        font-size: 13px;
+        text-transform: none;
+        color: var(--bronze-2);
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--bronze);
+      }
+
+      .hero {
+        padding: 96px 0 80px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-style: italic;
+        font-size: clamp(40px, 6vw, 68px);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        max-width: 14ch;
+      }
+      html[data-lang="ar"] .hero h1 {
+        font-family: var(--ar);
+        font-style: normal;
+        font-weight: 300;
+        line-height: 1.2;
+        letter-spacing: 0;
+        font-size: clamp(36px, 5.5vw, 60px);
+        max-width: 16ch;
+      }
+      .hero .lede {
+        margin-top: 28px;
+        max-width: var(--col);
+        font-size: clamp(17px, 2vw, 20px);
+        color: var(--ink-2);
+        line-height: 1.55;
+      }
+      html[data-lang="ar"] .hero .lede {
+        line-height: 1.85;
+      }
+
+      .track-banner {
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 22px;
+        background: var(--card);
+        border: 1px solid var(--bronze);
+        border-radius: 12px;
+        max-width: var(--col);
+      }
+      .track-banner-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--bronze);
+        flex-shrink: 0;
+      }
+      .track-banner-text {
+        font-size: 14.5px;
+        color: var(--ink-2);
+        line-height: 1.55;
+      }
+      html[data-lang="ar"] .track-banner-text {
+        font-size: 15.5px;
+        line-height: 1.75;
+      }
+      .track-banner-text strong {
+        color: var(--ink);
+        font-weight: 500;
+        display: block;
+        margin-bottom: 2px;
+        font-size: 16px;
+      }
+      html[data-lang="ar"] .track-banner-text strong {
+        font-weight: 600;
+        font-size: 17px;
+      }
+      .track-banner a {
+        color: var(--bronze);
+        text-decoration: none;
+        border-bottom: 1px solid
+          color-mix(in oklab, var(--bronze) 40%, transparent);
+      }
+      .track-banner a:hover {
+        color: var(--bronze-2);
+        border-bottom-color: var(--bronze-2);
+      }
+
+      h2.section-h {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-style: italic;
+        font-size: clamp(28px, 3.6vw, 42px);
+        line-height: 1.15;
+        letter-spacing: -0.005em;
+        max-width: 22ch;
+        margin-bottom: 14px;
+      }
+      html[data-lang="ar"] h2.section-h {
+        font-family: var(--ar);
+        font-style: normal;
+        font-weight: 400;
+        font-size: clamp(26px, 3.4vw, 38px);
+        line-height: 1.3;
+      }
+      .section-sub {
+        max-width: var(--col);
+        color: var(--ink-2);
+        font-size: 17px;
+        line-height: 1.65;
+        margin-bottom: 40px;
+      }
+      html[data-lang="ar"] .section-sub {
+        line-height: 1.85;
+      }
+
+      /* Phases */
+      .phases {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .phase {
+        background: var(--card);
+        border: 1px solid var(--hair);
+        border-radius: 14px;
+        padding: 28px clamp(22px, 3.5vw, 36px);
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      @media (max-width: 680px) {
+        .phase {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+      }
+      .phase-mark {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 48px;
+        line-height: 1;
+        color: var(--bronze);
+        min-width: 60px;
+      }
+      html[data-lang="ar"] .phase-mark {
+        font-family: var(--mono);
+        font-style: normal;
+        font-size: 32px;
+      }
+      .phase-body {
+        min-width: 0;
+      }
+      .phase-name {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--mute);
+        margin-bottom: 6px;
+      }
+      html[data-lang="ar"] .phase-name {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12.5px;
+      }
+      .phase h3 {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(22px, 2.6vw, 28px);
+        line-height: 1.2;
+        color: var(--ink);
+        margin-bottom: 10px;
+      }
+      html[data-lang="ar"] .phase h3 {
+        font-family: var(--ar);
+        font-style: normal;
+        font-weight: 500;
+        font-size: clamp(21px, 2.4vw, 25px);
+        line-height: 1.4;
+      }
+      .phase p {
+        color: var(--ink-2);
+        font-size: 15.5px;
+        line-height: 1.65;
+        max-width: 60ch;
+      }
+      html[data-lang="ar"] .phase p {
+        font-size: 16.5px;
+        line-height: 1.85;
+      }
+
+      .deliver {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 560px) {
+        .deliver {
+          grid-template-columns: 1fr;
+        }
+      }
+      .deliver-col {
+      }
+      .deliver-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--bronze-2);
+        margin-bottom: 8px;
+      }
+      html[data-lang="ar"] .deliver-label {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12px;
+      }
+      .deliver ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .deliver li {
+        font-size: 13.5px;
+        color: var(--ink-2);
+        line-height: 1.55;
+        padding-inline-start: 14px;
+        position: relative;
+      }
+      html[data-lang="ar"] .deliver li {
+        font-size: 14.5px;
+        line-height: 1.75;
+      }
+      .deliver li::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0;
+        top: 0.7em;
+        width: 6px;
+        height: 1px;
+        background: var(--bronze);
+      }
+
+      /* Ownership map */
+      .own {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 8px;
+      }
+      @media (max-width: 780px) {
+        .own {
+          grid-template-columns: 1fr;
+        }
+      }
+      .own-col {
+        background: var(--card);
+        border: 1px solid var(--hair);
+        border-radius: 12px;
+        padding: 22px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .own-h {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 22px;
+        line-height: 1.2;
+        color: var(--ink);
+      }
+      html[data-lang="ar"] .own-h {
+        font-family: var(--ar);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1.4;
+      }
+      .own-sub {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--bronze-2);
+      }
+      html[data-lang="ar"] .own-sub {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12.5px;
+      }
+      .own ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .own li {
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        padding-inline-start: 16px;
+        position: relative;
+      }
+      html[data-lang="ar"] .own li {
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .own li::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0;
+        top: 0.7em;
+        width: 8px;
+        height: 1px;
+        background: var(--bronze);
+      }
+
+      /* What we need from you */
+      .need {
+        background: var(--card);
+        border: 1px solid var(--hair);
+        border-radius: 14px;
+        padding: 32px clamp(24px, 4vw, 40px);
+      }
+      .need ol {
+        list-style: none;
+        padding: 0;
+        counter-reset: n;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .need li {
+        counter-increment: n;
+        padding-inline-start: 48px;
+        position: relative;
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.65;
+      }
+      html[data-lang="ar"] .need li {
+        font-size: 17px;
+        line-height: 1.85;
+      }
+      .need li::before {
+        content: counter(n, decimal-leading-zero);
+        position: absolute;
+        inset-inline-start: 0;
+        top: 1px;
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--bronze);
+        border: 1px solid var(--bronze);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+      }
+      html[data-lang="ar"] .need li::before {
+        font-family: var(--mono);
+      }
+      .need li small {
+        display: block;
+        margin-top: 4px;
+        color: var(--mute);
+        font-size: 13px;
+      }
+      html[data-lang="ar"] .need li small {
+        font-size: 14px;
+      }
+
+      /* Final CTA */
+      .final {
+        margin-top: 64px;
+        padding: 48px clamp(28px, 5vw, 56px);
+        background: linear-gradient(
+          180deg,
+          var(--ink) 0%,
+          color-mix(in oklab, var(--ink) 88%, var(--bronze-2)) 100%
+        );
+        color: var(--paper);
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .final-eyebrow {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.65;
+      }
+      html[data-lang="ar"] .final-eyebrow {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12.5px;
+        opacity: 0.7;
+      }
+      .final h2 {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(28px, 4vw, 40px);
+        line-height: 1.15;
+        max-width: 18ch;
+      }
+      html[data-lang="ar"] .final h2 {
+        font-family: var(--ar);
+        font-style: normal;
+        font-weight: 400;
+        font-size: clamp(26px, 3.6vw, 36px);
+        line-height: 1.3;
+      }
+      .final p {
+        font-size: 16px;
+        line-height: 1.65;
+        max-width: 54ch;
+        opacity: 0.85;
+      }
+      html[data-lang="ar"] .final p {
+        font-size: 17px;
+        line-height: 1.85;
+      }
+      .final-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .final-btn {
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        padding: 14px 22px;
+        border-radius: 999px;
+        font: inherit;
+        font-size: 15px;
+        font-weight: 500;
         display: inline-flex;
         align-items: center;
         gap: 10px;
+        text-decoration: none;
+        transition:
+          transform 0.15s var(--ease),
+          background 0.2s;
+      }
+      html[data-lang="ar"] .final-btn {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .final-btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-wa {
+        background: var(--wa);
+        color: #0a1f12;
+      }
+      .btn-wa:hover {
+        background: var(--wa-2);
+      }
+      .btn-wa svg {
+        width: 18px;
+        height: 18px;
+      }
+      .btn-copy {
+        background: transparent;
+        color: var(--paper);
+        border: 1px solid color-mix(in oklab, var(--paper) 30%, transparent);
+      }
+      .btn-copy:hover {
+        background: color-mix(in oklab, var(--paper) 10%, transparent);
+      }
+      .btn-back {
+        background: transparent;
+        color: var(--paper);
+        opacity: 0.7;
+      }
+      .btn-back:hover {
+        opacity: 1;
+      }
+
+      .final-note {
+        margin-top: 10px;
         font-family: var(--mono);
         font-size: 11px;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--mute);
-        text-decoration: none;
-        padding: 13px 18px;
-        border: 1px solid var(--hair);
-        border-radius: 999px;
-        transition:
-          border-color 0.18s,
-          color 0.18s,
-          background 0.18s;
+        opacity: 0.55;
       }
-      [dir="rtl"] .page-back {
+      html[data-lang="ar"] .final-note {
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
         font-size: 13px;
       }
-      .page-back:hover {
-        border-color: var(--bronze);
-        background: color-mix(in oklab, var(--bronze) 6%, transparent);
+
+      /* Toast */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        inset-inline-start: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--ink);
+        color: var(--paper);
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.25s var(--ease),
+          transform 0.25s var(--ease);
+        z-index: 80;
+      }
+      html[data-lang="ar"] .toast {
+        font-size: 14.5px;
+      }
+      .toast.on {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
       }
 
       footer {
-        border-top: 1px solid var(--hair);
-        margin-top: 64px;
-        padding: 28px var(--sx);
-        color: var(--mute);
+        max-width: var(--col-wide);
+        margin: 48px auto 0;
+        padding: 24px var(--sx) 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        border-top: 1px solid var(--rule);
         font-family: var(--mono);
         font-size: 10.5px;
-        letter-spacing: 0.14em;
+        color: var(--mute);
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 8px;
-        max-width: var(--col-wide);
-        margin-inline: auto;
       }
-      [dir="rtl"] footer {
+      html[data-lang="ar"] footer {
         font-family: var(--ar);
         letter-spacing: 0;
         text-transform: none;
         font-size: 12.5px;
       }
 
-      .rev {
+      .reveal {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(14px);
         transition:
-          opacity 0.65s cubic-bezier(0.2, 0.7, 0.2, 1),
-          transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease);
       }
-      .rev.in {
+      .reveal.in {
         opacity: 1;
         transform: none;
       }
 
-      @media (max-width: 560px) {
-        .hero {
-          padding: 40px 0 44px;
-        }
-        .week {
-          grid-template-columns: 72px 1fr;
-          gap: 12px;
-        }
-        .the-ask {
-          padding: 26px;
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          transition: none !important;
-        }
-        .rev {
-          opacity: 1;
-          transform: none;
-        }
+      .phase[data-hidden="true"] {
+        display: none;
       }
     </style>
   </head>
@@ -736,693 +884,920 @@
     <header class="masthead">
       <div class="masthead-row">
         <div class="markline">
-          <span class="glyph" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <rect
-                x="2.5"
-                y="2.5"
-                width="17"
-                height="17"
-                stroke="currentColor"
-                stroke-width="1"
-              />
-              <line
-                x1="2.5"
-                y1="11"
-                x2="19.5"
-                y2="11"
-                stroke="currentColor"
-                stroke-width="1"
-              />
-              <line
-                x1="11"
-                y1="2.5"
-                x2="11"
-                y2="19.5"
-                stroke="currentColor"
-                stroke-width="1"
-              />
-            </svg>
-          </span>
-          <span class="wordmark"
-            ><span class="en">Catalyst Partners</span
-            ><span class="ar">كاتاليست بارتنرز</span></span
+          <svg
+            class="glyph"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
           >
+            <path d="M4 12 L12 4 L20 12 L12 20 Z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <span class="wordmark" data-show="en">Catalyst Partners</span>
+          <span class="wordmark" data-show="ar">كاتاليست بارتنرز</span>
+          <span class="pagetag" data-show="en">Handoff</span>
+          <span class="pagetag" data-show="ar">التسليم</span>
         </div>
-        <nav class="steps" aria-label="Partner review">
-          <a href="compass.html" class="step" aria-label="Compass"
-            ><span class="en">Compass</span><span class="ar">البوصلة</span></a
-          >
-          <span class="step-sep"></span>
-          <a
-            href="handoff.html"
-            class="step on"
-            aria-current="page"
-            aria-label="Handoff"
-            ><span class="en">Handoff</span><span class="ar">التسليم</span></a
-          >
-        </nav>
         <div class="controls">
+          <div class="lang-tog">
+            <button id="lng-ar" type="button">ع</button>
+            <button id="lng-en" type="button">EN</button>
+          </div>
           <button
-            id="theme-btn"
             class="theme-btn"
-            onclick="toggleTheme()"
-            aria-label="Toggle dark mode"
+            id="theme-btn"
+            type="button"
+            aria-label="Toggle theme"
           >
             <svg
               id="theme-icon-moon"
-              viewBox="0 0 16 16"
+              viewBox="0 0 24 24"
               fill="none"
-              width="14"
-              height="14"
+              stroke="currentColor"
+              stroke-width="1.6"
             >
-              <path
-                d="M13.5 9A6 6 0 0 1 6.5 2a.5.5 0 0 0-.62.64A6 6 0 1 0 13.36 9.62.5.5 0 0 0 13.5 9z"
-                fill="currentColor"
-              />
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
             </svg>
             <svg
               id="theme-icon-sun"
-              viewBox="0 0 16 16"
+              viewBox="0 0 24 24"
               fill="none"
-              width="14"
-              height="14"
+              stroke="currentColor"
+              stroke-width="1.6"
               style="display: none"
             >
-              <circle
-                cx="8"
-                cy="8"
-                r="3.2"
-                stroke="currentColor"
-                stroke-width="1.2"
-              />
+              <circle cx="12" cy="12" r="4" />
               <path
-                d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.9 11.9l1.05 1.05M12.95 3.05l-1.06 1.06M4.1 11.9l-1.05 1.05"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
+                d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"
               />
             </svg>
           </button>
-          <div class="lang" role="group" aria-label="Language">
-            <button id="lng-en" class="on" onclick="setLang('en')">EN</button>
-            <button id="lng-ar" onclick="setLang('ar')">عربي</button>
-          </div>
         </div>
       </div>
-      <div class="strand"><i></i></div>
     </header>
 
     <main>
-      <section class="hero col">
-        <div class="salutation rev">
-          <span class="en">03 · Handoff</span
-          ><span class="ar">03 · التسليم</span>
+      <section class="hero">
+        <div class="eyebrow">
+          <span data-show="en">What happens next</span>
+          <span data-show="ar">ما الذي يحدث بعد ذلك</span>
         </div>
-
-        <h1 class="rev">
-          <span class="en"
-            >You've read the foundation. You've read the compass.
-            <em>Here is the delivery sequence.</em></span
-          >
-          <span class="ar"
-            >قرأت التأسيس والبوصلة. <em>هذا تسلسل التسليم.</em></span
-          >
-        </h1>
-
-        <p class="deck rev">
-          <span class="en"
-            >No ambiguity. What we ship, when, who owns what — laid out flat so
-            the first call we have is about the work, not about the plan.</span
-          >
-          <span class="ar"
-            >لا غموض في هذه الوثيقة. التسليمات والجداول والمسؤوليات — محدَّدة
-            بدقة، حتى تكون أول مكالمة عن العمل لا عن الخطة.</span
-          >
+        <h1 data-show="en">A deliberate sequence, in four movements.</h1>
+        <h1 data-show="ar">تسلسلٌ مدروس، في أربع حركات.</h1>
+        <p class="lede" data-show="en">
+          Catalyst Partners is built in phases, not on a calendar. Each phase
+          ends when its standard of finish is met, not when a day on a Gantt
+          chart passes. The shape below is shaped by the track you marked on
+          Foundation — what you receive, what we ask from you, and what crosses
+          the line between us at each step.
         </p>
+        <p class="lede" data-show="ar">
+          تُبنى كاتاليست بارتنرز على مراحل، لا على روزنامة. كل مرحلة تنتهي عند
+          بلوغها معيار الإتمام، لا عند مرور يومٍ على جدول زمني. الشكل أدناه يتبع
+          المسار الذي اخترتموه في "الأساس" — ما تتسلَّمونه، وما نطلبه منكم، وما
+          يَعبُر الخطّ بيننا في كل خطوة.
+        </p>
+
+        <div class="track-banner" id="track-banner">
+          <span class="track-banner-dot"></span>
+          <div class="track-banner-text">
+            <strong>
+              <span data-show="en" id="track-name-en"
+                >— Track not yet chosen</span
+              >
+              <span data-show="ar" id="track-name-ar"
+                >— لم يُختَر المسار بعد</span
+              >
+            </strong>
+            <span data-show="en"
+              ><a href="foundation.html">Return to Foundation</a> if you want to
+              change the starting line.</span
+            >
+            <span data-show="ar"
+              ><a href="foundation.html">ارجعوا إلى "الأساس"</a> إن أردتم تغيير
+              نقطة الانطلاق.</span
+            >
+          </div>
+        </div>
       </section>
 
-      <section class="col">
-        <div class="marker rev">
-          <span class="num">01</span>
-          <span class="label"
-            ><span class="en">What you did</span
-            ><span class="ar">اللي عملته</span></span
-          >
-          <span class="rule"></span>
+      <!-- The phases -->
+      <section class="reveal">
+        <div class="eyebrow">
+          <span data-show="en">The four phases</span>
+          <span data-show="ar">المراحل الأربع</span>
         </div>
-
-        <div class="completed-note rev">
-          <span class="en"
-            ><span class="tick">✓</span>By sending back pages 1 and 2, you have
-            given us what we need to move. Here is what you closed:</span
-          >
-          <span class="ar"
-            ><span class="tick">✓</span>بإرسالك الصفحتين الأولى والتانية، إديتنا
-            اللي محتاجينه للتحرك. ده اللي أقفلته:</span
-          >
-          <div class="completed-items">
-            <div class="completed-item">
-              <div class="ci-dot"></div>
-              <span class="en"
-                >8 foundation decisions — Arabic name, Arabic voice guardian,
-                family-business ownership, mid-market ownership, fast-track
-                threshold, data residency, CRM choice, notification
-                path.</span
-              >
-              <span class="ar"
-                >8 قرارات تأسيسية — اسم الشركة بالعربي، مراجع العربي، ملكية
-                عملاء عيلات الأعمال، ملكية السوق المتوسط، حد الـ lead المهم،
-                إقامة البيانات، اختيار الـ CRM، طريق التنبيه.</span
-              >
-            </div>
-            <div class="completed-item">
-              <div class="ci-dot"></div>
-              <span class="en"
-                >10 market and positioning claims — where you agreed, where you
-                adjusted, where you challenged. These shape the brand brief, the
-                site copy, and the first client conversation.</span
-              >
-              <span class="ar"
-                >10 رهانات سوقية وتموضع تم التحقق منها — فين اتفقت، فين عدّلت،
-                فين اختلفت. دي بتشكّل بريف البراند ونص الموقع وأول محادثة مع
-                عميل.</span
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="marker rev">
-          <span class="num">02</span>
-          <span class="label"
-            ><span class="en">Agency delivery phases — Phase 0 to launch</span
-            ><span class="ar">مراحل التسليم — المرحلة 0 للإطلاق</span></span
-          >
-          <span class="rule"></span>
-        </div>
-
-        <p class="rev" style="font-size:15px;color:var(--mute);line-height:1.6;margin-bottom:20px;max-width:560px;">
-          <span class="en">These four phases cover agency delivery — from your decisions today to the site going live. Phase 0 closes, Phase 1 (the full content engine) begins after.</span>
-          <span class="ar">المراحل الأربعة دي بتغطي التسليم من جهتنا — من قراراتك النهارده لحد ما الموقع يطلع. مرحلة 0 بتقفل، ومرحلة 1 (محرك المحتوى الكامل) بتبدأ بعدها.</span>
+        <h2 class="section-h" data-show="en">
+          From foundation to first proof.
+        </h2>
+        <h2 class="section-h" data-show="ar">من الأساس إلى أول دليل.</h2>
+        <p class="section-sub" data-show="en">
+          Each phase carries a clear close. We do not begin the next until the
+          one before is finished to the standard.
+        </p>
+        <p class="section-sub" data-show="ar">
+          كل مرحلة تنتهي بنهايةٍ واضحة. لا ندخل التالية قبل اكتمال سابقتها وفق
+          المعيار.
         </p>
 
-        <div class="timeline rev">
-          <div class="week">
-            <span class="week-label"
-              ><span class="en">Phase A · Foundation</span
-              ><span class="ar">المرحلة أ · التأسيس</span></span
-            >
-            <div class="week-items">
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">30-minute alignment call</span
-                    ><span class="ar">مكالمة تنسيق 30 دقيقة</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Review decisions + validations together. Close anything
-                      still open. One conversation, no slides.</span
-                    ><span class="ar"
-                      >نراجع القرارات والتحققات مع بعض. نقفل أي حاجة لسه مفتوحة.
-                      محادثة واحدة، من غير سلايدات.</span
-                    >
-                  </div>
-                </div>
+        <div class="phases">
+          <!-- Phase A — universal -->
+          <article class="phase">
+            <div class="phase-mark">A</div>
+            <div class="phase-body">
+              <div class="phase-name">
+                <span data-show="en">Phase A · Foundation locked</span>
+                <span data-show="ar">المرحلة أ · إغلاق الأساس</span>
               </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Domains registered</span
-                    ><span class="ar">سجّلنا النطاقات</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >catalystpartners.ae and supporting domains locked. No
-                      brand work ships before the addresses are owned.</span
-                    ><span class="ar"
-                      >catalystpartners.ae والنطاقات المساندة آمنّاها. مفيش شغل
-                      براند ينزل قبل ما العناوين ملكنا.</span
-                    >
-                  </div>
+              <h3 data-show="en">Decisions closed. Names set. Doors opened.</h3>
+              <h3 data-show="ar">
+                القرارات مُغلَقة. الأسماء محسومة. الأبواب مفتوحة.
+              </h3>
+              <p data-show="en">
+                The Compass confirmations are signed. The Arabic name is
+                decided. Domains are registered. The brand workspace and content
+                workspace exist. The work begins from a fixed starting line, not
+                a moving one.
+              </p>
+              <p data-show="ar">
+                تأكيدات البوصلة مُوقَّعة. الاسم العربي محسوم. النطاقات مُسجَّلة.
+                مساحة العلامة ومساحة المحتوى قائمتان. ينطلق العمل من نقطة بداية
+                ثابتة، لا متحرّكة.
+              </p>
+              <div class="deliver">
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">You receive</div>
+                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <ul>
+                    <li data-show="en">
+                      Signed-off positioning &amp; segment priority
+                    </li>
+                    <li data-show="ar">تموضع وأولوية قطاع مُؤكَّدان</li>
+                    <li data-show="en">
+                      Final Arabic name &amp; brand workspace
+                    </li>
+                    <li data-show="ar">الاسم العربي النهائي ومساحة العلامة</li>
+                    <li data-show="en">
+                      Registered domains (.ae primary + .com defensive)
+                    </li>
+                    <li data-show="ar">
+                      نطاقات مُسجَّلة (.ae أساسي + .com للحماية)
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en"
-                      >Brand brief finalized and issued to designer</span
-                    ><span class="ar">بريف البراند اتخلّص وبيتسلّم للمصمم</span>
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">
+                    We need from you
                   </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Your decisions embedded. Arabic name direction confirmed.
-                      Designer-ready document — no revision loops for missing
-                      information.</span
-                    ><span class="ar"
-                      >قراراتك جوّاه. اتجاه الاسم العربي مؤكَّد. الوثيقة
-                      جاهزة للمصمم — من غير دورات مراجعة لمعلومات ناقصة.</span
-                    >
-                  </div>
+                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <ul>
+                    <li data-show="en">
+                      A single review window for the Compass
+                    </li>
+                    <li data-show="ar">جلسة مراجعة واحدة للبوصلة</li>
+                    <li data-show="en">Confirmation on Arabic name approach</li>
+                    <li data-show="ar">إقرار توجّه الاسم العربي</li>
+                    <li data-show="en">
+                      Domain preferences (we suggest, you choose)
+                    </li>
+                    <li data-show="ar">تفضيلات النطاق (نقترح، وتختارون)</li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="week">
-            <span class="week-label"
-              ><span class="en">Phase B · Identity</span
-              ><span class="ar">المرحلة ب · الهوية</span></span
-            >
-            <div class="week-items">
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Brand identity — round 1</span
-                    ><span class="ar">الهوية البصرية — الجولة الأولى</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Logo concepts, bilingual wordmark, colour application,
-                      typography in use. Three directions presented, one
-                      selected.</span
-                    ><span class="ar"
-                      >مفاهيم الشعار، الاسم التجاري بالعربي والإنجليزي، تطبيق
-                      الألوان، الخطوط في الاستخدام. ثلاثة اتجاهات مقدَّمة، واحد
-                      منهم بيتاخد.</span
-                    >
-                  </div>
-                </div>
+          <!-- Phase B — Identity (all tracks) -->
+          <article class="phase" data-phase="identity">
+            <div class="phase-mark">B</div>
+            <div class="phase-body">
+              <div class="phase-name">
+                <span data-show="en">Phase B · The Identity</span>
+                <span data-show="ar">المرحلة ب · الهوية</span>
               </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Hosting environment provisioned</span
-                    ><span class="ar">بيئة الاستضافة جاهزة</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >UAE-region server stood up. CMS instance deployed.
-                      Backups configured. Development environment live.</span
-                    ><span class="ar"
-                      >سيرفر منطقة الإمارات شغّال. نسخة الـ CMS اتنشرت. النسخ
-                      الاحتياطية جاهزة. بيئة التطوير شغّالة.</span
-                    >
-                  </div>
+              <h3 data-show="en">The mark that enters every room.</h3>
+              <h3 data-show="ar">العلامة التي تَدخل كل غرفة.</h3>
+              <p data-show="en">
+                A complete bilingual identity — wordmark, logomark, system,
+                applications. The mark is tested against the contexts it must
+                survive: government proposal covers, executive decks, LinkedIn
+                at 56 pixels, signage at two metres. It works in all of them or
+                it does not ship.
+              </p>
+              <p data-show="ar">
+                هوية ثنائية اللغة كاملة — شعار نصّي، رمز، منظومة، تطبيقات.
+                يُختبَر الشعار في السياقات التي عليه أن يجتازها: أغلفة العروض
+                الحكومية، عروض المديرين، LinkedIn بعرض ٥٦ بكسل، اللافتات بمترين.
+                إما أن ينجح في كل ذلك، أو لا يُسلَّم.
+              </p>
+              <div class="deliver">
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">You receive</div>
+                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <ul>
+                    <li data-show="en">Bilingual wordmark &amp; logomark</li>
+                    <li data-show="ar">شعار نصّي ورمز ثنائي اللغة</li>
+                    <li data-show="en">
+                      Full identity system &amp; brand guidelines
+                    </li>
+                    <li data-show="ar">منظومة هوية كاملة وكتاب علامة</li>
+                    <li data-show="en">
+                      Templates: proposal cover, presentation deck, business
+                      card, email signature, LinkedIn set
+                    </li>
+                    <li data-show="ar">
+                      قوالب: غلاف العروض، البريزنتيشن، بطاقة العمل، توقيع
+                      البريد، حزمة LinkedIn
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">CRM configured</span
-                    ><span class="ar">الـ CRM جاهز</span>
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">
+                    We need from you
                   </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >HubSpot or Zoho set up per your decision. Segment routing
-                      map implemented. Raw lead log in place — CRM stays
-                      swappable.</span
-                    ><span class="ar"
-                      >HubSpot أو Zoho جاهز حسب قرارك. ضبطنا خريطة توجيه
-                      السيجمنتس. سجل الـ leads الخام جاهز — الـ CRM يفضل قابل
-                      للتبديل.</span
-                    >
-                  </div>
+                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <ul>
+                    <li data-show="en">
+                      Two review rounds, focused — direction first, refinement
+                      second
+                    </li>
+                    <li data-show="ar">
+                      جولتا مراجعة مركّزتان — التوجّه أولًا، التهذيب ثانيًا
+                    </li>
+                    <li data-show="en">
+                      A nominated reviewer for Arabic typography
+                    </li>
+                    <li data-show="ar">مراجع مُعيَّن لِطباعة العربية</li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="week">
-            <span class="week-label"
-              ><span class="en">Phase C · Build</span
-              ><span class="ar">المرحلة ج · البناء</span></span
-            >
-            <div class="week-items">
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Brand identity — final</span
-                    ><span class="ar">الهوية البصرية — نهائية</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Refined direction approved. Bilingual wordmark complete.
-                      Full identity system: logo files, colour palette, type
-                      specimen, usage rules.</span
-                    ><span class="ar"
-                      >الاتجاه المختار اتاعتمد. الاسم التجاري ثنائي اللغة كامل.
-                      نظام الهوية كامل: ملفات الشعار، لوحة الألوان، عينة الخطوط،
-                      قواعد الاستخدام.</span
-                    >
-                  </div>
-                </div>
+          <!-- Phase C — Voice (identity-voice & full) -->
+          <article class="phase" data-phase="voice">
+            <div class="phase-mark">C</div>
+            <div class="phase-body">
+              <div class="phase-name">
+                <span data-show="en">Phase C · The Voice</span>
+                <span data-show="ar">المرحلة ج · الصوت</span>
               </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Core website pages in development</span
-                    ><span class="ar">صفحات الموقع الأساسية في التطوير</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Homepage, positioning, services, and partners pages.
-                      Arabic and English built together — never one before the
-                      other.</span
-                    ><span class="ar"
-                      >الصفحة الرئيسية، التموضع، الخدمات، وصفحة الشركاء. العربي
-                      والإنجليزي بيتبنوا مع بعض — مش واحد قبل التاني.</span
-                    >
-                  </div>
+              <h3 data-show="en">A rhythm the firm can keep without strain.</h3>
+              <h3 data-show="ar">
+                إيقاعٌ تستطيع الشركة المحافظة عليه دون عناء.
+              </h3>
+              <p data-show="en">
+                An editorial system the partners can actually live with — a
+                monthly LinkedIn cadence in Arabic and English, a quarterly
+                insight series, and the scaffold for the flagship governance
+                report. Not a content calendar that dies in week three. A
+                rhythm.
+              </p>
+              <p data-show="ar">
+                منظومة تحريرية يقدر الشركاء على العيش معها فعلًا — إيقاع شهري
+                على LinkedIn بالعربية والإنجليزية، سلسلة رؤى فصلية، وهيكل
+                التقرير المرجعي حول الحوكمة. لا روزنامة محتوى تموت في الأسبوع
+                الثالث، بل إيقاع.
+              </p>
+              <div class="deliver">
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">You receive</div>
+                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <ul>
+                    <li data-show="en">
+                      Editorial framework &amp; tone-of-voice document
+                    </li>
+                    <li data-show="ar">إطار تحريري ووثيقة نبرة الصوت</li>
+                    <li data-show="en">
+                      First three months of LinkedIn programme, partner-led
+                    </li>
+                    <li data-show="ar">
+                      أول ثلاثة أشهر من برنامج LinkedIn، بقيادة الشركاء
+                    </li>
+                    <li data-show="en">
+                      Visual content kit: stat cards, quote cards, report covers
+                    </li>
+                    <li data-show="ar">
+                      حزمة محتوى مرئي: بطاقات إحصاءات، اقتباسات، أغلفة تقارير
+                    </li>
+                    <li data-show="en">
+                      Flagship report — outline, research plan, design direction
+                    </li>
+                    <li data-show="ar">
+                      التقرير المرجعي — مخطّط، خطة بحث، توجّه بصري
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Lead notification stack live</span
-                    ><span class="ar">نظام تنبيه الـ leads شغّال</span>
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">
+                    We need from you
                   </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Your preferred path — Slack, email, or both — configured
-                      and tested. Fast-track threshold working. Scoring model
-                      calibrated.</span
-                    ><span class="ar"
-                      >الطريق المفضل عندك — Slack أو إيميل أو الاتنين — جهّزناه
-                      واتاختبر. حد الـ fast-track شغّال. نموذج السكورنج
-                      معاير.</span
-                    >
-                  </div>
+                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <ul>
+                    <li data-show="en">One partner-voice session per month</li>
+                    <li data-show="ar">جلسة صوت شريك واحدة شهريًا</li>
+                    <li data-show="en">
+                      An Arabic reviewer for every piece before publish
+                    </li>
+                    <li data-show="ar">مراجع عربي لكل قطعة قبل النشر</li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="week">
-            <span class="week-label"
-              ><span class="en">Phase D · Deliver</span
-              ><span class="ar">المرحلة د · التسليم</span></span
-            >
-            <div class="week-items">
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Bilingual core site — review round</span
-                    ><span class="ar"
-                      >الموقع الثنائي الأساسي — جولة مراجعة</span
-                    >
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Core pages reviewed in both locales and directions.
-                      Arabic editorial review gate applied. Copy refinements
-                      based on validation feedback.</span
-                    ><span class="ar"
-                      >الصفحات الأساسية متراجَعة في اللغتين والاتجاهين. بوابة
-                      مراجعة المحتوى العربي متطبَّقة. تحسينات النص بناءً على
-                      تغذية راجعة من التحقق.</span
-                    >
-                  </div>
-                </div>
+          <!-- Phase D — The Digital Home (full only) -->
+          <article class="phase" data-phase="home">
+            <div class="phase-mark">D</div>
+            <div class="phase-body">
+              <div class="phase-name">
+                <span data-show="en">Phase D · The Digital Home</span>
+                <span data-show="ar">المرحلة د · البيت الرقمي</span>
               </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">LinkedIn content strategy delivered</span
-                    ><span class="ar">استراتيجية محتوى LinkedIn مسلَّمة</span>
-                  </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >Editorial calendar for the first 90 days. First three
-                      pieces drafted — Arabic and English. Audience
-                      repositioning roadmap.</span
-                    ><span class="ar"
-                      >تقويم تحريري للتسعين يوم الأولى. أول ثلاث قطع محتوى
-                      مسوَّدة — عربي وإنجليزي. خريطة طريق إعادة تموضع
-                      الجمهور.</span
-                    >
-                  </div>
+              <h3 data-show="en">
+                The site that earns trust before the first sentence is read.
+              </h3>
+              <h3 data-show="ar">
+                الموقع الذي يستحق الثقة قبل قراءة أوّل جملة.
+              </h3>
+              <p data-show="en">
+                A bilingual website that treats Arabic and English as equals,
+                hosts the flagship report behind a quiet lead form, and routes
+                every inquiry to the right partner. Built so every component —
+                the content, the leads, the analytics — is yours to take with
+                you, always. The architecture is the asset.
+              </p>
+              <p data-show="ar">
+                موقع ثنائي اللغة يَعدّ العربية والإنجليزية بمنزلة واحدة، يحتضن
+                التقرير المرجعي خلف استمارة استقطاب هادئة، ويُوجّه كل تواصل إلى
+                الشريك المعنيّ. مبنيّ بحيث يبقى كل مكوّن — المحتوى، البيانات،
+                التحليلات — ملكًا لكم، دائمًا. المعمار هو الأصل الحقيقي.
+              </p>
+              <div class="deliver">
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">You receive</div>
+                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <ul>
+                    <li data-show="en">
+                      Bilingual website — Arabic and English as first-class
+                      peers
+                    </li>
+                    <li data-show="ar">
+                      موقع ثنائي اللغة — العربية والإنجليزية بمنزلة واحدة
+                    </li>
+                    <li data-show="en">
+                      Self-hosted CMS — your team publishes without a developer
+                    </li>
+                    <li data-show="ar">
+                      نظام محتوى ذاتي الاستضافة — فريقكم ينشر دون مطوّر
+                    </li>
+                    <li data-show="en">
+                      Lead system: capture, score, route, owned raw log
+                    </li>
+                    <li data-show="ar">
+                      نظام استقطاب: تسجيل، تقييم، توجيه، سجل خام مملوك
+                    </li>
+                    <li data-show="en">
+                      Privacy-first analytics — no third-party surveillance
+                    </li>
+                    <li data-show="ar">
+                      تحليلات تحترم الخصوصية — دون تتبّع من طرف ثالث
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="week-item">
-                <div class="wi-dot"></div>
-                <div>
-                  <div class="wi-title">
-                    <span class="en">Phase 0 closed. Phase 1 begins.</span
-                    ><span class="ar">مرحلة 0 منتهية. مرحلة 1 تبدأ.</span>
+                <div class="deliver-col">
+                  <div class="deliver-label" data-show="en">
+                    We need from you
                   </div>
-                  <div class="wi-detail">
-                    <span class="en"
-                      >All foundation decisions implemented. The site moves into
-                      full Phase 1 build — lead system, gated reports, and the
-                      full content engine.</span
-                    ><span class="ar"
-                      >كل قرارات التأسيس متنفَّذة. الموقع بيدخل البناء الكامل
-                      للمرحلة 1 — نظام الـ leads والتقارير المقفولة ومحرك
-                      المحتوى الكامل.</span
-                    >
-                  </div>
+                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <ul>
+                    <li data-show="en">
+                      Segment-to-partner routing map (who answers which inquiry)
+                    </li>
+                    <li data-show="ar">
+                      خارطة توجيه القطاعات (مَن يردّ على أيّ تواصل)
+                    </li>
+                    <li data-show="en">
+                      A named Arabic editorial reviewer in the CMS
+                    </li>
+                    <li data-show="ar">مراجع عربي مُعيَّن داخل نظام المحتوى</li>
+                    <li data-show="en">
+                      First three pieces of insight content for launch
+                    </li>
+                    <li data-show="ar">أول ثلاث قطع محتوى للإطلاق</li>
+                  </ul>
                 </div>
               </div>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Ownership map -->
+      <section class="reveal">
+        <div class="eyebrow">
+          <span data-show="en">Who owns what</span>
+          <span data-show="ar">مَن يملك ماذا</span>
+        </div>
+        <h2 class="section-h" data-show="en">
+          Ownership is by architecture, not promise.
+        </h2>
+        <h2 class="section-h" data-show="ar">الملكية بالمعمار، لا بالوعد.</h2>
+        <p class="section-sub" data-show="en">
+          Catalyst sells governance. The work itself must visibly practise it.
+          Every deliverable, every vendor, every line of content is built so it
+          can be moved, replaced, or carried away — without rebuilding from
+          zero.
+        </p>
+        <p class="section-sub" data-show="ar">
+          كاتاليست تبيع الحوكمة. والعمل ذاته عليه أن يمارسها بوضوح. كل مُخرَج،
+          كل مورد، كل سطر محتوى يُبنى بحيث يمكن نقله، استبداله، أو الرحيل به —
+          دون إعادة البناء من الصفر.
+        </p>
+        <div class="own">
+          <div class="own-col">
+            <div class="own-sub" data-show="en">Catalyst owns</div>
+            <div class="own-sub" data-show="ar">يملك كاتاليست</div>
+            <div class="own-h" data-show="en">
+              Everything that touches the brand
+            </div>
+            <div class="own-h" data-show="ar">كل ما يلامس العلامة</div>
+            <ul>
+              <li data-show="en">Identity files (open editable formats)</li>
+              <li data-show="ar">ملفات الهوية (صِيَغ مفتوحة قابلة للتحرير)</li>
+              <li data-show="en">Domains, email, social handles</li>
+              <li data-show="ar">النطاقات، البريد، حسابات التواصل</li>
+              <li data-show="en">All content in the CMS (exportable)</li>
+              <li data-show="ar">كل محتوى نظام المحتوى (قابل للتصدير)</li>
+              <li data-show="en">Raw lead log — independent of any CRM</li>
+              <li data-show="ar">سجل العملاء الخام — مستقلٌّ عن أي CRM</li>
+            </ul>
+          </div>
+          <div class="own-col">
+            <div class="own-sub" data-show="en">Agency delivers</div>
+            <div class="own-sub" data-show="ar">تُسلِّم الأجنسي</div>
+            <div class="own-h" data-show="en">
+              The build, the rhythm, the standards
+            </div>
+            <div class="own-h" data-show="ar">البناء، الإيقاع، المعايير</div>
+            <ul>
+              <li data-show="en">Design, code, and content production</li>
+              <li data-show="ar">التصميم، البرمجة، إنتاج المحتوى</li>
+              <li data-show="en">Editorial system &amp; review workflow</li>
+              <li data-show="ar">المنظومة التحريرية وآلية المراجعة</li>
+              <li data-show="en">Technical hosting decisions (in your name)</li>
+              <li data-show="ar">قرارات الاستضافة التقنية (باسمكم)</li>
+              <li data-show="en">
+                A clean handover document at each phase close
+              </li>
+              <li data-show="ar">وثيقة تسليم نظيفة عند نهاية كل مرحلة</li>
+            </ul>
+          </div>
+          <div class="own-col">
+            <div class="own-sub" data-show="en">Vendors serve</div>
+            <div class="own-sub" data-show="ar">الموردون يخدمون</div>
+            <div class="own-h" data-show="en">
+              Every third party sits behind an adapter
+            </div>
+            <div class="own-h" data-show="ar">كل طرف ثالث يجلس خلف وسيط</div>
+            <ul>
+              <li data-show="en">CRM, ESP, analytics — all swappable</li>
+              <li data-show="ar">
+                نظام العلاقات، البريد، التحليلات — كلها قابلة للاستبدال
+              </li>
+              <li data-show="en">Hosting in your account, not ours</li>
+              <li data-show="ar">الاستضافة باسمكم لا باسمنا</li>
+              <li data-show="en">
+                No proprietary platform that traps your content
+              </li>
+              <li data-show="ar">لا منصّة احتكارية تحبس محتواكم</li>
+            </ul>
           </div>
         </div>
+      </section>
 
-        <div class="marker rev">
-          <span class="num">03</span>
-          <span class="label"
-            ><span class="en">Who owns what</span
-            ><span class="ar">مين مسؤول عن إيه</span></span
-          >
-          <span class="rule"></span>
+      <!-- What we need to begin -->
+      <section class="reveal">
+        <div class="eyebrow">
+          <span data-show="en">What we need to begin</span>
+          <span data-show="ar">ما نحتاجه للبدء</span>
         </div>
-
-        <div class="owner-map rev">
-          <div class="owner-col">
-            <div class="owner-col-head">
-              <span class="en">Our side</span><span class="ar">من جهتنا</span>
-            </div>
-            <div class="owner-list">
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Everything technical: hosting, CMS, website build, lead
-                  system, CRM setup</span
-                ><span class="ar"
-                  >كل حاجة تقنية: الاستضافة، الـ CMS، بناء الموقع، نظام الـ
-                  leads، إعداد الـ CRM</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Brand execution: brief → designer → bilingual identity
-                  system</span
-                ><span class="ar"
-                  >تنفيذ البراند: البريف ← المصمم ← نظام الهوية ثنائي
-                  اللغة</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Bilingual content: Arabic and English written at the same
-                  level, reviewed before it ships</span
-                ><span class="ar"
-                  >المحتوى ثنائي اللغة: عربي وإنجليزي بنفس المستوى، إحنا
-                  بنراجعه قبل ما ينزل</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Lead scoring, segment routing, notification stack</span
-                ><span class="ar"
-                  >سكورنج الـ leads وتوجيه السيجمنتس ونظام التنبيه</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >LinkedIn editorial calendar and first 90 days of
-                  content</span
-                ><span class="ar">تقويم محتوى LinkedIn وأول تسعين يوم</span>
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Any specialist gap — if a role is missing, we place it and
-                  hold the quality bar</span
-                ><span class="ar"
-                  >أي فراغ في الفريق — لو في دور ناقص، إحنا بنحطه ومش بنخفض
-                  المستوى</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="owner-col">
-            <div class="owner-col-head">
-              <span class="en">Your side</span><span class="ar">من جهتك</span>
-            </div>
-            <div class="owner-list">
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Send back pages 1 and 2 — decisions and validations</span
-                ><span class="ar"
-                  >إرسال الصفحتين الأولى والتانية — القرارات والتحققات</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Name the Arabic editorial reviewer — one person, before CMS
-                  setup</span
-                ><span class="ar"
-                  >تسمية مراجع المحتوى العربي — شخص واحد قبل إعداد الـ CMS</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Confirm who handles mid-market / manufacturing segment
-                  leads</span
-                ><span class="ar"
-                  >تأكيد مين بياخد leads السوق المتوسط والصناعة</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Join the 30-minute alignment call — one hour of your time
-                  closes Phase 0</span
-                ><span class="ar"
-                  >الانضمام لمكالمة التنسيق ثلاثين دقيقة — ساعة من وقتك بتقفل
-                  مرحلة 0</span
-                >
-              </div>
-              <div class="owner-item">
-                <div class="oi-dot"></div>
-                <span class="en"
-                  >Final approval on brand identity direction — your call, our
-                  execution</span
-                ><span class="ar"
-                  >الموافقة النهائية على اتجاه الهوية البصرية — قرارك،
-                  تنفيذنا</span
-                >
-              </div>
-            </div>
-          </div>
+        <h2 class="section-h" data-show="en">Three things. Nothing more.</h2>
+        <h2 class="section-h" data-show="ar">ثلاثة أمور. لا أكثر.</h2>
+        <p class="section-sub" data-show="en">
+          Phase A opens the moment these three are settled. We do not wait on a
+          long checklist — the rest unfolds in the work itself.
+        </p>
+        <p class="section-sub" data-show="ar">
+          المرحلة (أ) تفتح في اللحظة التي تُحسَم فيها هذه الثلاثة. لا ننتظر
+          قائمة طويلة — يَنفتح الباقي في صلب العمل ذاته.
+        </p>
+        <div class="need">
+          <ol>
+            <li>
+              <span data-show="en"
+                >Confirmation of the four readings on the Compass — agreed, or
+                refined where needed.</span
+              >
+              <span data-show="ar"
+                >تأكيد القراءات الأربع في "البوصلة" — مُعتمَدة، أو مُهذَّبة حيث
+                يلزم.</span
+              >
+              <small data-show="en">Takes one focused review.</small>
+              <small data-show="ar">يأخذ جلسة مراجعة واحدة مركّزة.</small>
+            </li>
+            <li>
+              <span data-show="en"
+                >A decision on the Arabic name approach — transliteration or a
+                translated Arabic name.</span
+              >
+              <span data-show="ar"
+                >قرار في توجّه الاسم العربي — نقل صوتي أم اسم عربي
+                مُترجَم.</span
+              >
+              <small data-show="en"
+                >Without this, the logo cannot move past direction
+                sketches.</small
+              >
+              <small data-show="ar"
+                >دون ذلك لا يَعبُر الشعار مرحلة الرسوم التوجيهية.</small
+              >
+            </li>
+            <li>
+              <span data-show="en"
+                >A nominated point of contact for review — one named person on
+                the partner side who can sign off on each phase close.</span
+              >
+              <span data-show="ar"
+                >جهة تواصل مُعيَّنة للمراجعة — شخص مُسمّى من جهة الشركاء يُقرّ
+                نهاية كل مرحلة.</span
+              >
+              <small data-show="en"
+                >Single point keeps the rhythm. Multiple voices delay
+                everything.</small
+              >
+              <small data-show="ar"
+                >نقطة واحدة تَحفظ الإيقاع. تعدّد الأصوات يُؤخّر كل شيء.</small
+              >
+            </li>
+          </ol>
         </div>
+      </section>
 
-        <div class="the-ask rev">
-          <h2>
-            <span class="en">One thing left. <em>Say the word.</em></span>
-            <span class="ar">حاجة واحدة فاضلة. <em>قول الكلمة.</em></span>
-          </h2>
-          <p>
-            <span class="en"
-              >You've read the foundation, the compass, and the handoff. Send
-              this back to us — three pages, your answers — and the 30-minute
-              call gets scheduled within the hour.</span
-            >
-            <span class="ar"
-              >قرأت التأسيس والبوصلة والتسليم. أرسل لنا الثلاث صفحات بإجاباتك —
-              والمكالمة بتتحدد في خلال ساعة.</span
-            >
+      <!-- Final CTA — WhatsApp here, and only here -->
+      <section style="border-bottom: 0">
+        <div class="final reveal">
+          <div class="final-eyebrow">
+            <span data-show="en">When you are ready</span>
+            <span data-show="ar">حين تكونون مستعدّين</span>
+          </div>
+          <h2 data-show="en">Send your confirmation, and we begin Phase A.</h2>
+          <h2 data-show="ar">أَرسلوا تأكيدكم، وندخل المرحلة (أ).</h2>
+          <p data-show="en">
+            We will send back a Phase A opening note within one working day — a
+            short document with the locked positioning, the agreed segment
+            priority, the Arabic name decision, and the first concrete steps.
+            Nothing more, nothing less.
           </p>
-          <a
-            class="cta-btn"
-            href="https://wa.me/201067553846?text=Mohamed%20Abdelwahab%20%E2%80%94%20I%20have%20reviewed%20the%20Catalyst%20Partners%20foundation%20documents%20(all%20three%20pages).%20Ready%20to%20align."
-            target="_blank"
-            rel="noopener"
-          >
-            <svg viewBox="0 0 16 16" fill="none">
-              <path
-                d="M2 14l1.2-3.4a6 6 0 1 1 2.2 2.2L2 14z"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-            </svg>
-            <span class="en">I've reviewed all three. Let's start.</span>
-            <span class="ar">راجعت الثلاثة. يلا نبدأ.</span>
-          </a>
+          <p data-show="ar">
+            نُعيد إليكم خلال يوم عمل واحد مذكرة افتتاح المرحلة (أ) — وثيقة قصيرة
+            فيها التموضع المُغلَق، أولوية القطاع المُتَّفَق عليها، قرار الاسم
+            العربي، والخطوات العملية الأولى. لا أكثر، ولا أقل.
+          </p>
+          <div class="final-actions">
+            <button class="final-btn btn-wa" id="btn-wa" type="button">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M20.5 3.5A11.4 11.4 0 0 0 2.7 17.7L1.5 22l4.4-1.2a11.4 11.4 0 0 0 17.6-9.6c0-3-1.2-5.9-3-7.7Zm-8.5 17.4c-1.7 0-3.4-.5-4.8-1.4l-.4-.2-3.1.8.8-3-.2-.4a9.5 9.5 0 1 1 7.7 4.2Zm5.4-7.1c-.3-.1-1.8-.9-2-1s-.5-.2-.7.2-.8 1-.9 1.1-.3.2-.6 0-1.2-.5-2.3-1.4c-.9-.7-1.4-1.6-1.6-1.9s0-.4.2-.6c.1-.1.3-.4.4-.5l.3-.5c.1-.2 0-.4 0-.6l-.7-1.7c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.3.3-1 .9-1 2.3s1 2.7 1.2 2.9c.1.2 2.1 3.2 5 4.5.7.3 1.2.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4l-.6-.5Z"
+                />
+              </svg>
+              <span data-show="en">Send via WhatsApp</span>
+              <span data-show="ar">أرسل عبر واتساب</span>
+            </button>
+            <button class="final-btn btn-copy" id="btn-copy" type="button">
+              <span data-show="en">Copy the message</span>
+              <span data-show="ar">انسخ الرسالة</span>
+            </button>
+            <a class="final-btn btn-back" href="compass.html">
+              <span data-show="en">← Step back to Compass</span>
+              <span data-show="ar">→ ارجع إلى البوصلة</span>
+            </a>
+          </div>
+          <div class="final-note">
+            <span data-show="en"
+              >The message includes your Compass confirmations and your chosen
+              starting line. Read it once before sending.</span
+            >
+            <span data-show="ar"
+              >تتضمّن الرسالة تأكيدات البوصلة ونقطة الانطلاق التي اخترتموها.
+              اقرأوها قبل الإرسال.</span
+            >
+          </div>
         </div>
       </section>
     </main>
 
-    <div class="page-nav col">
-      <a href="compass.html" class="page-back">
-        <span class="en">← Compass</span><span class="ar">البوصلة ←</span>
-      </a>
+    <div class="toast" id="toast">
+      <span data-show="en">Copied to clipboard</span>
+      <span data-show="ar">نُسِخَت إلى الحافظة</span>
     </div>
 
     <footer>
-      <span
-        ><span class="en">Catalyst Partners · Phase 0 · 3 of 3</span
-        ><span class="ar">كاتاليست بارتنرز · مرحلة 0 · 3 من 3</span></span
+      <span data-show="en"
+        >Catalyst Partners · Private partner brief · Phase 0</span
       >
+      <span data-show="ar"
+        >كاتاليست بارتنرز · موجز خاص بالشركاء · المرحلة صفر</span
+      >
+      <span data-show="en">03 / 03</span>
+      <span data-show="ar">٠٣ / ٠٣</span>
     </footer>
 
     <script>
-      /* ——————————————————————————————————— */
+      (function () {
+        var WA_NUMBER = "201067553846";
+        var root = document.documentElement;
+        var btnAr = document.getElementById("lng-ar");
+        var btnEn = document.getElementById("lng-en");
+        var themeBtn = document.getElementById("theme-btn");
+        var moon = document.getElementById("theme-icon-moon");
+        var sun = document.getElementById("theme-icon-sun");
+        var toast = document.getElementById("toast");
 
-      let lang = "en";
+        function applyLang(l) {
+          l = l === "en" ? "en" : "ar";
+          root.lang = l === "en" ? "en" : "ar";
+          root.dir = l === "en" ? "ltr" : "rtl";
+          root.setAttribute("data-lang", l);
+          btnAr.classList.toggle("on", l === "ar");
+          btnEn.classList.toggle("on", l === "en");
+          try {
+            localStorage.setItem("cp_lang", l);
+          } catch (e) {}
+        }
+        btnAr.addEventListener("click", function () {
+          applyLang("ar");
+        });
+        btnEn.addEventListener("click", function () {
+          applyLang("en");
+        });
+        applyLang(root.getAttribute("data-lang") || "ar");
 
-      function setLang(l) {
-        lang = l;
-        localStorage.setItem("cp_lang", l);
-        document.documentElement.lang = l === "ar" ? "ar" : "en";
-        document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
-        document.getElementById("lng-en").classList.toggle("on", l === "en");
-        document.getElementById("lng-ar").classList.toggle("on", l === "ar");
-      }
+        function applyTheme(t) {
+          t = t === "light" ? "light" : "dark";
+          root.setAttribute("data-theme", t);
+          moon.style.display = t === "dark" ? "none" : "block";
+          sun.style.display = t === "dark" ? "block" : "none";
+          try {
+            localStorage.setItem("cp_theme", t);
+          } catch (e) {}
+        }
+        themeBtn.addEventListener("click", function () {
+          applyTheme(
+            root.getAttribute("data-theme") === "dark" ? "light" : "dark",
+          );
+        });
+        applyTheme(root.getAttribute("data-theme") || "light");
 
-      const _savedLang = localStorage.getItem("cp_lang");
-      if (_savedLang) setLang(_savedLang);
+        // Track-aware phase rendering
+        var scopeLabels = {
+          identity: { en: "The Identity", ar: "الهوية" },
+          "identity-voice": { en: "Identity & Voice", ar: "الهوية والصوت" },
+          full: { en: "The Institution", ar: "المؤسسة" },
+        };
+        var phasesByScope = {
+          identity: ["identity"],
+          "identity-voice": ["identity", "voice"],
+          full: ["identity", "voice", "home"],
+        };
+        var savedScope = (function () {
+          try {
+            return localStorage.getItem("cp_scope");
+          } catch (e) {
+            return null;
+          }
+        })();
 
-      let darkMode = localStorage.getItem("cp_theme") === "dark"
-        || (localStorage.getItem("cp_theme") === null
-            && window.matchMedia("(prefers-color-scheme: dark)").matches);
-      function applyTheme() {
-        document.documentElement.setAttribute(
-          "data-theme",
-          darkMode ? "dark" : "light",
-        );
-        document.getElementById("theme-icon-moon").style.display = darkMode
-          ? "none"
-          : "block";
-        document.getElementById("theme-icon-sun").style.display = darkMode
-          ? "block"
-          : "none";
-      }
-      function toggleTheme() {
-        darkMode = !darkMode;
-        localStorage.setItem("cp_theme", darkMode ? "dark" : "light");
-        applyTheme();
-      }
-      applyTheme();
-
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((en) => {
-            if (en.isIntersecting) en.target.classList.add("in");
+        if (savedScope && scopeLabels[savedScope]) {
+          document.getElementById("track-name-en").textContent =
+            scopeLabels[savedScope].en;
+          document.getElementById("track-name-ar").textContent =
+            scopeLabels[savedScope].ar;
+          var visible = phasesByScope[savedScope] || [];
+          document.querySelectorAll(".phase[data-phase]").forEach(function (p) {
+            var key = p.getAttribute("data-phase");
+            p.setAttribute(
+              "data-hidden",
+              visible.indexOf(key) === -1 ? "true" : "false",
+            );
           });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -6% 0px" },
-      );
-      document.querySelectorAll(".rev").forEach((el) => io.observe(el));
+        } else {
+          // No scope chosen — show all phases as informational
+          document.querySelectorAll(".phase[data-phase]").forEach(function (p) {
+            p.setAttribute("data-hidden", "false");
+          });
+        }
+
+        // Build the message
+        function compassLabel(key, state) {
+          var labels = {
+            positioning: {
+              en: "Positioning — lead with institutional transformation",
+              ar: "التموضع — البَدء بالتحوّل المؤسسي",
+            },
+            wedge: {
+              en: "Entry segment — family enterprises first",
+              ar: "القطاع الأول — الشركات العائلية",
+            },
+            name: { en: "Arabic name approach", ar: "توجّه الاسم العربي" },
+            scope: { en: "Starting line", ar: "نقطة الانطلاق" },
+          };
+          return labels[key];
+        }
+        function buildMessage(lang) {
+          var compass = {};
+          try {
+            compass = JSON.parse(localStorage.getItem("cp_compass") || "{}");
+          } catch (e) {
+            compass = {};
+          }
+          var nameLabels = {
+            translit: {
+              en: "كاتاليست بارتنرز (transliteration)",
+              ar: "كاتاليست بارتنرز (نقل صوتي)",
+            },
+            translated: {
+              en: "Translated Arabic name (to be decided)",
+              ar: "اسم عربي مُترجَم (للبتّ فيه)",
+            },
+          };
+          var scope =
+            savedScope && scopeLabels[savedScope]
+              ? scopeLabels[savedScope]
+              : null;
+          var lines = [];
+
+          if (lang === "ar") {
+            lines.push("📋 *تأكيد كاتاليست بارتنرز — المرحلة (أ)*");
+            lines.push("");
+            lines.push("بعد قراءة الأساس والبوصلة، أؤكّد ما يلي:");
+            lines.push("");
+            ["positioning", "wedge", "name", "scope"].forEach(function (k) {
+              var v = compass[k] || {};
+              var lbl = compassLabel(k);
+              var line = "• " + lbl.ar + " — ";
+              if (k === "name") {
+                if (v.choice && nameLabels[v.choice])
+                  line +=
+                    nameLabels[v.choice].ar +
+                    (v.state === "refined" ? " · مع ملاحظة" : "");
+                else if (v.state === "refined")
+                  line += "اسم مقترَح في الملاحظة";
+                else line += "بانتظار البتّ";
+              } else if (k === "scope") {
+                line +=
+                  (scope ? scope.ar : "—") +
+                  (v.state === "refined"
+                    ? " · مع ملاحظة على التوقيت"
+                    : v.state === "agreed"
+                      ? " · مُؤكَّد"
+                      : " · بانتظار التأكيد");
+              } else {
+                line +=
+                  v.state === "agreed"
+                    ? "مُؤكَّد"
+                    : v.state === "refined"
+                      ? "مع تهذيب"
+                      : "بانتظار التأكيد";
+              }
+              lines.push(line);
+            });
+            var notes = ["positioning", "wedge", "name", "scope"]
+              .map(function (k) {
+                var v = compass[k] || {};
+                if (v.note && v.note.trim())
+                  return "↳ " + compassLabel(k).ar + ": " + v.note.trim();
+                return null;
+              })
+              .filter(Boolean);
+            if (notes.length) {
+              lines.push("");
+              lines.push("*ملاحظات:*");
+              notes.forEach(function (n) {
+                lines.push(n);
+              });
+            }
+            lines.push("");
+            lines.push("جاهز لفتح المرحلة (أ).");
+          } else {
+            lines.push("📋 *Catalyst Partners — Phase A confirmation*");
+            lines.push("");
+            lines.push(
+              "Having read Foundation and Compass, I confirm the following:",
+            );
+            lines.push("");
+            ["positioning", "wedge", "name", "scope"].forEach(function (k) {
+              var v = compass[k] || {};
+              var lbl = compassLabel(k);
+              var line = "• " + lbl.en + " — ";
+              if (k === "name") {
+                if (v.choice && nameLabels[v.choice])
+                  line +=
+                    nameLabels[v.choice].en +
+                    (v.state === "refined" ? " · with a note" : "");
+                else if (v.state === "refined")
+                  line += "name proposed in note below";
+                else line += "pending decision";
+              } else if (k === "scope") {
+                line +=
+                  (scope ? scope.en : "—") +
+                  (v.state === "refined"
+                    ? " · with a timing note"
+                    : v.state === "agreed"
+                      ? " · confirmed"
+                      : " · pending");
+              } else {
+                line +=
+                  v.state === "agreed"
+                    ? "confirmed"
+                    : v.state === "refined"
+                      ? "refined"
+                      : "pending";
+              }
+              lines.push(line);
+            });
+            var notesEn = ["positioning", "wedge", "name", "scope"]
+              .map(function (k) {
+                var v = compass[k] || {};
+                if (v.note && v.note.trim())
+                  return "↳ " + compassLabel(k).en + ": " + v.note.trim();
+                return null;
+              })
+              .filter(Boolean);
+            if (notesEn.length) {
+              lines.push("");
+              lines.push("*Notes:*");
+              notesEn.forEach(function (n) {
+                lines.push(n);
+              });
+            }
+            lines.push("");
+            lines.push("Ready to open Phase A.");
+          }
+          return lines.join("\n");
+        }
+
+        function showToast() {
+          toast.classList.add("on");
+          setTimeout(function () {
+            toast.classList.remove("on");
+          }, 1800);
+        }
+
+        document
+          .getElementById("btn-wa")
+          .addEventListener("click", function () {
+            var lang = root.getAttribute("data-lang") === "en" ? "en" : "ar";
+            var msg = buildMessage(lang);
+            var url =
+              "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+            window.open(url, "_blank", "noopener");
+          });
+        document
+          .getElementById("btn-copy")
+          .addEventListener("click", function () {
+            var lang = root.getAttribute("data-lang") === "en" ? "en" : "ar";
+            var msg = buildMessage(lang);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(msg).then(showToast);
+            } else {
+              var ta = document.createElement("textarea");
+              ta.value = msg;
+              document.body.appendChild(ta);
+              ta.select();
+              try {
+                document.execCommand("copy");
+                showToast();
+              } catch (e) {}
+              document.body.removeChild(ta);
+            }
+          });
+
+        // Reveal
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting) en.target.classList.add("in");
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+        );
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          io.observe(el);
+        });
+      })();
     </script>
   </body>
 </html>

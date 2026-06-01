@@ -1,14 +1,487 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0;url=client/foundation.html" />
-    <link rel="canonical" href="client/foundation.html" />
-    <title>Catalyst Partners</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>كاتاليست بارتنرز — موجز خاص</title>
+
+    <script>
+      (function () {
+        try {
+          var l = localStorage.getItem("cp_lang") || "ar";
+          var t = localStorage.getItem("cp_theme");
+          if (!t)
+            t = window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          var h = document.documentElement;
+          h.lang = l === "en" ? "en" : "ar";
+          h.dir = l === "en" ? "ltr" : "rtl";
+          h.setAttribute("data-theme", t);
+          h.setAttribute("data-lang", l);
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <style>
+      @font-face {
+        font-family: "IBM Plex Sans Arabic";
+        font-weight: 300;
+        font-display: swap;
+        src: url("fonts/300.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Sans Arabic";
+        font-weight: 400;
+        font-display: swap;
+        src: url("fonts/400.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Sans Arabic";
+        font-weight: 500;
+        font-display: swap;
+        src: url("fonts/500.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Sans Arabic";
+        font-weight: 600;
+        font-display: swap;
+        src: url("fonts/600.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Sans Arabic";
+        font-weight: 700;
+        font-display: swap;
+        src: url("fonts/700.woff2") format("woff2");
+      }
+
+      :root {
+        --paper: #f4efe5;
+        --paper-2: #ebe5d6;
+        --card: #fbf7ed;
+        --ink: #161311;
+        --ink-2: #3b3733;
+        --mute: #6e665c;
+        --hair: #d7cfbe;
+        --bronze: #8c6e3d;
+        --bronze-2: #6e5630;
+        --serif: "Instrument Serif", ui-serif, Georgia, serif;
+        --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --ar: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+        --sx: clamp(24px, 4vw, 48px);
+      }
+      [data-theme="dark"] {
+        --paper: #141210;
+        --paper-2: #1c1916;
+        --card: #1e1b17;
+        --ink: #ede8df;
+        --ink-2: #b8b0a4;
+        --mute: #7a7166;
+        --hair: #2e2a25;
+        --bronze: #a8854d;
+        --bronze-2: #c49a58;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html[data-lang="en"] [data-show="ar"] {
+        display: none;
+      }
+      html[data-lang="ar"] [data-show="en"] {
+        display: none;
+      }
+      html[data-lang="en"] body {
+        font-family: var(--sans);
+      }
+      html[data-lang="ar"] body {
+        font-family: var(--ar);
+      }
+
+      body {
+        color: var(--ink);
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            1200px 600px at 80% -10%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at -10% 110%,
+            var(--paper-2) 0%,
+            transparent 60%
+          ),
+          var(--paper);
+        -webkit-font-smoothing: antialiased;
+        display: grid;
+        place-items: center;
+        padding: 48px var(--sx);
+        line-height: 1.7;
+        font-size: 16px;
+      }
+      html[data-lang="ar"] body {
+        line-height: 1.85;
+        font-size: 17px;
+      }
+      ::selection {
+        background: #8c6e3d33;
+        color: var(--ink);
+      }
+
+      .wrap {
+        max-width: 560px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(12px);
+        animation: rise 0.8s var(--ease) forwards;
+      }
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .glyph {
+        width: 48px;
+        height: 48px;
+        color: var(--bronze);
+        animation: rotin 1.2s var(--ease);
+      }
+      @keyframes rotin {
+        from {
+          opacity: 0;
+          transform: rotate(-45deg) scale(0.7);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--mute);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      html[data-lang="ar"] .eyebrow {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 13px;
+        color: var(--bronze-2);
+      }
+
+      h1 {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(40px, 7vw, 64px);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+      html[data-lang="ar"] h1 {
+        font-family: var(--ar);
+        font-style: normal;
+        font-weight: 300;
+        font-size: clamp(36px, 6.5vw, 56px);
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      .for {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--mute);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      html[data-lang="ar"] .for {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 13.5px;
+      }
+
+      .lede {
+        font-size: 17px;
+        color: var(--ink-2);
+        max-width: 42ch;
+        line-height: 1.65;
+      }
+      html[data-lang="ar"] .lede {
+        font-size: 17.5px;
+        line-height: 1.85;
+      }
+
+      .enter {
+        margin-top: 8px;
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        text-decoration: none;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 18px 32px;
+        border-radius: 999px;
+        font: inherit;
+        font-size: 15px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        transition:
+          background 0.25s,
+          transform 0.15s var(--ease);
+      }
+      html[data-lang="ar"] .enter {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .enter:hover {
+        background: var(--bronze-2);
+        transform: translateY(-1px);
+      }
+      .enter-arr {
+        font-family: var(--serif);
+        font-size: 22px;
+        line-height: 1;
+        opacity: 0.9;
+      }
+      html[data-lang="ar"] .enter-arr {
+        transform: scaleX(-1);
+        font-family: var(--ar);
+        font-weight: 300;
+      }
+
+      .controls {
+        position: fixed;
+        top: 16px;
+        inset-inline-end: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 10;
+      }
+      .lang-tog {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--hair);
+        border-radius: 999px;
+        background: var(--card);
+        overflow: hidden;
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+      .lang-tog button {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: var(--mute);
+        padding: 7px 12px;
+        cursor: pointer;
+        letter-spacing: 0.06em;
+      }
+      .lang-tog button.on {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .theme-btn {
+        appearance: none;
+        border: 1px solid var(--hair);
+        background: var(--card);
+        color: var(--mute);
+        cursor: pointer;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .theme-btn:hover {
+        color: var(--bronze);
+        border-color: var(--bronze);
+      }
+      .theme-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .seal {
+        position: fixed;
+        bottom: 16px;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--mute);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      html[data-lang="ar"] .seal {
+        font-family: var(--ar);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 12px;
+      }
+    </style>
   </head>
   <body>
+    <div class="controls">
+      <div class="lang-tog">
+        <button id="lng-ar" type="button">ع</button>
+        <button id="lng-en" type="button">EN</button>
+      </div>
+      <button
+        class="theme-btn"
+        id="theme-btn"
+        type="button"
+        aria-label="Toggle theme"
+      >
+        <svg
+          id="theme-icon-moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+        >
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+        </svg>
+        <svg
+          id="theme-icon-sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          style="display: none"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="wrap">
+      <svg
+        class="glyph"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+        aria-hidden="true"
+      >
+        <path d="M4 12 L12 4 L20 12 L12 20 Z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+
+      <div class="eyebrow">
+        <span data-show="en">A private brief</span>
+        <span data-show="ar">موجز خاص</span>
+      </div>
+
+      <h1 data-show="en">Catalyst Partners.</h1>
+      <h1 data-show="ar">كاتاليست بارتنرز.</h1>
+
+      <div class="for">
+        <span data-show="en">For Mohamed Abdelwahab</span>
+        <span data-show="ar">إلى محمد عبدالوهاب</span>
+      </div>
+
+      <p class="lede" data-show="en">
+        Three pages of careful reading. Foundation, Compass, Handoff. Together,
+        they hold what we understand about the firm — and what we propose to
+        build before we touch a single deliverable.
+      </p>
+      <p class="lede" data-show="ar">
+        ثلاث صفحات من قراءةٍ متأنّية. الأساس، البوصلة، التسليم. تَحمل، مجتمعةً،
+        ما فهمناه عن الشركة — وما نقترح بناءه قبل أن نبدأ بأوّل مُخرَج.
+      </p>
+
+      <a class="enter" href="client/foundation.html">
+        <span data-show="en">Begin with Foundation</span>
+        <span data-show="ar">ابدأ بالأساس</span>
+        <span class="enter-arr">→</span>
+      </a>
+    </div>
+
+    <div class="seal">
+      <span data-show="en">Phase 0 · 01 of 03 · Private</span>
+      <span data-show="ar">المرحلة صفر · ٠١ من ٠٣ · خاص</span>
+    </div>
+
     <script>
-      location.replace("client/foundation.html");
+      (function () {
+        var root = document.documentElement;
+        var btnAr = document.getElementById("lng-ar");
+        var btnEn = document.getElementById("lng-en");
+        var themeBtn = document.getElementById("theme-btn");
+        var moon = document.getElementById("theme-icon-moon");
+        var sun = document.getElementById("theme-icon-sun");
+
+        function applyLang(l) {
+          l = l === "en" ? "en" : "ar";
+          root.lang = l === "en" ? "en" : "ar";
+          root.dir = l === "en" ? "ltr" : "rtl";
+          root.setAttribute("data-lang", l);
+          btnAr.classList.toggle("on", l === "ar");
+          btnEn.classList.toggle("on", l === "en");
+          try {
+            localStorage.setItem("cp_lang", l);
+          } catch (e) {}
+        }
+        btnAr.addEventListener("click", function () {
+          applyLang("ar");
+        });
+        btnEn.addEventListener("click", function () {
+          applyLang("en");
+        });
+        applyLang(root.getAttribute("data-lang") || "ar");
+
+        function applyTheme(t) {
+          t = t === "light" ? "light" : "dark";
+          root.setAttribute("data-theme", t);
+          moon.style.display = t === "dark" ? "none" : "block";
+          sun.style.display = t === "dark" ? "block" : "none";
+          try {
+            localStorage.setItem("cp_theme", t);
+          } catch (e) {}
+        }
+        themeBtn.addEventListener("click", function () {
+          applyTheme(
+            root.getAttribute("data-theme") === "dark" ? "light" : "dark",
+          );
+        });
+        applyTheme(root.getAttribute("data-theme") || "light");
+      })();
     </script>
   </body>
 </html>
