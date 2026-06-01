@@ -227,31 +227,58 @@
         gap: 6px;
       }
       .lang-tog {
+        position: relative;
         display: flex;
-        align-items: center;
+        align-items: stretch;
+        direction: ltr;
         border: 1px solid var(--hair);
         border-radius: 999px;
         background: var(--card);
-        overflow: hidden;
+        padding: 3px;
         font-family: var(--mono);
-        font-size: var(--t-7);
+        font-size: 11px;
       }
+      .lang-tog::before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        bottom: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        border-radius: 999px;
+        background: var(--bronze);
+        transition: transform 0.24s cubic-bezier(0.34,1.4,0.64,1);
+        pointer-events: none;
+        will-change: transform;
+      }
+      html[data-lang="ar"] .lang-tog::before { transform: translateX(0); }
+      html[data-lang="en"] .lang-tog::before { transform: translateX(100%); }
       .lang-tog button {
+        position: relative;
+        z-index: 1;
+        flex: 1;
         appearance: none;
         border: 0;
         background: transparent;
         color: var(--mute);
-        padding: 7px 12px;
+        padding: 8px 14px;
+        min-height: 36px;
         cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
         letter-spacing: 0.06em;
-        transition:
-          background 0.18s var(--ease),
-          color 0.18s var(--ease);
+        border-radius: 999px;
+        transition: color 0.22s ease;
+        -webkit-tap-highlight-color: transparent;
       }
+      #lng-ar { letter-spacing: 0; }
       .lang-tog button.on,
-      .lang-tog button[aria-pressed="true"] {
-        background: var(--bronze);
-        color: var(--paper);
+      .lang-tog button[aria-pressed="true"] { color: var(--paper); }
+      .lang-tog button:not(.on):hover { color: var(--ink); }
+      .lang-tog button:active { opacity: 0.8; }
+      .lang-tog button:focus-visible {
+        outline: 2px solid var(--bronze);
+        outline-offset: 2px;
       }
       .theme-btn {
         appearance: none;
@@ -890,9 +917,9 @@
           <span class="pagetag" data-show="ar">البوصلة</span>
         </div>
         <div class="controls">
-          <div class="lang-tog" role="tablist" aria-label="Language">
-            <button id="lng-ar" type="button">ع</button>
-            <button id="lng-en" type="button">EN</button>
+          <div class="lang-tog" role="group" aria-label="Language">
+            <button id="lng-ar" type="button" aria-label="Arabic">ع</button>
+            <button id="lng-en" type="button" aria-label="English">EN</button>
           </div>
           <button
             class="theme-btn"
@@ -931,7 +958,7 @@
       <section class="hero">
         <div class="eyebrow">
           <span data-show="en">Did we read you right?</span>
-          <span data-show="ar">هل قرأناكم بصورةٍ صحيحة؟</span>
+          <span data-show="ar">هل قرأناك صحيحاً؟</span>
         </div>
         <h1 data-show="en">Four readings. Confirm or refine.</h1>
         <h1 data-show="ar">أربع قراءات. للتأكيد أو التعديل.</h1>
@@ -990,8 +1017,8 @@
               referenceable track record sits at the table.
             </p>
             <p class="body" data-show="ar">
-              يذكر الموجز الشقّين معًا. تشير قراءة السوق، والكفاءات الموثّقة في
-              فريق الشركاء، إلى التركيز على الشق المؤسسي: الحوكمة، الإشراف على
+              يذكر الموجز الجانبين معًا. تشير قراءة السوق، والكفاءات الموثّقة في
+              فريق الشركاء، إلى التركيز على الجانب المؤسسي: الحوكمة، الإشراف على
               البرامج، الأداء، التحوّل، مع طبقة تسليم رقمية تُحدث الفارق. تبقى
               إعادة الهيكلة المالية ضمن العرض، إنّما لا تتصدّر المحادثة حتى يجلس
               على الطاولة شريكٌ ماليٌ بسجلٍّ معتمد.
@@ -1003,7 +1030,7 @@
             >
             <small class="cite" data-show="ar"
               >المرجع: مسح A&amp;M للتحوّل في الشرق الأوسط، الربع الثاني 2023 —
-              73% يطلبون الشقّين معًا، أقل من 25% يرونه يتحقّق فعليًا.</small
+              73% يطلبون الجانبين معًا، أقل من 25% يرونه يتحقّق فعليًا.</small
             >
             <div class="claim-actions">
               <button class="act" data-type="agree" type="button">
@@ -1012,7 +1039,7 @@
               </button>
               <button class="act" data-type="refine" type="button">
                 <span data-show="en">I would refine this</span
-                ><span data-show="ar">أحبّ أن أُهذِّب هذا</span>
+                ><span data-show="ar">أريد تعديله</span>
               </button>
             </div>
             <div class="refine-panel">
@@ -1021,7 +1048,7 @@
                 <span data-show="en"
                   >What should we sharpen — or what are we missing?</span
                 >
-                <span data-show="ar">ما الذي نُهذِّبه — أو ما الذي فاتنا؟</span>
+                <span data-show="ar">ما الذي تودّ تعديله؟</span>
               </div>
             </div>
           </article>
@@ -1084,7 +1111,7 @@
               </button>
               <button class="act" data-type="refine" type="button">
                 <span data-show="en">I would refine this</span
-                ><span data-show="ar">أحبّ أن أُهذِّب هذا</span>
+                ><span data-show="ar">أريد تعديله</span>
               </button>
             </div>
             <div class="refine-panel">
@@ -1120,7 +1147,7 @@
             </h2>
             <h2 data-show="ar">
               النقل الصوتي أسرع. الاسم المُترجَم أعمق في العربية. نوصي بالنقل
-              الصوتي. القرار قراركم.
+              الصوتي. القرار قرارك.
             </h2>
             <p class="body" data-show="en">
               The logo cannot be designed in earnest until this is decided. A
@@ -1210,7 +1237,7 @@
               step back and change it.
             </h2>
             <h2 data-show="ar">
-              ننقل اختياركم من "الأساس". نرجو تأكيده هنا، أو الرجوع وتعديله.
+              ننقل اختيارك من "الأساس". نرجو تأكيده هنا، أو الرجوع وتعديله.
             </h2>
             <p class="body" data-show="en">
               The track you marked on the previous page sets the shape of
@@ -1221,7 +1248,7 @@
             </p>
             <p class="body" data-show="ar">
               المسار المختار في الصفحة السابقة يُحدّد شكل ما يليه: المُخرَجات
-              التي تدخل المرحلة الأولى، ترتيب إيقاع العمل، وما يلزم منكم قبل
+              التي تدخل المرحلة الأولى، ترتيب إيقاع العمل، وما يلزم منك قبل
               البدء. نرجو تأكيد بقاء الاختيار صحيحًا، بعد قراءة الصورة كاملة.
             </p>
             <div class="scope-mirror">
@@ -1236,7 +1263,7 @@
                 <span data-show="ar"
                   >المسار المختار:
                   <strong id="scope-name-ar">— لم يُختَر بعد</strong>.
-                  <a href="foundation.html">ارجعوا إلى "الأساس"</a>
+                  <a href="foundation.html">ارجع إلى "الأساس"</a>
                   لتغييره.</span
                 >
               </div>
@@ -1269,7 +1296,7 @@
         <div class="summary">
           <div class="summary-title">
             <span data-show="en">Your reading at a glance</span>
-            <span data-show="ar">قراءتكم في لمحة</span>
+            <span data-show="ar">قراءتك في لمحة</span>
           </div>
           <div class="summary-grid" id="summary-grid">
             <div class="summary-row" data-key="positioning">

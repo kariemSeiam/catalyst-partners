@@ -222,31 +222,58 @@
         gap: 6px;
       }
       .lang-tog {
+        position: relative;
         display: flex;
-        align-items: center;
+        align-items: stretch;
+        direction: ltr;
         border: 1px solid var(--hair);
         border-radius: 999px;
         background: var(--card);
-        overflow: hidden;
+        padding: 3px;
         font-family: var(--mono);
-        font-size: var(--t-7);
+        font-size: 11px;
       }
+      .lang-tog::before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        bottom: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        border-radius: 999px;
+        background: var(--bronze);
+        transition: transform 0.24s cubic-bezier(0.34,1.4,0.64,1);
+        pointer-events: none;
+        will-change: transform;
+      }
+      html[data-lang="ar"] .lang-tog::before { transform: translateX(0); }
+      html[data-lang="en"] .lang-tog::before { transform: translateX(100%); }
       .lang-tog button {
+        position: relative;
+        z-index: 1;
+        flex: 1;
         appearance: none;
         border: 0;
         background: transparent;
         color: var(--mute);
-        padding: 7px 12px;
+        padding: 8px 14px;
+        min-height: 36px;
         cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
         letter-spacing: 0.06em;
-        transition:
-          background 0.18s var(--ease),
-          color 0.18s var(--ease);
+        border-radius: 999px;
+        transition: color 0.22s ease;
+        -webkit-tap-highlight-color: transparent;
       }
+      #lng-ar { letter-spacing: 0; }
       .lang-tog button.on,
-      .lang-tog button[aria-pressed="true"] {
-        background: var(--bronze);
-        color: var(--paper);
+      .lang-tog button[aria-pressed="true"] { color: var(--paper); }
+      .lang-tog button:not(.on):hover { color: var(--ink); }
+      .lang-tog button:active { opacity: 0.8; }
+      .lang-tog button:focus-visible {
+        outline: 2px solid var(--bronze);
+        outline-offset: 2px;
       }
       .theme-btn {
         appearance: none;
@@ -957,9 +984,9 @@
           <span class="pagetag" data-show="ar">التسليم</span>
         </div>
         <div class="controls">
-          <div class="lang-tog">
-            <button id="lng-ar" type="button">ع</button>
-            <button id="lng-en" type="button">EN</button>
+          <div class="lang-tog" role="group" aria-label="Language">
+            <button id="lng-ar" type="button" aria-label="Arabic">ع</button>
+            <button id="lng-en" type="button" aria-label="English">EN</button>
           </div>
           <button
             class="theme-btn"
@@ -1012,7 +1039,7 @@
         <p class="lede" data-show="ar">
           نبني كاتاليست بارتنرز على مراحل، لا على تواريخ. كل مرحلة تكتمل ببلوغ
           معيار إتمامها، لا بانتهاء جدول. الشكل أدناه يتبع المسار المختار في
-          "الأساس": ما تتسلّمونه، ما نطلبه منكم، وما يَعبُر بيننا في كل خطوة.
+          "الأساس": ما تتسلّمه، ما نطلبه منك، وما يَعبُر بيننا في كل خطوة.
         </p>
 
         <div class="track-banner" id="track-banner">
@@ -1031,7 +1058,7 @@
               change the starting line.</span
             >
             <span data-show="ar"
-              ><a href="foundation.html">ارجعوا إلى "الأساس"</a> إن أردتم تغيير
+              ><a href="foundation.html">ارجع إلى "الأساس"</a> إن أردت تغيير
               نقطة الانطلاق.</span
             >
           </div>
@@ -1084,7 +1111,7 @@
               <div class="deliver">
                 <div class="deliver-col">
                   <div class="deliver-label" data-show="en">You receive</div>
-                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <div class="deliver-label" data-show="ar">تتسلّم</div>
                   <ul>
                     <li data-show="en">
                       Signed-off positioning &amp; segment priority
@@ -1106,7 +1133,7 @@
                   <div class="deliver-label" data-show="en">
                     We need from you
                   </div>
-                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <div class="deliver-label" data-show="ar">نحتاج منك</div>
                   <ul>
                     <li data-show="en">
                       A single review window for the Compass
@@ -1150,7 +1177,7 @@
               <div class="deliver">
                 <div class="deliver-col">
                   <div class="deliver-label" data-show="en">You receive</div>
-                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <div class="deliver-label" data-show="ar">تتسلّم</div>
                   <ul>
                     <li data-show="en">Bilingual wordmark &amp; logomark</li>
                     <li data-show="ar">شعار نصّي ورمز ثنائي اللغة</li>
@@ -1172,7 +1199,7 @@
                   <div class="deliver-label" data-show="en">
                     We need from you
                   </div>
-                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <div class="deliver-label" data-show="ar">نحتاج منك</div>
                   <ul>
                     <li data-show="en">
                       Two review rounds, focused — direction first, refinement
@@ -1219,7 +1246,7 @@
               <div class="deliver">
                 <div class="deliver-col">
                   <div class="deliver-label" data-show="en">You receive</div>
-                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <div class="deliver-label" data-show="ar">تتسلّم</div>
                   <ul>
                     <li data-show="en">
                       Editorial framework &amp; tone-of-voice document
@@ -1249,7 +1276,7 @@
                   <div class="deliver-label" data-show="en">
                     We need from you
                   </div>
-                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <div class="deliver-label" data-show="ar">نحتاج منك</div>
                   <ul>
                     <li data-show="en">One partner-voice session per month</li>
                     <li data-show="ar">جلسة صوت شريك واحدة شهريًا</li>
@@ -1286,12 +1313,12 @@
                 موقع ثنائي اللغة يعامل العربية والإنجليزية بمنزلة واحدة. يحتضن
                 التقرير المرجعي خلف استمارة استقطاب هادئة، ويوجّه كل تواصل إلى
                 الشريك المعنيّ. كل مكوّن — المحتوى، البيانات، التحليلات — يبقى
-                ملكًا لكم. المعمار هو الأصل الحقيقي.
+                ملكًا لك. المعمار هو الأصل الحقيقي.
               </p>
               <div class="deliver">
                 <div class="deliver-col">
                   <div class="deliver-label" data-show="en">You receive</div>
-                  <div class="deliver-label" data-show="ar">تتسلّمون</div>
+                  <div class="deliver-label" data-show="ar">تتسلّم</div>
                   <ul>
                     <li data-show="en">
                       Bilingual website — Arabic and English as first-class
@@ -1304,7 +1331,7 @@
                       Self-hosted CMS — your team publishes without a developer
                     </li>
                     <li data-show="ar">
-                      نظام محتوى ذاتي الاستضافة — فريقكم ينشر دون مطوّر
+                      نظام محتوى ذاتي الاستضافة — فريقك ينشر دون مطوّر
                     </li>
                     <li data-show="en">
                       Lead system: capture, score, route, owned raw log
@@ -1324,7 +1351,7 @@
                   <div class="deliver-label" data-show="en">
                     We need from you
                   </div>
-                  <div class="deliver-label" data-show="ar">نحتاج منكم</div>
+                  <div class="deliver-label" data-show="ar">نحتاج منك</div>
                   <ul>
                     <li data-show="en">
                       Segment-to-partner routing map (who answers which inquiry)
@@ -1390,7 +1417,7 @@
           </div>
           <div class="own-col">
             <div class="own-sub" data-show="en">Agency delivers</div>
-            <div class="own-sub" data-show="ar">تُسلِّم الأجنسي</div>
+            <div class="own-sub" data-show="ar">تُسلِّم كاتاليست بارتنرز</div>
             <div class="own-h" data-show="en">
               The build, the rhythm, the standards
             </div>
@@ -1401,7 +1428,7 @@
               <li data-show="en">Editorial system &amp; review workflow</li>
               <li data-show="ar">المنظومة التحريرية وآلية المراجعة</li>
               <li data-show="en">Technical hosting decisions (in your name)</li>
-              <li data-show="ar">قرارات الاستضافة التقنية (باسمكم)</li>
+              <li data-show="ar">قرارات الاستضافة التقنية (باسمك)</li>
               <li data-show="en">
                 A clean handover document at each phase close
               </li>
@@ -1421,11 +1448,11 @@
                 نظام العلاقات، البريد، التحليلات — كلها قابلة للاستبدال
               </li>
               <li data-show="en">Hosting in your account, not ours</li>
-              <li data-show="ar">الاستضافة باسمكم لا باسمنا</li>
+              <li data-show="ar">الاستضافة باسمك لا باسمنا</li>
               <li data-show="en">
                 No proprietary platform that traps your content
               </li>
-              <li data-show="ar">لا منصّة احتكارية تحبس محتواكم</li>
+              <li data-show="ar">لا منصّة احتكارية تحبس محتواك</li>
             </ul>
           </div>
         </div>
@@ -1507,7 +1534,7 @@
             <span data-show="ar">حين تكونون مستعدّين</span>
           </div>
           <h2 data-show="en">Send your confirmation, and we begin Phase A.</h2>
-          <h2 data-show="ar">أَرسلوا تأكيدكم، وندخل المرحلة (أ).</h2>
+          <h2 data-show="ar">أرسل تأكيدك، وندخل المرحلة (أ).</h2>
           <p data-show="en">
             We will send back a Phase A opening note within one working day — a
             short document with the locked positioning, the agreed segment
@@ -1515,13 +1542,15 @@
             Nothing more, nothing less.
           </p>
           <p data-show="ar">
-            نُعيد إليكم خلال يوم عمل واحد مذكرة افتتاح المرحلة (أ) — وثيقة قصيرة
+            نُعيد إليك خلال يوم عمل واحد مذكرة افتتاح المرحلة (أ) — وثيقة قصيرة
             فيها التموضع المُغلَق، أولوية القطاع المُتَّفَق عليها، قرار الاسم
             العربي، والخطوات العملية الأولى. لا أكثر، ولا أقل.
           </p>
           <div class="req-note">
             <label class="req-note-label" for="req-note">
-              <span data-show="en">Anything you'd like us to know (optional)</span>
+              <span data-show="en"
+                >Anything you'd like us to know (optional)</span
+              >
               <span data-show="ar">أضف ما تودّ إعلامنا به (اختياري)</span>
             </label>
             <textarea
@@ -1756,7 +1785,8 @@
                 lines.push(n);
               });
             }
-            var reqNoteAr = (document.getElementById("req-note") || {}).value || "";
+            var reqNoteAr =
+              (document.getElementById("req-note") || {}).value || "";
             if (reqNoteAr.trim()) {
               lines.push("");
               lines.push("ملاحظة: " + reqNoteAr.trim());
@@ -1815,7 +1845,8 @@
                 lines.push(n);
               });
             }
-            var reqNoteEn = (document.getElementById("req-note") || {}).value || "";
+            var reqNoteEn =
+              (document.getElementById("req-note") || {}).value || "";
             if (reqNoteEn.trim()) {
               lines.push("");
               lines.push("Note: " + reqNoteEn.trim());
