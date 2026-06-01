@@ -46,10 +46,32 @@ body {
   min-height: 100vh;
 }
 
-.en { display: inline; }
-.ar { display: none; }
-[dir="rtl"] .en { display: none; }
-[dir="rtl"] .ar { display: inline; }
+.en, .ar {
+  display: inline;
+}
+.en {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.ar {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* ── Bilingual: both languages always visible, each in its correct font ── */
+/* When AR mode active, EN spans inherit AR font from parent — override */
+html[data-lang="ar"] .en { font-family: var(--sans); }
+html[data-lang="ar"] h1 .en,
+html[data-lang="ar"] h2 .en,
+html[data-lang="ar"] h3 .en { font-family: var(--serif); }
+html[data-lang="ar"] h3 .en { font-style: italic; }
+/* When EN mode active, AR spans inherit sans/serif — override to AR */
+html[data-lang="en"] .ar { font-family: var(--ar); }
+
+/* EN spans inside RTL parent — keep correct EN fonts */
+[dir="rtl"] .en { font-family: var(--sans); }
+[dir="rtl"] h1 .en, [dir="rtl"] h2 .en { font-family: var(--serif); }
+[dir="rtl"] .pillar h3 .en { font-family: var(--serif); font-style: italic; }
 
 
       .masthead {
